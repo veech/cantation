@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Mage_Animations.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -15,14 +16,14 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 7.13808, 11.5085 )
+extents = Vector2( 7.13808, 11.7045 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
+script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "idle"
-playing = true
 offset = Vector2( 8, -12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
