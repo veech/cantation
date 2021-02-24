@@ -17,8 +17,10 @@ func _move():
 	
 	_set_facing_direction(x_direction, y_direction)
 	
-	motion.x = x_direction * SPEED
-	motion.y = y_direction * SPEED
+	#motion.x = x_direction * SPEED
+	#motion.y = y_direction * SPEED
+	
+	motion = Vector2(x_direction, y_direction).normalized() * SPEED
 
 func _set_facing_direction(x, y):
 	if x != 0 && y == 0: 
