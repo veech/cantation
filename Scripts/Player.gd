@@ -5,6 +5,8 @@ const SPEED = 200
 var motion: Vector2 = Vector2(0, 0)
 var facing_direction: Vector2 = Vector2(0, 1)
 
+
+
 func _physics_process(delta):
 	_move()
 	_animate()
@@ -56,3 +58,23 @@ func _play_idle_animation():
 		$AnimatedSprite.play("left_idle")
 	elif facing_direction.x > 0:
 		$AnimatedSprite.play("right_idle")
+
+
+
+#Player Inventory code. We prolly need to move this to its own script/scene in the near future
+enum Potion { HEALTH, MAGIC }
+var health_potions = 0
+var magic_potions = 0
+
+func add_potion(type):
+	if type == Potion.HEALTH:
+		health_potions += 1
+	else:
+		magic_potions += 1
+	emit_signal("player_state_changed", self)
+	print("Player potion count\n", "Health potions: ", health_potions, "\n", 
+		"Magic Potions: ", magic_potions, "\n")
+			
+func add_spellbook(attributes):
+	print("Player picked up spellbook\n")
+	print(attributes.print_attributes(), "\n")

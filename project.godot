@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "Global",
+"language": "GDScript",
+"path": "res://Scripts/Global.gd"
+} ]
 _global_script_class_icons={
-
+"Global": ""
 }
 
 [application]
@@ -18,6 +23,10 @@ _global_script_class_icons={
 config/name="Cantation"
 run/main_scene="res://Scenes/Example_Map.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Inventory_UI="*res://Scenes/Inventory_UI.tscn"
 
 [input]
 
