@@ -7,7 +7,7 @@ extends Panel
 const ItemSlotClass = preload("res://Scripts/ItemSlot.gd")
 const ItemClass = preload("res://Scripts/Item.gd")
 
-const MAX_SLOTS = 45
+const MAX_SLOTS = 36
 
 var slotList = Array()
 
