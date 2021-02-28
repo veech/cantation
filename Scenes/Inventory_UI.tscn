@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Inventory_UI.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Inventory.gd" type="Script" id=2]
@@ -21,6 +21,23 @@ bg_color = Color( 0.0627451, 0.0431373, 0.0705882, 0.815686 )
 border_color = Color( 0, 0, 0, 1 )
 corner_radius_top_left = 10
 corner_radius_top_right = 10
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.133333, 0.113725, 0.141176, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.0627451, 0.0431373, 0.0705882, 0.815686 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
 
 [node name="Inventory_UI" type="CanvasLayer"]
 layer = -1
@@ -56,16 +73,38 @@ align = 1
 valign = 1
 uppercase = true
 
-[node name="SlotsContainer" type="ScrollContainer" parent="Inventory"]
-anchor_right = 1.0
+[node name="SlotsContainer" type="Panel" parent="Inventory"]
+anchor_top = 1.0
+anchor_right = 0.061
 anchor_bottom = 1.0
-margin_left = 25.0
-margin_top = 75.0
-margin_right = -25.0
-margin_bottom = -25.0
+margin_left = 35.0
+margin_top = -440.0
+margin_right = 400.0
+margin_bottom = -35.0
+custom_styles/panel = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Slots" type="GridContainer" parent="Inventory/SlotsContainer"]
-columns = 5
+margin_left = 15.0
+margin_top = 50.0
+margin_right = 15.0
+margin_bottom = 35.0
+columns = 6
+
+[node name="TopBar" type="Panel" parent="Inventory/SlotsContainer"]
+anchor_right = 1.0
+anchor_bottom = 0.081
+size_flags_horizontal = 9
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Inventory/SlotsContainer/TopBar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Spells"
+align = 1
+valign = 1
