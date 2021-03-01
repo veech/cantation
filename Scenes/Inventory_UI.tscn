@@ -1,42 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
+[ext_resource path="res://Scripts/Tool_Tip.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Inventory.gd" type="Script" id=2]
+[ext_resource path="res://UI_Styles/Inventory_UI_Style.tres" type="StyleBox" id=3]
+[ext_resource path="res://UI_Styles/Box_Style.tres" type="StyleBox" id=4]
+[ext_resource path="res://UI_Styles/TopBar_StyleI.tres" type="StyleBox" id=5]
+[ext_resource path="res://Scripts/ItemSlot.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/Spells_Set.gd" type="Script" id=7]
+[ext_resource path="res://UI_Styles/ToolTip_Textbox.tres" type="StyleBox" id=8]
+[ext_resource path="res://Assets/Text_Box_Alt.png" type="Texture" id=9]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.176471, 0.152941, 0.231373, 0.733333 )
-border_width_left = 15
-border_width_top = 15
-border_width_right = 15
-border_width_bottom = 15
-border_color = Color( 0.0627451, 0.0431373, 0.0705882, 0.815686 )
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.0627451, 0.0431373, 0.0705882, 0.815686 )
-border_color = Color( 0, 0, 0, 1 )
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.133333, 0.113725, 0.141176, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.0627451, 0.0431373, 0.0705882, 0.815686 )
-corner_radius_top_left = 5
-corner_radius_top_right = 5
+[sub_resource type="Theme" id=1]
 
 [node name="Inventory_UI" type="CanvasLayer"]
 layer = 0
@@ -48,21 +22,21 @@ margin_left = 50.0
 margin_top = 50.0
 margin_right = -50.0
 margin_bottom = -50.0
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = ExtResource( 3 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TopBar" type="Panel" parent="Inventory"]
+[node name="Inventory_TopBar" type="Panel" parent="Inventory"]
 anchor_right = 1.0
 margin_bottom = 40.0
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Inventory/TopBar"]
+[node name="Label" type="Label" parent="Inventory/Inventory_TopBar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -71,38 +45,164 @@ align = 1
 valign = 1
 uppercase = true
 
-[node name="SlotsContainer" type="Panel" parent="Inventory"]
-anchor_top = 1.0
-anchor_right = 0.061
-anchor_bottom = 1.0
+[node name="Pack" type="Panel" parent="Inventory"]
 margin_left = 35.0
-margin_top = -440.0
+margin_top = 65.0
 margin_right = 400.0
-margin_bottom = -35.0
-custom_styles/panel = SubResource( 3 )
+margin_bottom = 480.0
+custom_styles/panel = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slots" type="GridContainer" parent="Inventory/SlotsContainer"]
+[node name="Slots" type="GridContainer" parent="Inventory/Pack"]
 margin_left = 15.0
 margin_top = 50.0
 margin_right = 15.0
 margin_bottom = 35.0
 columns = 6
 
-[node name="TopBar" type="Panel" parent="Inventory/SlotsContainer"]
+[node name="TopBar" type="Panel" parent="Inventory/Pack"]
 anchor_right = 1.0
-anchor_bottom = 0.081
+margin_bottom = 25.0
 size_flags_horizontal = 9
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Inventory/SlotsContainer/TopBar"]
+[node name="Label" type="Label" parent="Inventory/Pack/TopBar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "Spells"
 align = 1
 valign = 1
+
+[node name="Spells_Set" type="Panel" parent="Inventory"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -400.0
+margin_top = 65.0
+margin_right = -35.0
+margin_bottom = 480.0
+custom_styles/panel = ExtResource( 4 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spell_Slots" type="NinePatchRect" parent="Inventory/Spells_Set"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -74.0
+margin_top = -74.0
+margin_right = 74.0
+margin_bottom = 74.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spell_A" type="Panel" parent="Inventory/Spells_Set/Spell_Slots"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spell_B" type="Panel" parent="Inventory/Spells_Set/Spell_Slots"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -40.0
+margin_bottom = 40.0
+script = ExtResource( 6 )
+
+[node name="Spell_C" type="Panel" parent="Inventory/Spells_Set/Spell_Slots"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+margin_right = 40.0
+script = ExtResource( 6 )
+
+[node name="Spell_D" type="Panel" parent="Inventory/Spells_Set/Spell_Slots"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -40.0
+script = ExtResource( 6 )
+
+[node name="Panel" type="Panel" parent="Inventory/Spells_Set"]
+anchor_right = 1.0
+margin_bottom = 25.0
+custom_styles/panel = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="Inventory/Spells_Set/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -27.5
+margin_top = -7.0
+margin_right = 27.5
+margin_bottom = 7.0
+text = "Spell Set"
+align = 1
+valign = 1
+
+[node name="Tool_Tip" type="NinePatchRect" parent="."]
+visible = false
+margin_left = 535.0
+margin_top = 235.0
+margin_right = 663.0
+margin_bottom = 400.0
+theme = SubResource( 1 )
+texture = ExtResource( 9 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Element" type="Label" parent="Tool_Tip"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -48.0
+margin_top = 5.0
+margin_right = 48.0
+margin_bottom = 20.0
+custom_styles/normal = ExtResource( 8 )
+
+[node name="Damage" type="Label" parent="Tool_Tip"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -48.0
+margin_top = 25.0
+margin_right = 48.0
+margin_bottom = 35.0
+custom_styles/normal = ExtResource( 8 )
+
+[node name="Range" type="Label" parent="Tool_Tip"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -48.0
+margin_top = 45.0
+margin_right = 48.0
+margin_bottom = 60.0
+custom_styles/normal = ExtResource( 8 )
+
+[node name="Speed" type="Label" parent="Tool_Tip"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -48.0
+margin_top = 65.0
+margin_right = 48.0
+margin_bottom = 80.0
+rect_scale = Vector2( 1, 1.00914 )
+custom_styles/normal = ExtResource( 8 )

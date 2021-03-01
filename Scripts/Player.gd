@@ -66,7 +66,9 @@ func _input(event):
 		print("Attacking!")
 		print(facing_direction)
 		cast_spell(facing_direction, transform)
+	
 		
+	
 	#The spell attributes should probably be passed into this function
 func cast_spell(direction, spawn_location):
 	print("Player at: ", transform)
