@@ -10,6 +10,8 @@
 
 tool extends Area2D
 var attributes
+
+#accesses inventory by going through an autoload. will cause errors in editor.
 onready var inventory = get_node("/root/Inventory_UI").get_child(0)
 
 

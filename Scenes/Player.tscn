@@ -154,3 +154,5 @@ drag_margin_left = 0.1
 drag_margin_top = 0.1
 drag_margin_right = 0.1
 drag_margin_bottom = 0.1
+
+[node name="Spell_Spawn_Point" type="Position2D" parent="."]
