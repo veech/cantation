@@ -18,6 +18,7 @@ onready var inventory = get_node("/root/Inventory_UI").get_child(0)
 class Attributes:
 	var slot_type = Global.SlotType.SLOT_DAMAGE_SPELL
 	var element
+	var element_string
 	var damage
 	var elemental_damage
 	var projectile_range
@@ -34,6 +35,17 @@ class Attributes:
 		self.projectile_speed = randi() % 30 + 15
 		self.burst_radius = randi() % 5
 		
+		if self.element == Global.ELEMENTS.NONELEMENTAL:
+			self.element_string = "non-elemental"
+		elif self.element == Global.ELEMENTS.EARTH:
+			self.element_string = "Earth"
+		elif self.element == Global.ELEMENTS.FIRE:
+			self.element_string = "Fire"
+		elif self.element == Global.ELEMENTS.WIND:
+			self.element_string = "Wind"
+		elif self.element == Global.ELEMENTS.WATER:
+			self.element_string = "Water"
+	
 	func print_attributes():
 		print("element: ", self.element)
 		print("damage: ", self.damage)
