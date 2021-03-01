@@ -1,6 +1,5 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scripts/Inventory_UI.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Inventory.gd" type="Script" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -40,8 +39,7 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 
 [node name="Inventory_UI" type="CanvasLayer"]
-layer = -1
-script = ExtResource( 1 )
+layer = 0
 
 [node name="Inventory" type="Panel" parent="."]
 anchor_right = 1.0

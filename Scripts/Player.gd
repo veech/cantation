@@ -60,7 +60,18 @@ func _play_idle_animation():
 		$AnimatedSprite.play("right_idle")
 
 
-
+#Player attack code
+func _input(event):
+	if event.is_action_pressed("Attack_A"):
+		print("Attacking!")
+		print(facing_direction)
+		cast_spell(facing_direction, transform)
+		
+	#The spell attributes should probably be passed into this function
+func cast_spell(direction, spawn_location):
+	print("Player at: ", transform)
+	
+	
 #Player Inventory code. We prolly need to move this to its own script/scene in the near future
 enum Potion { HEALTH, MAGIC }
 var health_potions = 0

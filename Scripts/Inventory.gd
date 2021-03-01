@@ -12,11 +12,23 @@ const MAX_SLOTS = 36
 var slotList = Array()
 
 func _ready():
+	set_visible(false)
 	var slots = get_node("SlotsContainer/Slots")
 	for _i in range(MAX_SLOTS):
 		var slot = ItemSlotClass.new()
 		slotList.append(slot)
 		slots.add_child(slot)
+
+func _input(event):
+	if event.is_action_pressed("ui_accept"):
+		toggle_visibility()
+
+func toggle_visibility():
+	if is_visible():
+		set_visible(false)
+	else:
+		set_visible(true)
+				
 
 func get_free_slot():
 	for slot in slotList:
