@@ -32,7 +32,7 @@ class Attributes:
 		self.damage = randi() % 10
 		self.elemental_damage = randi() % 5
 		self.projectile_range = randi() % 20 + 10
-		self.projectile_speed = randi() % 30 + 15
+		self.projectile_speed = rand_range(.5, 1)
 		self.burst_radius = randi() % 5
 		
 		if self.element == Global.ELEMENTS.NONELEMENTAL:
@@ -90,7 +90,6 @@ func _process(delta):
 func _on_Spellbook_body_entered(body):
 	if body.name == "Player":
 		if inventory.get_free_slot():
-			body.add_spellbook(attributes)
 			inventory.add_item(attributes)
 			get_tree().queue_delete(self)
 			

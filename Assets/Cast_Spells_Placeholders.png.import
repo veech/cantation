@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Water_Spell_ball.png-c691b5ad409ecd39e3b941e0898264da.stex"
+path="res://.import/Cast_Spells_Placeholders.png-b8e86823615542c67c514c4e6e991921.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Spell_attacks/Water_Spell_ball.png"
-dest_files=[ "res://.import/Water_Spell_ball.png-c691b5ad409ecd39e3b941e0898264da.stex" ]
+source_file="res://Assets/Cast_Spells_Placeholders.png"
+dest_files=[ "res://.import/Cast_Spells_Placeholders.png-b8e86823615542c67c514c4e6e991921.stex" ]
 
 [params]
 

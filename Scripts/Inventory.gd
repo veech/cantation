@@ -8,12 +8,16 @@ const ItemSlotClass = preload("res://Scripts/ItemSlot.gd")
 const ItemClass = preload("res://Scripts/Item.gd")
 const ToolTipClass = preload("res://Scripts/Tool_Tip.gd")
 
+var active_spell = null
+
 const MAX_SLOTS = 36
 
 var slotList = Array()
 
 var holding_item = null
 var item_offset = Vector2(0, 0)
+
+var game_is_paused = false
 
 onready var tooltip = get_node("../Tool_Tip")
 onready var spell_set = get_node("../Inventory/Spells_Set")
@@ -35,18 +39,15 @@ func _ready():
 			spell_slot.slot_type = Global.SlotType.SLOT_DAMAGE_SPELL
 			spell_slot.connect("mouse_entered", self, "mouse_enter_slot", [spell_slot]);
 			spell_slot.connect("mouse_exited", self, "mouse_exit_slot", [spell_slot]);
-			spell_slot.connect("gui_input", self, "slot_gui_input", [spell_slot]);			
-		
+			spell_slot.connect("gui_input", self, "slot_gui_input", [spell_slot]);
+			spell_slot.connect("set_spell", self, "set_active_spell")
 	
 func slot_gui_input(event: InputEvent, slot: ItemSlotClass):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && event.pressed:
 			if holding_item:
-				print("Already holding item!")
 				if slot.slot_type != Global.SlotType.SLOT_DEFAULT:
-					print("not a default slot")
 					if can_equip(holding_item, slot):
-						print("Can equip")
 						if !slot.item:
 							slot.put_item(holding_item)
 							holding_item = null
@@ -71,9 +72,8 @@ func slot_gui_input(event: InputEvent, slot: ItemSlotClass):
 				holding_item = slot.item
 				item_offset = event.global_position - holding_item.rect_global_position
 				slot.pick_item()
-				print("event happened at: ", event.global_position)
 				holding_item.rect_global_position = event.global_position - item_offset
-				print("Item placed at: ", holding_item.rect_global_position)
+
 
 
 func mouse_enter_slot(_slot : ItemSlotClass):
@@ -86,22 +86,17 @@ func mouse_exit_slot(_slot : ItemSlotClass):
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("ui_accept"):
-		toggle_visibility()
+		toggle_inventory()
 		tooltip.hide()
 	elif event is InputEventMouseMotion && holding_item && holding_item.picked:
 		holding_item.rect_global_position = event.global_position - item_offset
 		
 	if event is InputEventMouseButton:
-		print("Viewport position of click: ", get_viewport().get_mouse_position())
-		print("Click occurred at global position: ", event.global_position)
+		pass
 
-func toggle_visibility():
-	if is_visible():
-		set_visible(false)
-	else:
-		set_visible(true)
-				
-
+func toggle_inventory():
+	set_visible(!is_visible())
+	
 func get_free_slot():
 	for slot in slotList:
 		if !slot.item:
@@ -113,10 +108,11 @@ func add_item(attributes):
 		slot.set_item(ItemClass.new(attributes, null, Global.item_images[attributes.element]))
 		
 func can_equip(item, slot):
-	print("Can equip??")
 	return item.attributes.slot_type == slot.slot_type
 		
 func pick_item(slot, event):
 	pass
 		
-		
+func set_active_spell(spell):
+	active_spell = spell
+	print(active_spell.attributes.projectile_speed)

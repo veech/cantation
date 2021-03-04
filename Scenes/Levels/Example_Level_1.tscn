@@ -1,12 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Dungeon_Tilemap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Spellbook.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Spell_Pool_Location.tscn" type="PackedScene" id=4]
 
 [node name="Example_Level_1" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="Player" parent="." groups=[
+"Player",
+] instance=ExtResource( 2 )]
 z_index = 1
 
 [node name="Dungeon_Tilemap" parent="." instance=ExtResource( 1 )]
@@ -41,3 +44,6 @@ position = Vector2( -458, 323 )
 
 [node name="Spellbook10" parent="." instance=ExtResource( 3 )]
 position = Vector2( -109, 71 )
+
+[node name="Spell_Pool_Location" parent="." instance=ExtResource( 4 )]
+position = Vector2( -574.365, 17.4655 )
