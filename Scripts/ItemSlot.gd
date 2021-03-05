@@ -37,6 +37,7 @@ func put_item(new_item):
 	item.put_item()
 	Inventory_UI.remove_child(item)
 	add_child(item)
+#This might not be a good way to do this
 	emit_signal("set_spell", item)
 
 func refreshColors():

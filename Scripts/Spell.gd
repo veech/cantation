@@ -1,10 +1,3 @@
-### this is not how this should be done
-###	we should instead just have an object pool off screen
-### and when a spell is called, the object is moved to the player transform
-### the attributes will be used to select the correct spell color and then it will be passed to the spell
-### remember to use the facing direction
-
-
 extends Area2D
 class_name Spell
 
@@ -29,6 +22,8 @@ func _physics_process(delta):
 
 func on_body_entered(body):
 	if body.get_name() != "Player":
+		if body.is_in_group("Enemies"):
+			body.take_damage(attributes.damage)
 		movement_direction = Vector2.ZERO
 		emit_signal("killed", self)
 
