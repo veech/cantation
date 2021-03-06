@@ -101,6 +101,7 @@ func _input(event: InputEvent):
 		
 	if event.is_action_pressed("advance_current_spell"):
 		set_current_spell(current_spell_slot + 1)
+		print("Active spell is spell: ", current_spell_slot + 1)
 
 func toggle_inventory():
 	set_visible(!is_visible())

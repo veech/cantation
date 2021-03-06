@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Tool_Tip.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Inventory.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Scripts/Spells_Set.gd" type="Script" id=7]
 [ext_resource path="res://UI_Styles/ToolTip_Textbox.tres" type="StyleBox" id=8]
 [ext_resource path="res://Assets/Text_Box_Alt.png" type="Texture" id=9]
+[ext_resource path="res://UI_Styles/Temp_Spell_Set_box.tres" type="StyleBox" id=10]
 
 [sub_resource type="Theme" id=1]
 
@@ -117,7 +118,12 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -14.0
+custom_styles/normal = ExtResource( 10 )
 text = "1"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Spell_B" type="Panel" parent="Inventory/Spells_Set/Spell_Slots"]
 anchor_left = 1.0
@@ -131,7 +137,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -14.0
+custom_styles/normal = ExtResource( 10 )
 text = "2"
+align = 1
 
 [node name="Spell_C" type="Panel" parent="Inventory/Spells_Set/Spell_Slots"]
 anchor_top = 1.0
@@ -145,7 +153,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -14.0
+custom_styles/normal = ExtResource( 10 )
 text = "3"
+align = 1
 
 [node name="Spell_D" type="Panel" parent="Inventory/Spells_Set/Spell_Slots"]
 anchor_left = 1.0
@@ -161,7 +171,12 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -14.0
+custom_styles/normal = ExtResource( 10 )
 text = "4"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Panel" type="Panel" parent="Inventory/Spells_Set"]
 anchor_right = 1.0

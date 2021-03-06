@@ -30,6 +30,7 @@ func pick_item():
 	remove_child(item)
 	Inventory_UI.add_child(item)
 	item = null
+	emit_signal("set_spell", item)
 	
 func put_item(new_item):
 	item = new_item
