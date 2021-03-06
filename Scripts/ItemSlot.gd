@@ -6,6 +6,8 @@ var slotIndex
 var item = null
 var style
 
+signal set_spell
+
 func _init():
 	
 	rect_min_size = Vector2(52, 52)
@@ -22,11 +24,13 @@ func set_item(new_item):
 	item.item_slot = self
 	item.set_size(Vector2(64, 64))
 	
+	
 func pick_item():
 	item.pick_item()
 	remove_child(item)
 	Inventory_UI.add_child(item)
 	item = null
+	emit_signal("set_spell", item)
 	
 func put_item(new_item):
 	item = new_item
@@ -34,6 +38,8 @@ func put_item(new_item):
 	item.put_item()
 	Inventory_UI.remove_child(item)
 	add_child(item)
+#This might not be a good way to do this
+	emit_signal("set_spell", item)
 
 func refreshColors():
 	style.bg_color = Color("#9badb7")

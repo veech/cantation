@@ -1,10 +1,26 @@
 extends KinematicBody2D
 
-const SPEED = 200
+const SPEED = 150
 
 var motion: Vector2 = Vector2(0, 0)
 var facing_direction: Vector2 = Vector2(0, 1)
 
+
+#pool variables
+const SPELL_POOL_SIZE = 50
+const SPELL_POOL_NAME = "Spell"
+
+# Getting the Spell Pool Ready
+const Pool = preload("res://Scripts/Pool.gd")
+const Spell = preload("res://Scenes/Spell.tscn")
+
+onready var inventory = get_node("/root/Inventory_UI").get_child(0)
+onready var pool_location = get_node("../Spell_Pool_Location")
+onready var spell_pool = Pool.new(SPELL_POOL_SIZE, SPELL_POOL_NAME, Spell)
+
+func _ready():
+	#Pool code
+	spell_pool.attach_to_node(pool_location)
 
 
 func _physics_process(delta):
@@ -12,7 +28,7 @@ func _physics_process(delta):
 	_animate()
 	
 	move_and_slide(motion)
-	
+
 func _move():
 	var x_direction: int = Input.get_action_strength("right") - Input.get_action_strength("left")
 	var y_direction: int = Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -63,17 +79,31 @@ func _play_idle_animation():
 #Player attack code
 func _input(event):
 	if event.is_action_pressed("Attack_A"):
-		print("Attacking!")
-		print(facing_direction)
-		cast_spell(facing_direction, transform)
+		pass
 	
-		
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT && event.pressed:
+			if inventory.get_current_spell() != null:
+				var direction = (get_global_mouse_position() - global_position).normalized()
+				cast_spell(direction)
+			else:
+				print("No active spell to cast")
 	
 	#The spell attributes should probably be passed into this function
-func cast_spell(direction, spawn_location):
-	print("Player at: ", transform)
+func cast_spell(direction):
+	var spawned_spell = spell_pool.spawn_object()
+	spawned_spell.set_attributes(inventory.get_current_spell().attributes)
+	spawned_spell.global_position = global_position
+	spawned_spell.set_movement_direction(direction)
 	
 	
+
+
+
+
+
+
+
 #Player Inventory code. We prolly need to move this to its own script/scene in the near future
 enum Potion { HEALTH, MAGIC }
 var health_potions = 0
@@ -87,7 +117,3 @@ func add_potion(type):
 	emit_signal("player_state_changed", self)
 	print("Player potion count\n", "Health potions: ", health_potions, "\n", 
 		"Magic Potions: ", magic_potions, "\n")
-			
-func add_spellbook(attributes):
-	print("Player picked up spellbook\n")
-	print(attributes.print_attributes(), "\n")
