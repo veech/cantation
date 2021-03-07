@@ -1,6 +1,6 @@
 extends NinePatchRect
 
-const Item_Class = preload("res://Scripts/Item.gd")
+const Item_Class = preload("res://Scripts/Inventory/Item.gd")
 
 onready var element = get_node("Element")
 onready var damage = get_node("Damage")

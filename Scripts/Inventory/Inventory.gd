@@ -4,9 +4,9 @@
 
 extends Panel
 
-const ItemSlotClass = preload("res://Scripts/ItemSlot.gd")
-const ItemClass = preload("res://Scripts/Item.gd")
-const ToolTipClass = preload("res://Scripts/Tool_Tip.gd")
+const ItemSlotClass = preload("res://Scripts/Inventory/ItemSlot.gd")
+const ItemClass = preload("res://Scripts/Inventory/Item.gd")
+const ToolTipClass = preload("res://Scripts/Inventory/Tool_Tip.gd")
 
 var equipped_spell_1 = null
 var equipped_spell_2 = null
@@ -41,7 +41,7 @@ onready var pool_location = get_node("/root/Example_Level_1/Spell_Pool_Location"
 onready var fireball_pool = Pool.new(FIREBALL_POOL_SIZE, FIREBALL_POOL_NAME, Fireball)
 
 #Spell scripts
-const Fireball_Launcher = preload("res://Scripts/Base_Launcher_Spell.gd")
+const Fireball_Launcher = preload("res://Scripts/Spell_Casts/Fireball_Launcher.gd")
 
 var fireball_launcher: Fireball_Launcher 
 
@@ -149,13 +149,13 @@ func set_equipped_spell_1(spell):
 	equipped_spells[0] = instantiate_spell(spell)
 
 func set_equipped_spell_2(spell):
-	equipped_spells[1] = spell 
+	equipped_spells[1] = instantiate_spell(spell) 
 	
 func set_equipped_spell_3(spell):
-	equipped_spells[2] = spell
+	equipped_spells[2] = instantiate_spell(spell)
 	
 func set_equipped_spell_4(spell):
-	equipped_spells[3] = spell
+	equipped_spells[3] = instantiate_spell(spell)
 
 func set_current_spell(spell_slot):
 	current_spell_slot = spell_slot % 4
@@ -164,6 +164,8 @@ func get_current_spell():
 	return equipped_spells[current_spell_slot]
 
 func instantiate_spell(item):
+	if !item:
+		return null
 	match item.attributes["spell_type"]:
 		Global.ELEMENTS.FIRE:
 			fireball_launcher.set_attributes(item.attributes)

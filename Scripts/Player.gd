@@ -5,22 +5,10 @@ const SPEED = 150
 var motion: Vector2 = Vector2(0, 0)
 var facing_direction: Vector2 = Vector2(0, 1)
 
-
-#pool variables
-const SPELL_POOL_SIZE = 50
-const SPELL_POOL_NAME = "Spell"
-
-# Getting the Spell Pool Ready
-const Pool = preload("res://Scripts/Pool.gd")
-const Spell = preload("res://Scenes/Spell.tscn")
-
 onready var inventory = get_node("/root/Inventory_UI").get_child(0)
-onready var pool_location = get_node("../Spell_Pool_Location")
-onready var spell_pool = Pool.new(SPELL_POOL_SIZE, SPELL_POOL_NAME, Spell)
 
 func _ready():
-	#Pool code
-	spell_pool.attach_to_node(pool_location)
+	pass
 
 
 func _physics_process(delta):
@@ -35,8 +23,6 @@ func _move():
 	
 	_set_facing_direction(x_direction, y_direction)
 	
-	#motion.x = x_direction * SPEED
-	#motion.y = y_direction * SPEED
 	
 	motion = Vector2(x_direction, y_direction).normalized() * SPEED
 
@@ -85,21 +71,10 @@ func _input(event):
 		if event.button_index == BUTTON_LEFT && event.pressed:
 			if inventory.get_current_spell() != null:
 				inventory.get_current_spell().cast(self.global_position, get_global_mouse_position())
-				#var direction = (get_global_mouse_position() - global_position).normalized()
-				#cast_spell(direction)
+
 			else:
 				print("No active spell to cast")
 	
-	#The spell attributes should probably be passed into this function
-func cast_spell(direction):
-	var spawned_spell = spell_pool.get_inactive_object()
-	spawned_spell.set_attributes(inventory.get_current_spell().attributes)
-	spawned_spell.global_position = global_position
-	spawned_spell.set_movement_direction(direction)
-	
-	
-
-
 
 
 

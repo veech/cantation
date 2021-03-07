@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "Spell",
 "language": "GDScript",
-"path": "res://Scripts/Spell.gd"
+"path": "res://Scripts/Misc_Unused/Spell.gd"
 } ]
 _global_script_class_icons={
 "Global": "",

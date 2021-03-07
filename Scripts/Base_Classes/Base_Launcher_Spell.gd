@@ -1,4 +1,4 @@
-extends "res://Scripts/Base_Spell.gd"
+extends "res://Scripts/Base_Classes/Base_Spell.gd"
 
 var projectile_pool
 #var attributes = {}

@@ -5,7 +5,8 @@ var movement_direction = Vector2.ZERO
 #These are probably going to be within the attributes dictionary once I sort that out
 var power = 0
 var speed = 0
-var base_speed = 100
+var base_speed = 200
+var active = false
 
 var attributes = {}
 #this will have to be connected to the pool in the pool code within the inventory class
@@ -36,7 +37,7 @@ func on_body_entered(body):
 #	pass
 
 func knockback(body, push_strength):
-	pass
+	print("NI")
 
 #result must be a DIRECTION i.e. must be normalized before being entered into this function
 func set_movement_direction(direction):

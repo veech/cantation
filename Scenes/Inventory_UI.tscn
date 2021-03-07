@@ -1,15 +1,16 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Scripts/Tool_Tip.gd" type="Script" id=1]
-[ext_resource path="res://Scripts/Inventory.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Inventory/Tool_Tip.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Inventory/Inventory.gd" type="Script" id=2]
 [ext_resource path="res://UI_Styles/Inventory_UI_Style.tres" type="StyleBox" id=3]
 [ext_resource path="res://UI_Styles/Box_Style.tres" type="StyleBox" id=4]
 [ext_resource path="res://UI_Styles/TopBar_StyleI.tres" type="StyleBox" id=5]
-[ext_resource path="res://Scripts/ItemSlot.gd" type="Script" id=6]
-[ext_resource path="res://Scripts/Spells_Set.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/Inventory/ItemSlot.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/Inventory/Spells_Set.gd" type="Script" id=7]
 [ext_resource path="res://UI_Styles/ToolTip_Textbox.tres" type="StyleBox" id=8]
 [ext_resource path="res://Assets/Text_Box_Alt.png" type="Texture" id=9]
 [ext_resource path="res://UI_Styles/Temp_Spell_Set_box.tres" type="StyleBox" id=10]
+
 
 [sub_resource type="Theme" id=1]
 
