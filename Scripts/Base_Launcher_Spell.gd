@@ -1,6 +1,5 @@
 extends "res://Scripts/Base_Spell.gd"
 
-#This pool variable will likely be within the attributes dictionary
 var projectile_pool
 
 func cast(cast_position, mouse_position):
@@ -11,3 +10,6 @@ func cast(cast_position, mouse_position):
 func direction_from_to(position_a, position_b):
 	var direction = position_b - position_a
 	return direction.normalized()
+
+func set_spell_pool(pool):
+	self.projectile_pool = pool
