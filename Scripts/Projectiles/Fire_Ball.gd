@@ -1,4 +1,4 @@
-extends "res://Scripts/Base_Projectile.gd"
+extends "res://Scripts/Base_Classes/Base_Projectile.gd"
 
 #this script will need to have a set attributes function and variables that give
 # fireball specific funcitonality. i.e. burn power, burn duration, fireball size, etc
@@ -6,10 +6,7 @@ extends "res://Scripts/Base_Projectile.gd"
 var burn_power = 0
 var burn_duration = 0
 
-var active = false
-
-func _ready():
-	print("Fireball instantiated")
+#var active = false
 
 func impact_enemy(body, power):
 	.impact_enemy(body, power)

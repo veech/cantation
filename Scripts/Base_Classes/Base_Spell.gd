@@ -11,7 +11,7 @@ func cast(cast_position, mouse_position):
 	print("Cast function not implemented in child class")
 	
 func impact_enemy(power, body):
-	pass
+	print("NI")
 	
 func set_attributes(new_attributes):
 	self.attributes = new_attributes

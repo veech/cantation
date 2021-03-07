@@ -1,6 +1,6 @@
 extends Node
 
-const spell_obj = preload("res://Scenes/Spell.tscn")
+#const spell_obj = preload("res://Scenes/Spell.tscn")
 
 var size
 var scene
