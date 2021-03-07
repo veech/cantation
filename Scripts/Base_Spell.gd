@@ -14,8 +14,8 @@ func impact_enemy(power, body):
 	pass
 	
 func set_attributes(new_attributes):
-	pass
+	self.attributes = new_attributes
 	
 func get_attributes():
-	pass
+	return self.attributes
 	

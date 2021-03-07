@@ -3,7 +3,7 @@ extends Panel
 
 var slots = Array()
 
-export(Global.SlotType) var slot_type = Global.SlotType.SLOT_DAMAGE_SPELL
+export(Global.SlotType) var slot_type = Global.SlotType.SLOT_SPELL
 
 func _ready():
 	slots.resize(6)

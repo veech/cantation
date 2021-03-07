@@ -5,7 +5,7 @@
 
 extends TextureRect
 
-var attributes
+var attributes = {}
 var item_slot
 
 var picked = false
