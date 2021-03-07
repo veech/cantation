@@ -91,7 +91,7 @@ func _input(event):
 	
 	#The spell attributes should probably be passed into this function
 func cast_spell(direction):
-	var spawned_spell = spell_pool.spawn_object()
+	var spawned_spell = spell_pool.get_inactive_object()
 	spawned_spell.set_attributes(inventory.get_current_spell().attributes)
 	spawned_spell.global_position = global_position
 	spawned_spell.set_movement_direction(direction)
