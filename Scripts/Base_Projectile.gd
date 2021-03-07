@@ -28,7 +28,13 @@ func on_body_entered(body):
 		movement_direction = Vector2.ZERO
 		emit_signal("killed", self)
 
+func freeze(body, freeze_duration):
+	pass
+
 func burn(body, burn_power, burn_duration):
+	pass
+
+func push(body, push_strength):
 	pass
 
 #result must be a DIRECTION i.e. must be normalized before being entered into this function

@@ -32,7 +32,7 @@ func construct():
 		inactive_objects.push_back(s)
 	
 	
-func spawn_object():
+func get_inactive_object():
 #	if inactive_objects.size() > 0:
 #		var object = inactive_objects.pop_back()
 
