@@ -29,7 +29,30 @@ var game_is_paused = false
 onready var tooltip = get_node("../Tool_Tip")
 onready var spell_set = get_node("../Inventory/Spells_Set")
 
+
+
+# Getting the Spell Pool Ready
+const FIREBALL_POOL_SIZE = 40
+const FIREBALL_POOL_NAME = "fireball"
+const Pool = preload("res://Scripts/Pool.gd")
+const Fireball = preload("res://Scenes/Projectiles/Fire_Ball.tscn")
+
+onready var pool_location = get_node("/root/Example_Level_1/Spell_Pool_Location")
+onready var fireball_pool = Pool.new(FIREBALL_POOL_SIZE, FIREBALL_POOL_NAME, Fireball)
+
+#Spell scripts
+const Fireball_Launcher = preload("res://Scripts/Base_Launcher_Spell.gd")
+
+var fireball_launcher: Fireball_Launcher 
+
 func _ready():
+
+	#Pool code
+	fireball_pool.attach_to_node(pool_location)
+	
+	#launchers 
+	fireball_launcher = Fireball_Launcher.new() 
+	
 	set_visible(false)
 	var slots = get_node("Pack/Slots")
 	for _i in range(MAX_SLOTS):
@@ -43,7 +66,7 @@ func _ready():
 	for i in range(4):
 		var spell_slot = spell_set.slots[i]
 		if spell_slot:
-			spell_slot.slot_type = Global.SlotType.SLOT_DAMAGE_SPELL
+			spell_slot.slot_type = Global.SlotType.SLOT_SPELL
 			spell_slot.connect("mouse_entered", self, "mouse_enter_slot", [spell_slot]);
 			spell_slot.connect("mouse_exited", self, "mouse_exit_slot", [spell_slot]);
 			spell_slot.connect("gui_input", self, "slot_gui_input", [spell_slot]);
@@ -114,16 +137,16 @@ func get_free_slot():
 func add_item(attributes):
 	var slot = get_free_slot()
 	if slot:
-		slot.set_item(ItemClass.new(attributes, null, Global.item_images[attributes.element]))
+		slot.set_item(ItemClass.new(attributes, null, Global.item_images[Global.ELEMENTS.FIRE]))
 		
 func can_equip(item, slot):
-	return item.attributes.slot_type == slot.slot_type
+	return item.attributes["slot_type"] == slot.slot_type
 		
 func pick_item(slot, event):
 	pass
 		
 func set_equipped_spell_1(spell):
-	equipped_spells[0] = spell
+	equipped_spells[0] = instantiate_spell(spell)
 
 func set_equipped_spell_2(spell):
 	equipped_spells[1] = spell 
@@ -139,3 +162,18 @@ func set_current_spell(spell_slot):
 
 func get_current_spell():
 	return equipped_spells[current_spell_slot]
+
+func instantiate_spell(item):
+	match item.attributes["spell_type"]:
+		Global.ELEMENTS.FIRE:
+			fireball_launcher.set_attributes(item.attributes)
+			fireball_launcher.set_spell_pool(fireball_pool)
+			return fireball_launcher
+		null:
+			print("no spell_type assigned")
+		_:
+			print("This spell type is not in the switch statement")
+		
+		
+		
+		

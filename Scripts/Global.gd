@@ -4,8 +4,7 @@ class_name Global
 enum SlotType {
 	SLOT_DEFAULT = 0,
 	SLOT_POTION,
-	SLOT_DAMAGE_SPELL,
-	SLOT_UTILITY_SPELL
+	SLOT_SPELL
 }
 
 enum ELEMENTS {

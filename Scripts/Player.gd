@@ -84,8 +84,9 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && event.pressed:
 			if inventory.get_current_spell() != null:
-				var direction = (get_global_mouse_position() - global_position).normalized()
-				cast_spell(direction)
+				inventory.get_current_spell().cast(self.global_position, get_global_mouse_position())
+				#var direction = (get_global_mouse_position() - global_position).normalized()
+				#cast_spell(direction)
 			else:
 				print("No active spell to cast")
 	
