@@ -3,8 +3,8 @@ extends Area2D
 var movement_direction = Vector2.ZERO
 
 #These are probably going to be within the attributes dictionary once I sort that out
-var power
-var speed
+var power = 0
+var speed = 0
 var base_speed = 250
 
 #this will have to be connected to the pool in the pool code within the inventory class
@@ -28,13 +28,13 @@ func on_body_entered(body):
 		movement_direction = Vector2.ZERO
 		emit_signal("killed", self)
 
-func freeze(body, freeze_duration):
-	pass
+#func freeze(body, freeze_duration):
+#	pass
 
-func burn(body, burn_power, burn_duration):
-	pass
+#func burn(body, burn_power, burn_duration):
+#	pass
 
-func push(body, push_strength):
+func knockback(body, push_strength):
 	pass
 
 #result must be a DIRECTION i.e. must be normalized before being entered into this function
@@ -42,4 +42,6 @@ func set_movement_direction(direction):
 	self.movement_direction = direction
 
 func set_attributes(new_attributes):
-	pass
+	self.power = new_attributes['power']
+	self.speed = new_attributes['projectile_speed']
+
