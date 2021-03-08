@@ -32,26 +32,27 @@ onready var spell_set = get_node("../Inventory/Spells_Set")
 
 
 # Getting the Spell Pool Ready
-const FIREBALL_POOL_SIZE = 40
-const FIREBALL_POOL_NAME = "fireball"
+const POOL_SIZE = 20
 const Pool = preload("res://Scripts/Pool.gd")
+const FIREBALL_POOL_NAME = "fireball"
+const WAVE_POOL_NAME = "wave"
+const ICEBLAST_NAME = "iceblast"
+
 const Fireball = preload("res://Scenes/Projectiles/Fire_Ball.tscn")
+const Wave = preload("res://Scenes/Projectiles/Wave.tscn")
+#const Ice_Blast = preload("res://Scenes/Projectiles/Ice_Blast.tscn")
 
-onready var pool_location = get_node("/root/Example_Level_1/Spell_Pool_Location")
-onready var fireball_pool = Pool.new(FIREBALL_POOL_SIZE, FIREBALL_POOL_NAME, Fireball)
-
-#Spell scripts
+# Projectile Launchers
 const Fireball_Launcher = preload("res://Scripts/Spell_Casts/Fireball_Launcher.gd")
-
 var fireball_launcher: Fireball_Launcher 
+const Wave_Launcher = preload("res://Scripts/Spell_Casts/Wave_Launcher.gd")
+var wave_launcher: Wave_Launcher
+#const Iceblast_Launcher = preload("res://Scripts/Spell_Casts/Iceblast_Launcher.gd")
+#var iceblast_launcher: Iceblast_Launcher
 
 func _ready():
+	projectile_pool_setup()
 
-	#Pool code
-	fireball_pool.attach_to_node(pool_location)
-	
-	#launchers 
-	fireball_launcher = Fireball_Launcher.new() 
 	
 	set_visible(false)
 	var slots = get_node("Pack/Slots")
@@ -137,7 +138,7 @@ func get_free_slot():
 func add_item(attributes):
 	var slot = get_free_slot()
 	if slot:
-		slot.set_item(ItemClass.new(attributes, null, Global.item_images[Global.ELEMENTS.FIRE]))
+		slot.set_item(ItemClass.new(attributes, null, Global.item_images[attributes['spell_type']]))
 		
 func can_equip(item, slot):
 	return item.attributes["slot_type"] == slot.slot_type
@@ -148,6 +149,7 @@ func pick_item(slot, event):
 func set_equipped_spell_1(spell):
 	equipped_spells[0] = instantiate_spell(spell)
 
+	
 func set_equipped_spell_2(spell):
 	equipped_spells[1] = instantiate_spell(spell) 
 	
@@ -169,13 +171,24 @@ func instantiate_spell(item):
 	match item.attributes["spell_type"]:
 		Global.ELEMENTS.FIRE:
 			fireball_launcher.set_attributes(item.attributes)
-			fireball_launcher.set_spell_pool(fireball_pool)
 			return fireball_launcher
+		Global.ELEMENTS.WATER:
+			wave_launcher.set_attributes(item.attributes)
+			return wave_launcher
 		null:
 			print("no spell_type assigned")
 		_:
 			print("This spell type is not in the switch statement")
 		
-		
-		
-		
+func projectile_pool_setup():
+	
+	var fireball_pool = Pool.new(POOL_SIZE, FIREBALL_POOL_NAME, Fireball)		
+	fireball_pool.attach_to_node(Game_Manager)	
+	fireball_launcher = Fireball_Launcher.new()	
+	fireball_launcher.set_spell_pool(fireball_pool)
+
+	var wave_pool = Pool.new(POOL_SIZE, WAVE_POOL_NAME, Wave)		
+	wave_pool.attach_to_node(Game_Manager)	
+	wave_launcher = Wave_Launcher.new()	
+	wave_launcher.set_spell_pool(wave_pool)
+	

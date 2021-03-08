@@ -1,16 +1,18 @@
 extends "res://Scripts/Base_Classes/Base_Spellbook.gd"
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+const MIN_POWER = 5
+const MAX_POWER = 15
 
+const MIN_PUSH_POWER = 1
+const MAX_PUSH_POWER = 3
+const MIN_WIDTH = 1
+const MAX_WIDTH = 6
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	print("From Spellbook: ", attributes)
+	attributes["spell_type"] = Global.ELEMENTS.WATER
+#	attributes["power"] = rng.randi_range(MIN_POWER, MAX_POWER)
+	attributes["push_power"] = rng.randi_range(MIN_PUSH_POWER, MAX_PUSH_POWER)
+	attributes["width"] = rng.randi_range(MIN_WIDTH, MAX_WIDTH)
+	attributes["projectile_speed"] = rng.randf_range(.5, 1)

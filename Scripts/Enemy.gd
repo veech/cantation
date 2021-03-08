@@ -14,6 +14,8 @@ var frozen: bool = false
 var freeze_remaining = 0
 var freeze_power = 0
 
+var velocity = Vector2.ZERO
+
 func _ready():
 	health = 100
 	print("Starting health: ", health)
@@ -27,6 +29,8 @@ func take_damage(damage):
 		
 		
 func _process(delta):
+	global_position += velocity * delta
+	
 	if burned == true:
 		burn_remaining -= delta
 		if burn_remaining <= 0:
@@ -53,6 +57,12 @@ func freeze(freeze_power, freeze_duration):
 	self.freeze_remaining = freeze_duration 
 	print("Enemy frozen!")
 		
+func start_push(push_direction, push_power):
+	print("I got pushed!")
+
+func end_push():
+	print("not pushed  anymore")
+
 func death():
 	print("Im ded")
 	self.queue_free()
