@@ -29,8 +29,7 @@ func construct():
 		s.set_name(obj_name + "_" + str(i))
 		s.connect("killed", self, "on_killed")
 		s.active = false
-		s.set_pause_mode(1)
-		s.hide()
+		turn_off(s)
 		inactive_objects.push_back(s)
 	
 	
@@ -50,8 +49,7 @@ func get_inactive_object():
 		active_objects[n] = obj
 		inactive_objects.pop_back()
 		obj.active = true
-		obj.set_pause_mode(0)
-		obj.show()
+		turn_on(obj)
 		return obj
 
 	print("Not enough" + obj_name + " objects in pool to spawn another")
@@ -69,12 +67,21 @@ func on_killed(target):
 	target.active = false
 	var temp = active_objects.erase(name)
 	inactive_objects.push_front(target)
-	target.set_pause_mode(1)
-	target.hide()
+	turn_off(target)
 	
 func get_scene():
 	return scene
 	
 func no_access():
 	return
+	
+func turn_on(target):
+	target.show()
+	target.set_monitoring(true)
+
+func turn_off(target):
+	target.hide()
+	target.set_monitoring(false)
+	
+	
 	

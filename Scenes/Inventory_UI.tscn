@@ -11,10 +11,10 @@
 [ext_resource path="res://Assets/Text_Box_Alt.png" type="Texture" id=9]
 [ext_resource path="res://UI_Styles/Temp_Spell_Set_box.tres" type="StyleBox" id=10]
 
-
 [sub_resource type="Theme" id=1]
 
 [node name="Inventory_UI" type="CanvasLayer"]
+pause_mode = 2
 layer = 0
 
 [node name="Inventory" type="Panel" parent="."]
