@@ -10,7 +10,7 @@ enum SlotType {
 enum ELEMENTS {
 	NONELEMENTAL = 0,
 	EARTH,
-	WIND,
+	ICE,
 	WATER,
 	FIRE
 }

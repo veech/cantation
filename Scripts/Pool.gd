@@ -30,7 +30,7 @@ func construct():
 		s.connect("killed", self, "on_killed")
 		s.active = false
 		s.set_pause_mode(1)
-#		s.hide()
+		s.hide()
 		inactive_objects.push_back(s)
 	
 	
