@@ -9,7 +9,7 @@ const MAX_BURN_DURATION = 6
 
 func _ready():
 	print("From Spellbook: ", attributes)
-	attributes["spell_type"] = Global.ELEMENTS.FIRE
+	attributes["spell_type"] = Global.SPELLS.FIRE
 	attributes["power"] = rng.randi_range(MIN_POWER, MAX_POWER)
 	attributes["burn_power"] = rng.randi_range(MIN_BURN_POWER, MAX_BURN_POWER)
 	attributes["burn_duration"] = rng.randi_range(MIN_BURN_DURATION, MAX_BURN_DURATION)

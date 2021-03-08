@@ -11,7 +11,7 @@ const MAX_WIDTH = 6
 
 func _ready():
 	print("From Spellbook: ", attributes)
-	attributes["spell_type"] = Global.ELEMENTS.WATER
+	attributes["spell_type"] = Global.SPELLS.WATER
 #	attributes["power"] = rng.randi_range(MIN_POWER, MAX_POWER)
 	attributes["push_power"] = rng.randi_range(MIN_PUSH_POWER, MAX_PUSH_POWER)
 	attributes["width"] = rng.randi_range(MIN_WIDTH, MAX_WIDTH)

@@ -13,7 +13,7 @@ const MAX_RADIUS = 6
 
 func _ready():
 	print("From Spellbook: ", attributes)
-	attributes["spell_type"] = Global.ELEMENTS.ICE
+	attributes["spell_type"] = Global.SPELLS.ICE
 	attributes["power"] = rng.randi_range(MIN_POWER, MAX_POWER)
 	attributes["freeze_power"] = rng.randi_range(MIN_FREEZE_POWER, MAX_FREEZE_POWER)
 	attributes["freeze_duration"] = rng.randi_range(MIN_FREEZE_DURATION, MAX_FREEZE_DURATION)
