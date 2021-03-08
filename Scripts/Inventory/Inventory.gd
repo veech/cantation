@@ -36,19 +36,19 @@ const POOL_SIZE = 20
 const Pool = preload("res://Scripts/Pool.gd")
 const FIREBALL_POOL_NAME = "fireball"
 const WAVE_POOL_NAME = "wave"
-const ICEBLAST_NAME = "iceblast"
+const ICEBLAST_POOL_NAME = "iceblast"
 
 const Fireball = preload("res://Scenes/Projectiles/Fire_Ball.tscn")
 const Wave = preload("res://Scenes/Projectiles/Wave.tscn")
-#const Ice_Blast = preload("res://Scenes/Projectiles/Ice_Blast.tscn")
+const Iceblast = preload("res://Scenes/Projectiles/Iceblast.tscn")
 
 # Projectile Launchers
 const Fireball_Launcher = preload("res://Scripts/Spell_Casts/Fireball_Launcher.gd")
 var fireball_launcher: Fireball_Launcher 
 const Wave_Launcher = preload("res://Scripts/Spell_Casts/Wave_Launcher.gd")
 var wave_launcher: Wave_Launcher
-#const Iceblast_Launcher = preload("res://Scripts/Spell_Casts/Iceblast_Launcher.gd")
-#var iceblast_launcher: Iceblast_Launcher
+const Iceblast_Launcher = preload("res://Scripts/Spell_Casts/Iceblast_Launcher.gd")
+var iceblast_launcher: Iceblast_Launcher
 
 func _ready():
 	projectile_pool_setup()
@@ -175,6 +175,9 @@ func instantiate_spell(item):
 		Global.ELEMENTS.WATER:
 			wave_launcher.set_attributes(item.attributes)
 			return wave_launcher
+		Global.ELEMENTS.ICE:
+			iceblast_launcher.set_attributes(item.attributes)
+			return iceblast_launcher
 		null:
 			print("no spell_type assigned")
 		_:
@@ -192,3 +195,7 @@ func projectile_pool_setup():
 	wave_launcher = Wave_Launcher.new()	
 	wave_launcher.set_spell_pool(wave_pool)
 	
+	var iceblast_pool = Pool.new(POOL_SIZE, ICEBLAST_POOL_NAME, Iceblast)		
+	iceblast_pool.attach_to_node(Game_Manager)	
+	iceblast_launcher = Iceblast_Launcher.new()	
+	iceblast_launcher.set_spell_pool(iceblast_pool)
