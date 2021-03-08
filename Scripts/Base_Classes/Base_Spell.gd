@@ -1,7 +1,8 @@
 extends Area2D
 
 var attributes = {}
-#in child classes with projectiles, one of the attributes need to be the pool or maybe it needs to be a variable passed into the _init() function
+#in child classes with projectiles, one of the attributes need to be the pool or maybe it needs to be a 
+#variable passed into the _init() function
 
 func _init():
 	pass

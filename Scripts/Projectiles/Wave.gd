@@ -10,6 +10,9 @@ func push_body(body, push_direction, attributes):
 	body.start_push(push_direction, attributes['push_power'])
 	print("NI: push_body")
 
+# This is def not the way to do this. This is a hack to avoid a bug. 
+# once we have player and enemy inheriting from the same base class, we'll also have a way for the spell
+# to tell this function who cast it. These entered/exited functions will ignore if the body is the caster
 func on_body_entered(body):
 	if body.get_name() != "Player":
 		if body.is_in_group("Enemies"):

@@ -7,7 +7,7 @@ var facing_direction: Vector2 = Vector2(0, 1)
 
 onready var inventory = get_node("/root/Inventory_UI").get_child(0)
 
-var pushed = false
+#var pushed = false
 
 func _ready():
 	pass
