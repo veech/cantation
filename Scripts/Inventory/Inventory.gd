@@ -169,13 +169,13 @@ func instantiate_spell(item):
 	if !item:
 		return null
 	match item.attributes["spell_type"]:
-		Global.ELEMENTS.FIRE:
+		Global.SPELLS.FIRE:
 			fireball_launcher.set_attributes(item.attributes)
 			return fireball_launcher
-		Global.ELEMENTS.WATER:
+		Global.SPELLS.WATER:
 			wave_launcher.set_attributes(item.attributes)
 			return wave_launcher
-		Global.ELEMENTS.ICE:
+		Global.SPELLS.ICE:
 			iceblast_launcher.set_attributes(item.attributes)
 			return iceblast_launcher
 		null:
