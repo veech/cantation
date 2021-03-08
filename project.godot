@@ -33,6 +33,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Inventory_UI="*res://Scenes/Inventory_UI.tscn"
+Game_Manager="*res://Scripts/Game_Manager.gd"
 
 [input]
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Tilemaps/Dungeon_Tilemap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Spellbooks/Fire_Spellbook.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Spell_Pool_Location.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Enemies/Enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Spellbooks/Water_Spellbook.tscn" type="PackedScene" id=6]
 
 [node name="Example_Level_1" type="Node2D"]
 
@@ -24,3 +25,6 @@ position = Vector2( 323.79, 189.339 )
 
 [node name="Fire_Spellbook" parent="." instance=ExtResource( 3 )]
 position = Vector2( -7.76331, 92.9928 )
+
+[node name="Water_Spellbook" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3.84546, 150.761 )
