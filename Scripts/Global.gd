@@ -9,17 +9,20 @@ enum SlotType {
 
 enum SPELLS {
 	FIRE = 0,
+	WIND,
 	ICE,
 	WATER,
-	SUMMONSWORD
+	SUMMONSWORD,
+	LIGHTNING
 }
 
 const item_images = [
-		preload("res://Assets/Icon_Images/fire.png"),
-		preload("res://Assets/Icon_Images/wind.png"),
-		preload("res://Assets/Icon_Images/water.png"),
-		preload("res://Assets/Icon_Images/non_elemental.png"),
-		preload("res://Assets/Icon_Images/earth.png"),
+		preload("res://Assets/Spellbooks/Fire.png"),
+		preload("res://Assets/Spellbooks/Wind.png"),
+		preload("res://Assets/Spellbooks/Ice.png"),
+		preload("res://Assets/Spellbooks/Water.png"),
+		preload("res://Assets/Spellbooks/Buckle.png"),
+		preload("res://Assets/Spellbooks/Lightning.png"),
 ]
 
 const overworld_images = [
