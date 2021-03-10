@@ -8,8 +8,9 @@
 [ext_resource path="res://Scripts/Inventory/ItemSlot.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/Inventory/Spells_Set.gd" type="Script" id=7]
 [ext_resource path="res://UI_Styles/ToolTip_Textbox.tres" type="StyleBox" id=8]
-[ext_resource path="res://Assets/Text_Box_Alt.png" type="Texture" id=9]
+[ext_resource path="res://Assets/misc_unused/Text_Box_Alt.png" type="Texture" id=9]
 [ext_resource path="res://UI_Styles/Temp_Spell_Set_box.tres" type="StyleBox" id=10]
+
 
 [sub_resource type="Theme" id=1]
 

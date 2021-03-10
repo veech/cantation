@@ -1,9 +1,11 @@
 [gd_scene load_steps=22 format=2]
 
-[ext_resource path="res://Assets/Tileset_alt.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Tilemaps/Tileset_alt.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Floor_Tilemap.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Tilemaps/Floor_Tilemap.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Misc_Unused/Spellbook.tscn" type="PackedScene" id=5]
+
+
 
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
