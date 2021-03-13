@@ -31,11 +31,13 @@ animations = [ {
 extents = Vector2( 9.42583, 8.08997 )
 
 [node name="Wave" type="Area2D"]
+scale = Vector2( 2, 3 )
+z_index = 1
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

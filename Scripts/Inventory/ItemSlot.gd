@@ -10,7 +10,7 @@ signal set_spell
 
 func _init():
 	
-	rect_min_size = Vector2(52, 52)
+	rect_min_size = Vector2(72, 72)
 	style = StyleBoxFlat.new()
 	refreshColors()
 	style.set_border_width_all(3)
