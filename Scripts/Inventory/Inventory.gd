@@ -17,7 +17,7 @@ var equipped_spells = [null, null, null, null, null]
 
 var current_spell_slot = 0
 
-const MAX_SLOTS = 36
+const MAX_SLOTS = 16
 
 var slotList = Array()
 

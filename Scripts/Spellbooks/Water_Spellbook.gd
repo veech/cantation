@@ -15,4 +15,4 @@ func _ready():
 #	attributes["power"] = rng.randi_range(MIN_POWER, MAX_POWER)
 	attributes["push_power"] = rng.randi_range(MIN_PUSH_POWER, MAX_PUSH_POWER)
 	attributes["width"] = rng.randi_range(MIN_WIDTH, MAX_WIDTH)
-	attributes["projectile_speed"] = rng.randf_range(.5, 1)
+	attributes["projectile_speed"] = rng.randf_range(.75, 1)

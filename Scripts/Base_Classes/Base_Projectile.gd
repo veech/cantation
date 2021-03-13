@@ -5,7 +5,7 @@ var movement_direction = Vector2.ZERO
 #These are probably going to be within the attributes dictionary once I sort that out
 #var power = 0
 #var speed = 0
-var base_speed = 200
+var base_speed = 240
 var active = false
 
 var attributes = {"power": 0, "projectile_speed": 0}
