@@ -2,24 +2,19 @@ extends Area2D
 
 var movement_direction = Vector2.ZERO
 
-#These are probably going to be within the attributes dictionary once I sort that out
-#var power = 0
-#var speed = 0
 var base_speed = 240
 var velocity = Vector2.ZERO
 var active = false
 
 var attributes = {"power": 0, "projectile_speed": 0}
-#this will have to be connected to the pool in the pool code within the inventory class
+
 signal killed
 onready var collision_shape = $CollisionShape2D
-#Prolly not gonna use this but the damage function will be handled in the 
+
+
 func impact_enemy(body, attributes):
 	emit_signal("killed", self)
-	#movement_direction = Vector2.ZERO
 	print("NI: Base_Projectile impact_enemy")
-#	body.take_damage(power)
-	#override functions can handle freezing, burning, pushing the body.
 
 func impact_wall():
 	stop_projectile()
@@ -35,20 +30,22 @@ func _physics_process(delta):
 	global_position += velocity
 
 func on_body_entered(body):
-	if body.get_name() != "Player":
-		if body.is_in_group("Enemies"):
-			impact_enemy(body, attributes)
-		if body.is_in_group("Wall"):
-			impact_wall()
+#	if body.get_name() != "Player":
+#		if body.is_in_group("Enemies"):
+#			impact_enemy(body, attributes)
+#		if body.is_in_group("Wall"):
+#			impact_wall()
+
+	if body.is_in_group("Enemies"):
+		impact_enemy(body, attributes)
+	if body.is_in_group("Player"):
+		impact_enemy(body, attributes)
+	if body.is_in_group("Wall"):
+		impact_wall()
+	
+
 func on_body_exited(body):
 	pass
-	
-	
-#func freeze(body, freeze_duration):
-#	pass
-
-#func burn(body, burn_power, burn_duration):
-#	pass
 
 func knockback(body, push_strength):
 	print("NI")
@@ -62,9 +59,3 @@ func set_attributes(new_attributes):
 
 func stop_projectile():
 	self.movement_direction = Vector2.ZERO
-#	unnecessary with a dictionary
-#	self.attributes['power'] = new_attributes['power']
-#	self.attributes['projectile_speed'] = new_attributes['projectile_speed']
-#	self.power = new_attributes['power']
-#	self.speed = new_attributes['projectile_speed']
-

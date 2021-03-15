@@ -7,8 +7,6 @@ var facing_direction: Vector2 = Vector2(0, 1)
 
 onready var inventory = get_node("/root/Inventory_UI").get_child(0)
 
-#var pushed = false
-
 func _ready():
 	pass
 
@@ -66,16 +64,11 @@ func _play_idle_animation():
 
 #Player attack code
 func _input(event):
-	if event.is_action_pressed("Attack_A"):
-		pass
-	
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT && event.pressed:
-			if inventory.get_current_spell() != null:
-				inventory.get_current_spell().cast(self.global_position, get_global_mouse_position())
-
-			else:
-				print("No active spell to cast")
+	if event.is_action_pressed("Cast"):
+		if inventory.get_current_spell() != null:
+			inventory.get_current_spell().cast(self.global_position, get_global_mouse_position())
+		else:
+			print("No active spell to cast")
 	
 
 

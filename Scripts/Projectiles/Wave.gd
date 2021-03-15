@@ -16,7 +16,7 @@ func on_body_entered(body):
 	print("collision with: ", body.get_name())
 
 func on_body_exited(body):
-	
-	if body.is_in_group("Enemies"):
-		body.end_push()
+	pass
+#	if body.is_in_group("Enemies"):
+#		body.end_push()
 	
