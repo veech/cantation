@@ -32,7 +32,7 @@ onready var spell_set = get_node("../Inventory/Spells_Set")
 
 
 # Getting the Spell Pool Ready
-const POOL_SIZE = 20
+const POOL_SIZE = 40
 const Pool = preload("res://Scripts/Pool.gd")
 const FIREBALL_POOL_NAME = "fireball"
 const WAVE_POOL_NAME = "wave"
