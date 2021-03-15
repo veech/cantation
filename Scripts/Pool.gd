@@ -33,45 +33,29 @@ func construct():
 		s.hide()
 		inactive_objects.push_back(s)
 	
-	
 func get_inactive_object():
-#	if inactive_objects.size() > 0:
-#		var object = inactive_objects.pop_back()
-
-	var ds = inactive_objects.size()
-	if ds > 0:
-		var obj = inactive_objects[ds - 1]
-		
-		if obj.active:
+	if inactive_objects.size() >= 1:
+		var obj = inactive_objects.pop_back()
+		if obj.active == true:
 			print("Oops. tried to spawn active object")
 			return null
-
 		var n = obj.get_name()
 		active_objects[n] = obj
-		inactive_objects.pop_back()
-		obj.active = true
 		turn_on(obj)
-		print(obj.is_monitoring())
 		return obj
-
-	print("Not enough" + obj_name + " objects in pool to spawn another")
 	return null
 
 func attach_to_node(target_node):
-	#pool_location = target_node.position + pool_location_offset
 	for i in active_objects.values():
 		target_node.add_child(i)
 	for i in inactive_objects:
 		target_node.add_child(i)
-		#i.global_position = pool_location
-	
 	
 func on_killed(target):
+	turn_off(target)
 	var name = target.get_name()
-	target.active = false
 	var temp = active_objects.erase(name)
 	inactive_objects.push_front(target)
-	turn_off(target)
 	
 func get_scene():
 	return scene
@@ -80,16 +64,11 @@ func no_access():
 	return
 	
 func turn_on(target):
-	target.show()
+	target.active = true
 	target.collision_shape.set_deferred("disabled", false)
+	target.show()
 
 func turn_off(target):
-#	target.hide()
-# setting monitoring to false isnt working
-	#target.set_deferred("monitorable", false)
-	#target.set_monitoring(false)
+	target.active = false
 	target.collision_shape.set_deferred("disabled", true)
-	pass
-	
-	
-	
+	target.hide()

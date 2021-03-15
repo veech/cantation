@@ -40,8 +40,6 @@ func take_damage(damage):
 		death()
 	
 func _physics_process(delta):
-	
-
 	move_and_collide((velocity * speed) + push)		
 	push = lerp(push, Vector2.ZERO, .1)
 
