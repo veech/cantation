@@ -13,5 +13,5 @@ func impact_enemy(body, attributes):
 	.impact_enemy(body, attributes)
 	body.take_damage(attributes['power'])
 	body.burn(attributes['burn_power'], attributes['burn_duration'])
-
+	stop_projectile()
 

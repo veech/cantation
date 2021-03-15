@@ -28,7 +28,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 9.42583, 8.08997 )
+extents = Vector2( 3.33497, 7.46173 )
 
 [node name="Wave" type="Area2D"]
 scale = Vector2( 2, 3 )
@@ -37,8 +37,10 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
-frame = 2
+frame = 3
 playing = true
+offset = Vector2( 8, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 12.0994, 0.070076 )
 shape = SubResource( 6 )
