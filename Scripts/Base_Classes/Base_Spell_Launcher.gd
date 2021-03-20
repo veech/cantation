@@ -6,12 +6,13 @@ var projectile_pool
 #func _init(attributes):
 #	self.attributes = attributes	
 
-func cast(cast_position, mouse_position):
+func cast(cast_position, mouse_position, caster_name):
 	var spawned_spell = self.projectile_pool.get_inactive_object()
 	if !spawned_spell:
 		print("Tried to spawn NIL.")
 		return
 	spawned_spell.set_attributes(self.attributes)
+	spawned_spell.attributes["name"] = caster_name
 	var movement_direction = direction_from_to(cast_position, mouse_position)
 	spawned_spell.set_movement_direction(movement_direction)
 	spawned_spell.rotation = movement_direction.angle()

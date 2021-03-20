@@ -147,17 +147,17 @@ func pick_item(slot, event):
 	pass
 		
 func set_equipped_spell_1(spell):
-	equipped_spells[0] = instantiate_spell(spell)
+	equipped_spells[0] = instantiate_spell_launcher(spell)
 
 	
 func set_equipped_spell_2(spell):
-	equipped_spells[1] = instantiate_spell(spell) 
+	equipped_spells[1] = instantiate_spell_launcher(spell) 
 	
 func set_equipped_spell_3(spell):
-	equipped_spells[2] = instantiate_spell(spell)
+	equipped_spells[2] = instantiate_spell_launcher(spell)
 	
 func set_equipped_spell_4(spell):
-	equipped_spells[3] = instantiate_spell(spell)
+	equipped_spells[3] = instantiate_spell_launcher(spell)
 
 func set_current_spell(spell_slot):
 	current_spell_slot = spell_slot % 4
@@ -165,7 +165,7 @@ func set_current_spell(spell_slot):
 func get_current_spell():
 	return equipped_spells[current_spell_slot]
 
-func instantiate_spell(item):
+func instantiate_spell_launcher(item):
 	if !item:
 		return null
 	match item.attributes["spell_type"]:

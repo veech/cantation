@@ -8,6 +8,7 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	connect("body_entered", self, "on_body_entered")
 	attributes["slot_type"] = Global.SlotType.SLOT_SPELL
+	attributes["name"] = ''
 	rng.randomize()
 
 func on_body_entered(body):
