@@ -23,19 +23,19 @@ func impact_wall():
 func _ready():
 	connect("body_entered", self, "on_body_entered")
 	connect("body_exited", self, "on_body_exited")
-
+	collision_shape.disabled = true
+	
 func _physics_process(delta):
 	
 	velocity = movement_direction * base_speed * attributes['projectile_speed'] * delta
 	global_position += velocity
 
 func on_body_entered(body):
-#	if body.get_name() != "Player":
-#		if body.is_in_group("Enemies"):
-#			impact_enemy(body, attributes)
-#		if body.is_in_group("Wall"):
-#			impact_wall()
-
+	#this is to make sure the caster isnt damaged by his/her own spell
+	if body.get_name() == self.attributes["name"]:
+		return
+	
+	#these might be redundant. the wall one might be necessary since the wall wont have a "damage" function
 	if body.is_in_group("Enemies"):
 		impact_enemy(body, attributes)
 	if body.is_in_group("Player"):

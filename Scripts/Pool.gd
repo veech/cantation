@@ -6,6 +6,9 @@ var size
 var scene
 var obj_name
 
+#this is hacky. I need this to be set somehow by the level size maybe?
+#or I just need to find a way to turn off all of the 
+var pool_position = Vector2(-1000, -1000)
 
 #objects in scene
 var active_objects = {}
@@ -30,6 +33,7 @@ func construct():
 		s.set_name(obj_name + "_" + str(i))
 		s.connect("killed", self, "on_killed")
 		s.active = false
+#		s.global_position = pool_position
 		s.hide()
 		inactive_objects.push_back(s)
 	
@@ -50,7 +54,7 @@ func attach_to_node(target_node):
 		target_node.add_child(i)
 	for i in inactive_objects:
 		target_node.add_child(i)
-	
+		
 func on_killed(target):
 	turn_off(target)
 	var name = target.get_name()
@@ -65,6 +69,7 @@ func no_access():
 	
 func turn_on(target):
 	target.active = true
+	#collision_shape is a var named in baseprojectile
 	target.collision_shape.set_deferred("disabled", false)
 	target.show()
 
