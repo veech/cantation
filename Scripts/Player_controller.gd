@@ -7,6 +7,9 @@ onready var inventory = get_node("/root/Inventory_UI").get_child(0)
 var input: Vector2
 var facing_direction = Vector2(0,1)
 
+func _ready():
+	set_collision_layer_bit(1, true)
+
 func _physics_process(delta):
 	get_input_axis()
 	_animate()

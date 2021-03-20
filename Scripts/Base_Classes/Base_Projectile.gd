@@ -24,6 +24,7 @@ func _ready():
 	connect("body_entered", self, "on_body_entered")
 	connect("body_exited", self, "on_body_exited")
 	collision_shape.disabled = true
+	set_collision_layer_bit(4, true)
 	
 func _physics_process(delta):
 	
@@ -49,6 +50,9 @@ func on_body_exited(body):
 
 func knockback(body, push_strength):
 	print("NI")
+
+func push_body(body, push_direction, attributes):
+	body.start_push(velocity, attributes['push_power'])
 
 #result must be a DIRECTION i.e. must be normalized before being entered into this function
 func set_movement_direction(direction):
