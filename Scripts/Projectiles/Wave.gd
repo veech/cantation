@@ -5,8 +5,7 @@ extends "res://Scripts/Base_Classes/Base_Projectile.gd"
 func impact_enemy(body, attributes):
 	push_body(body, movement_direction, attributes)
 
-func push_body(body, push_direction, attributes):
-	body.start_push(velocity, attributes['push_power'])
+
 
 # This is def not the way to do this. This is a hack to avoid a bug. 
 # once we have player and enemy inheriting from the same base class, we'll also have a way for the spell

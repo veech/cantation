@@ -11,11 +11,14 @@ var chasing = false
 var stopping_rate = .2
 
 
+func _ready():
+	set_collision_layer_bit(2, true)
+
 func _physics_process(delta):
 	# this raycast needs to ignore NPCs
 	if self.global_position.distance_to(player.global_position) <= max_sight_distance and self.global_position.distance_to(player.global_position) >= stopping_distance:
 		var space_state = get_world_2d().direct_space_state
-		var result = space_state.intersect_ray(global_position, player.global_position, [self])
+		var result = space_state.intersect_ray(global_position, player.global_position, [self], 0b1010)
 		if result.collider.is_in_group("Player"):
 			chasing = true
 		else:
