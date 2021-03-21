@@ -4,14 +4,15 @@ extends "res://Scripts/Base_Classes/Base_Character.gd"
 onready var player = get_node("../Player")
 
 export var max_sight_distance: int = 150
-export var max_chase_distance: int
+export var max_chase_distance: int = 300
 export var stopping_distance: int = 50
 
 var chasing = false
 var stopping_rate = .2
 
-
 func _ready():
+	max_speed = 75
+	speed = max_speed
 	set_collision_layer_bit(2, true)
 
 func _physics_process(delta):
@@ -23,8 +24,10 @@ func _physics_process(delta):
 			chasing = true
 		else:
 			chasing = false
-	elif self.global_position.distance_to(player.global_position) <= stopping_distance:
+	elif self.global_position.distance_to(player.global_position) <= stopping_distance or self.global_position.distance_to(player.global_position) >= max_chase_distance:
 		chasing = false
+#	elif self.global_position.distance_to(player.global_position) >= max_chase_distance:
+#		chasing = false
 	if chasing == true:
 		velocity = direction_from_to(self.global_position, player.global_position)
 	else:

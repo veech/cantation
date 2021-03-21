@@ -4,10 +4,10 @@ extends "res://Scripts/Base_Classes/Base_Spellbook.gd"
 const MIN_POWER = 1
 const MAX_POWER = 8
 
-const MIN_FREEZE_POWER = 1
-const MAX_FREEZE_POWER = 3
+const MIN_FREEZE_POWER = 2
+const MAX_FREEZE_POWER = 4
 const MIN_FREEZE_DURATION = 1
-const MAX_FREEZE_DURATION = 4
+const MAX_FREEZE_DURATION = 8
 const MIN_RADIUS = 1
 const MAX_RADIUS = 6
 
