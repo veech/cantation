@@ -12,7 +12,6 @@ func impact_enemy(body, attributes):
 # to tell this function who cast it. These entered/exited functions will ignore if the body is the caster
 func on_body_entered(body):
 	.on_body_entered(body)
-	print("collision with: ", body.get_name())
 
 func on_body_exited(body):
 	pass
