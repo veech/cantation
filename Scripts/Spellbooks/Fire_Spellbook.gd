@@ -14,6 +14,6 @@ func _ready():
 	attributes["spell_type"] = Global.SPELLS.FIRE
 	attributes["power"] = rng.randi_range(MIN_POWER, MAX_POWER)
 	attributes["push_power"] = rng.randf_range(MIN_PUSH_POWER, MAX_PUSH_POWER)
-	attributes["burn_power"] = 3 #rng.randi_range(MIN_BURN_POWER, MAX_BURN_POWER)
-	attributes["burn_duration"] = 5 #rng.randi_range(MIN_BURN_DURATION, MAX_BURN_DURATION)
+	attributes["burn_power"] = rng.randi_range(MIN_BURN_POWER, MAX_BURN_POWER)
+	attributes["burn_duration"] = rng.randi_range(MIN_BURN_DURATION, MAX_BURN_DURATION)
 	attributes["projectile_speed"] = rng.randf_range(.5, 1)
