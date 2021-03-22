@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Tilemaps/Brick_Wall_Version2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,10 @@
 [ext_resource path="res://Scenes/Spellbooks/Water_Spellbook.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Spellbooks/Fire_Spellbook.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Enemies/Enemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Non_Projectiles_Spells/Summon_Sword.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Spellbooks/Wind_Spellbook.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Spellbooks/Lightning_Spellbook.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Spellbooks/Summon_Sword_Spellbook.tscn" type="PackedScene" id=10]
 
 [node name="Level_3" type="Node2D"]
 
@@ -14,6 +18,8 @@ tile_data = PoolIntArray( -262153, 2, 0, -262152, 3, 65536, -262151, 3, 65536, -
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( -244.106, -121.162 )
+
+[node name="Summon_Sword" parent="Player" instance=ExtResource( 7 )]
 
 [node name="Fire_Spellbook" parent="." instance=ExtResource( 5 )]
 position = Vector2( -149.671, 219.161 )
@@ -86,3 +92,18 @@ position = Vector2( 166.905, 402.723 )
 
 [node name="Enemy21" parent="." instance=ExtResource( 6 )]
 position = Vector2( 180.359, 358.996 )
+
+[node name="Wind_Spellbook" parent="." instance=ExtResource( 8 )]
+position = Vector2( -248.634, -71.2389 )
+
+[node name="Lightning_Spellbook" parent="." instance=ExtResource( 9 )]
+position = Vector2( -147.727, -77.1252 )
+
+[node name="Summon_Sword_Spellbook" parent="." instance=ExtResource( 10 )]
+position = Vector2( -200.703, -27.5124 )
+
+[node name="Fire_Spellbook2" parent="." instance=ExtResource( 5 )]
+position = Vector2( -185.25, -123 )
+
+[node name="Fire_Spellbook3" parent="." instance=ExtResource( 5 )]
+position = Vector2( -157.75, -125.5 )

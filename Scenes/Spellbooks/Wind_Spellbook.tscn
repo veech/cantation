@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Base_Scenes/Base_Spellbook_Scene.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Spellbooks/Books_Sheet.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Spellbooks/Wind_Spellbook.gd" type="Script" id=3]
+
+[node name="Wind_Spellbook" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 48, 112, 16, 16 )
