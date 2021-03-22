@@ -27,7 +27,7 @@ var item_offset = Vector2(0, 0)
 var game_is_paused = false
 
 onready var tooltip = get_node("../Tool_Tip")
-onready var spell_set = get_node("../Inventory/Spells_Set")
+onready var spell_set = get_node("Spells_Set")
 
 
 
@@ -69,14 +69,14 @@ func _ready():
 		slotList.append(slot)
 		slots.add_child(slot)
 		
-	for i in range(4):
+	for i in range(len(spell_set.slots)):
 		var spell_slot = spell_set.slots[i]
 		if spell_slot:
 			spell_slot.slot_type = Global.SlotType.SLOT_SPELL
 			spell_slot.connect("mouse_entered", self, "mouse_enter_slot", [spell_slot]);
 			spell_slot.connect("mouse_exited", self, "mouse_exit_slot", [spell_slot]);
 			spell_slot.connect("gui_input", self, "slot_gui_input", [spell_slot]);
-			spell_slot.connect("set_spell", self, "set_equipped_spell" + "_" + str(i+1))
+#			spell_slot.connect("set_spell", self, "set_equipped_spell" + "_" + str(i+1))
 
 
 func slot_gui_input(event: InputEvent, slot: ItemSlotClass):
@@ -223,4 +223,4 @@ func projectile_pool_setup():
 	wave_pool.attach_to_node(Game_Manager)
 	
 	iceblast_pool = Pool.new(POOL_SIZE, ICEBLAST_POOL_NAME, Iceblast)
-	iceblast_pool.attach_to_node(Game_Manager)	
+	iceblast_pool.attach_to_node(Game_Manager)
