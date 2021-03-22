@@ -1,16 +1,14 @@
 extends "res://Scripts/Base_Classes/Base_Spell.gd"
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+const Sword = preload("res://Scenes/Non-Projectile_Spells/Sword.tscn")
+var sword
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func cast(caster, mouse_position):
+	sword = Sword.instance()
+	sword.position = Vector2(0,0)
+	print("Sword summoned")
+	caster.add_child(sword)
+#	sword.position = Vector2(0,0)
+	sword.look_at(mouse_position)
+#	sword.set_start_direction(mouse_position)

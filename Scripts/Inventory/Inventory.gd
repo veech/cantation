@@ -44,25 +44,19 @@ const Iceblast = preload("res://Scenes/Projectiles/Iceblast.tscn")
 
 # Projectile Launchers
 const Fireball_Launcher = preload("res://Scripts/Spell_Casts/Fireball_Launcher.gd")
-#var fireball_launcher: Fireball_Launcher 
 var fireball_pool : Pool
 const Wave_Launcher = preload("res://Scripts/Spell_Casts/Wave_Launcher.gd")
-#var wave_launcher: Wave_Launcher
 var wave_pool : Pool
 const Iceblast_Launcher = preload("res://Scripts/Spell_Casts/Iceblast_Launcher.gd")
-#var iceblast_launcher: Iceblast_Launcher
 var iceblast_pool: Pool
 
 #Non-projectile Spell Scripts
 const Summon_Sword = preload("res://Scripts/Spell_Casts/Summon_Sword.gd")
-var summon_sword: Summon_Sword
 const Wind_Spell = preload("res://Scripts/Spell_Casts/Wind_Spell.gd")
-var wind_spell: Wind_Spell
 const Lightning_Spell = preload("res://Scripts/Spell_Casts/Lightning_Spell.gd")
-var lightning_spell: Lightning_Spell
 
 func _ready():
-	spell_setup()
+	projectile_pool_setup()
 
 	
 	set_visible(false)
@@ -157,9 +151,17 @@ func can_equip(item, slot):
 func pick_item(slot, event):
 	pass
 		
+		
+
+
+# I think all this code needs to be moved to the BaseCharacter script.
+# Probably the pools should be set up at the point of equipping a spell and destroyed at the point of unequipping.
+# if this proves too expensive, then they should be instanced from the beginning
+# pool setup should be a generic function that sets up one pool at a time.
+# that way, enemies can have a single spell equipped and have their own pool for that spell.
+ 
 func set_equipped_spell_1(spell):
 	equipped_spells[0] = instantiate_spell_caster(spell)
-
 	
 func set_equipped_spell_2(spell):
 	equipped_spells[1] = instantiate_spell_caster(spell) 
@@ -197,39 +199,28 @@ func instantiate_spell_caster(item):
 			return iceblast_launcher
 		#The rest of these should return the correct spell script so the player can call cast.
 		Global.SPELLS.SUMMONSWORD:
-			#iceblast_launcher.set_attributes(item.attributes)
-			return null
+			var summon_sword = Summon_Sword.new()
+			summon_sword.set_attributes(item.attributes)
+			return summon_sword
 		Global.SPELLS.LIGHTNING:
-			print("NI")
-			return null
+			var lightning_spell = Lightning_Spell.new()
+			lightning_spell.set_attributes(item.attributes)
+			return lightning_spell
 		Global.SPELLS.WIND:
-			print("NI")
-			return null
+			var wind_spell = Wind_Spell.new()
+			wind_spell.set_attributes(item.attributes)
+			return wind_spell
 		null:
 			print("no spell_type assigned")
 		_:
 			print("This spell type is not in the switch statement")
-		
-func spell_setup():
-	projectile_pool_setup()
-	
-	summon_sword = Summon_Sword.new()
-	wind_spell = Wind_Spell.new()
-	lightning_spell = Lightning_Spell.new()
 
 func projectile_pool_setup():
-	
 	fireball_pool = Pool.new(POOL_SIZE, FIREBALL_POOL_NAME, Fireball)
 	fireball_pool.attach_to_node(Game_Manager)
-	#fireball_launcher = Fireball_Launcher.new()
-	#fireball_launcher.set_spell_pool(fireball_pool)
 
 	wave_pool = Pool.new(POOL_SIZE, WAVE_POOL_NAME, Wave)
 	wave_pool.attach_to_node(Game_Manager)
-	#wave_launcher = Wave_Launcher.new()
-	#wave_launcher.set_spell_pool(wave_pool)
 	
 	iceblast_pool = Pool.new(POOL_SIZE, ICEBLAST_POOL_NAME, Iceblast)
 	iceblast_pool.attach_to_node(Game_Manager)	
-	#iceblast_launcher = Iceblast_Launcher.new()	
-	#iceblast_launcher.set_spell_pool(iceblast_pool)
