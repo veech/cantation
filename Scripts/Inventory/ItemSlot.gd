@@ -39,7 +39,7 @@ func put_item(new_item):
 	Inventory_UI.remove_child(item)
 	add_child(item)
 #This is ignored except when the slot emitting it is a spell_slot
-	emit_signal("set_spell", item)
+	emit_signal("set_spell", item, slotIndex)
 
 func refreshColors():
 	style.bg_color = Color("#9badb7")
