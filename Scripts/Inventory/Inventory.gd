@@ -44,14 +44,25 @@ const Iceblast = preload("res://Scenes/Projectiles/Iceblast.tscn")
 
 # Projectile Launchers
 const Fireball_Launcher = preload("res://Scripts/Spell_Casts/Fireball_Launcher.gd")
-var fireball_launcher: Fireball_Launcher 
+#var fireball_launcher: Fireball_Launcher 
+var fireball_pool : Pool
 const Wave_Launcher = preload("res://Scripts/Spell_Casts/Wave_Launcher.gd")
-var wave_launcher: Wave_Launcher
+#var wave_launcher: Wave_Launcher
+var wave_pool : Pool
 const Iceblast_Launcher = preload("res://Scripts/Spell_Casts/Iceblast_Launcher.gd")
-var iceblast_launcher: Iceblast_Launcher
+#var iceblast_launcher: Iceblast_Launcher
+var iceblast_pool: Pool
+
+#Non-projectile Spell Scripts
+const Summon_Sword = preload("res://Scripts/Spell_Casts/Summon_Sword.gd")
+var summon_sword: Summon_Sword
+const Wind_Spell = preload("res://Scripts/Spell_Casts/Wind_Spell.gd")
+var wind_spell: Wind_Spell
+const Lightning_Spell = preload("res://Scripts/Spell_Casts/Lightning_Spell.gd")
+var lightning_spell: Lightning_Spell
 
 func _ready():
-	projectile_pool_setup()
+	spell_setup()
 
 	
 	set_visible(false)
@@ -147,17 +158,17 @@ func pick_item(slot, event):
 	pass
 		
 func set_equipped_spell_1(spell):
-	equipped_spells[0] = instantiate_spell_launcher(spell)
+	equipped_spells[0] = instantiate_spell_caster(spell)
 
 	
 func set_equipped_spell_2(spell):
-	equipped_spells[1] = instantiate_spell_launcher(spell) 
+	equipped_spells[1] = instantiate_spell_caster(spell) 
 	
 func set_equipped_spell_3(spell):
-	equipped_spells[2] = instantiate_spell_launcher(spell)
+	equipped_spells[2] = instantiate_spell_caster(spell)
 	
 func set_equipped_spell_4(spell):
-	equipped_spells[3] = instantiate_spell_launcher(spell)
+	equipped_spells[3] = instantiate_spell_caster(spell)
 
 func set_current_spell(spell_slot):
 	current_spell_slot = spell_slot % 4
@@ -165,37 +176,60 @@ func set_current_spell(spell_slot):
 func get_current_spell():
 	return equipped_spells[current_spell_slot]
 
-func instantiate_spell_launcher(item):
+func instantiate_spell_caster(item):
 	if !item:
 		return null
 	match item.attributes["spell_type"]:
 		Global.SPELLS.FIRE:
+			var fireball_launcher = Fireball_Launcher.new()
 			fireball_launcher.set_attributes(item.attributes)
+			fireball_launcher.set_spell_pool(fireball_pool)
 			return fireball_launcher
 		Global.SPELLS.WATER:
+			var wave_launcher = Wave_Launcher.new()
 			wave_launcher.set_attributes(item.attributes)
+			wave_launcher.set_spell_pool(wave_pool)
 			return wave_launcher
 		Global.SPELLS.ICE:
+			var iceblast_launcher = Iceblast_Launcher.new()
 			iceblast_launcher.set_attributes(item.attributes)
+			iceblast_launcher.set_spell_pool(iceblast_pool)
 			return iceblast_launcher
+		#The rest of these should return the correct spell script so the player can call cast.
+		Global.SPELLS.SUMMONSWORD:
+			#iceblast_launcher.set_attributes(item.attributes)
+			return null
+		Global.SPELLS.LIGHTNING:
+			print("NI")
+			return null
+		Global.SPELLS.WIND:
+			print("NI")
+			return null
 		null:
 			print("no spell_type assigned")
 		_:
 			print("This spell type is not in the switch statement")
 		
+func spell_setup():
+	projectile_pool_setup()
+	
+	summon_sword = Summon_Sword.new()
+	wind_spell = Wind_Spell.new()
+	lightning_spell = Lightning_Spell.new()
+
 func projectile_pool_setup():
 	
-	var fireball_pool = Pool.new(POOL_SIZE, FIREBALL_POOL_NAME, Fireball)		
-	fireball_pool.attach_to_node(Game_Manager)	
-	fireball_launcher = Fireball_Launcher.new()	
-	fireball_launcher.set_spell_pool(fireball_pool)
+	fireball_pool = Pool.new(POOL_SIZE, FIREBALL_POOL_NAME, Fireball)
+	fireball_pool.attach_to_node(Game_Manager)
+	#fireball_launcher = Fireball_Launcher.new()
+	#fireball_launcher.set_spell_pool(fireball_pool)
 
-	var wave_pool = Pool.new(POOL_SIZE, WAVE_POOL_NAME, Wave)		
-	wave_pool.attach_to_node(Game_Manager)	
-	wave_launcher = Wave_Launcher.new()	
-	wave_launcher.set_spell_pool(wave_pool)
+	wave_pool = Pool.new(POOL_SIZE, WAVE_POOL_NAME, Wave)
+	wave_pool.attach_to_node(Game_Manager)
+	#wave_launcher = Wave_Launcher.new()
+	#wave_launcher.set_spell_pool(wave_pool)
 	
-	var iceblast_pool = Pool.new(POOL_SIZE, ICEBLAST_POOL_NAME, Iceblast)		
+	iceblast_pool = Pool.new(POOL_SIZE, ICEBLAST_POOL_NAME, Iceblast)
 	iceblast_pool.attach_to_node(Game_Manager)	
-	iceblast_launcher = Iceblast_Launcher.new()	
-	iceblast_launcher.set_spell_pool(iceblast_pool)
+	#iceblast_launcher = Iceblast_Launcher.new()	
+	#iceblast_launcher.set_spell_pool(iceblast_pool)

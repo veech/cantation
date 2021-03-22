@@ -9,9 +9,9 @@ onready var speed = get_node("Speed")
 
 func display_tip(_item: Item_Class, mouse_pos: Vector2):
 	visible = true
-	element.set_text(str(_item.attributes["spell_type"]))
+	element.set_text("Element: " + str(_item.attributes["spell_type"]))
 #	damage.set_text("Power: %d" % _item.attributes["power"]) #, _item.attributes.elemental_damage)
-	attack_range.set_text("Speed: %d/100" % (_item.attributes["projectile_speed"] * 100))
+#	attack_range.set_text("Speed: %d/100" % (_item.attributes["projectile_speed"] * 100))
 	#speed.set_text("Speed: %d/100" % (_item.attributes.projectile_speed * 100))
 
 	rect_size = Vector2(128, 256)
