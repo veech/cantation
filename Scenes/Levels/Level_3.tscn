@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Tilemaps/Brick_Wall_Version2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Scenes/Spellbooks/Water_Spellbook.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Spellbooks/Fire_Spellbook.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Enemies/Enemy.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Non_Projectiles_Spells/Summon_Sword.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Spellbooks/Wind_Spellbook.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Spellbooks/Lightning_Spellbook.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Spellbooks/Summon_Sword_Spellbook.tscn" type="PackedScene" id=10]
@@ -18,8 +17,6 @@ tile_data = PoolIntArray( -262153, 2, 0, -262152, 3, 65536, -262151, 3, 65536, -
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( -244.106, -121.162 )
-
-[node name="Summon_Sword" parent="Player" instance=ExtResource( 7 )]
 
 [node name="Fire_Spellbook" parent="." instance=ExtResource( 5 )]
 position = Vector2( -149.671, 219.161 )
@@ -40,58 +37,19 @@ position = Vector2( 119.224, 336.986 )
 position = Vector2( 117.401, 386.925 )
 
 [node name="Enemy4" parent="." instance=ExtResource( 6 )]
-position = Vector2( 314.902, 353.951 )
+position = Vector2( 165.615, 329.257 )
 
 [node name="Enemy5" parent="." instance=ExtResource( 6 )]
-position = Vector2( 301.448, 395.996 )
+position = Vector2( 152.161, 371.302 )
 
 [node name="Enemy6" parent="." instance=ExtResource( 6 )]
-position = Vector2( 258.562, 457.381 )
+position = Vector2( 147.438, 424.83 )
 
 [node name="Enemy7" parent="." instance=ExtResource( 6 )]
-position = Vector2( 235.858, 465.79 )
+position = Vector2( 124.734, 433.239 )
 
 [node name="Enemy8" parent="." instance=ExtResource( 6 )]
-position = Vector2( 283.789, 438.881 )
-
-[node name="Enemy9" parent="." instance=ExtResource( 6 )]
-position = Vector2( 166.905, 306.861 )
-
-[node name="Enemy10" parent="." instance=ExtResource( 6 )]
-position = Vector2( 233.335, 295.929 )
-
-[node name="Enemy11" parent="." instance=ExtResource( 6 )]
-position = Vector2( 267.812, 304.338 )
-
-[node name="Enemy12" parent="." instance=ExtResource( 6 )]
-position = Vector2( 282.107, 337.974 )
-
-[node name="Enemy13" parent="." instance=ExtResource( 6 )]
-position = Vector2( 275.38, 381.7 )
-
-[node name="Enemy14" parent="." instance=ExtResource( 6 )]
-position = Vector2( 243.426, 418.7 )
-
-[node name="Enemy15" parent="." instance=ExtResource( 6 )]
-position = Vector2( 200.54, 447.29 )
-
-[node name="Enemy16" parent="." instance=ExtResource( 6 )]
-position = Vector2( 139.996, 434.677 )
-
-[node name="Enemy17" parent="." instance=ExtResource( 6 )]
-position = Vector2( 235.858, 348.065 )
-
-[node name="Enemy18" parent="." instance=ExtResource( 6 )]
-position = Vector2( 213.154, 386.746 )
-
-[node name="Enemy19" parent="." instance=ExtResource( 6 )]
-position = Vector2( 199.7, 309.384 )
-
-[node name="Enemy20" parent="." instance=ExtResource( 6 )]
-position = Vector2( 166.905, 402.723 )
-
-[node name="Enemy21" parent="." instance=ExtResource( 6 )]
-position = Vector2( 180.359, 358.996 )
+position = Vector2( 172.665, 406.33 )
 
 [node name="Wind_Spellbook" parent="." instance=ExtResource( 8 )]
 position = Vector2( -248.634, -71.2389 )

@@ -24,7 +24,7 @@ func get_input_axis():
 func _input(event):
 	if event.is_action_pressed("Cast"):
 		if inventory.get_current_spell() != null:
-			inventory.get_current_spell().cast(self.global_position, get_global_mouse_position(), self.get_name())
+			inventory.get_current_spell().cast(self, get_global_mouse_position())
 		else:
 			print("No active spell to cast")
 	
