@@ -17,3 +17,5 @@ offset = Vector2( 72, 0 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 72, 0 )
 shape = SubResource( 1 )
+
+[node name="Spell_Timer" type="Timer" parent="."]

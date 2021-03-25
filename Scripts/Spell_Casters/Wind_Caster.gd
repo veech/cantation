@@ -15,7 +15,6 @@ func set_spell(parent_node, caster):
 	casted_spell.attributes['caster'] = caster.get_name()
 	caster.add_child(casted_spell)
 	casted_spell.turn_off()
-	return casted_spell
 
 func cast(caster, mouse_position):
 	casted_spell.activate_wind(mouse_position)

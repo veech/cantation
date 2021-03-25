@@ -1,15 +1,11 @@
 extends "res://Scripts/Base_Classes/Base_Spell_Caster.gd"
 
-var projectile_pool
-const POOL_SIZE = 40
-const Pool = preload("res://Scripts/Pool.gd")
 
-var pool_name
-var projectile
-
-
+	
+	
+	
 func cast(caster, mouse_position):
-	var spawned_spell = self.projectile_pool.get_inactive_object()
+	var spawned_spell = self.spell_pool.get_inactive_object()
 	if !spawned_spell:
 		print("Tried to spawn NIL.")
 		return
@@ -23,22 +19,19 @@ func direction_from_to(position_a, position_b):
 	var direction = position_b - position_a
 	return direction.normalized()
 
-func set_spell_pool(pool):
-	self.projectile_pool = pool
+
 
 func unequip(slot):
 	print("unequipping spell")
 	unset_spell_pool()
 	
-func unset_spell_pool():
-	projectile_pool.queue_free()
+
 
 func set_attributes(attributes):
 	self.attributes = attributes
 
 func set_spell(parent_node, caster):
 	self.attributes["caster"] = caster.get_name()
-	var new_pool = Pool.new(POOL_SIZE, pool_name, projectile, self.attributes)
+	var new_pool = Pool.new(POOL_SIZE, pool_name, spell, self.attributes)
 	new_pool.attach_to_node(parent_node)
-	self.projectile_pool = new_pool
-	return new_pool
+	self.spell_pool = new_pool

@@ -4,7 +4,7 @@ var movement_direction = Vector2.ZERO
 
 var base_speed = 240
 var velocity = Vector2.ZERO
-var active = false
+#var active = false
 
 signal killed
 onready var collision_shape = $CollisionShape2D
