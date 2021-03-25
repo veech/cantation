@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Tilemaps/Brick_Wall_Version2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Spellbooks/Ice_Spellbook.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Spellbooks/Water_Spellbook.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Spellbooks/Fire_Spellbook.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Enemies/Enemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Spellbooks/Wind_Spellbook.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Spellbooks/Lightning_Spellbook.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Spellbooks/Summon_Sword_Spellbook.tscn" type="PackedScene" id=10]
@@ -40,3 +41,9 @@ position = Vector2( -185.25, -123 )
 
 [node name="Fire_Spellbook3" parent="." instance=ExtResource( 5 )]
 position = Vector2( -157.75, -125.5 )
+
+[node name="Enemy" parent="." instance=ExtResource( 6 )]
+position = Vector2( -105.72, 176.157 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 6 )]
+position = Vector2( -57.6116, 195.757 )

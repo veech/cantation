@@ -1,6 +1,5 @@
 extends "res://Scripts/Base_Classes/Base_Character.gd"
 
-
 onready var player = get_node("../Player")
 
 export var max_sight_distance: int = 150
@@ -16,7 +15,7 @@ func _ready():
 	set_collision_layer_bit(2, true)
 
 func _physics_process(delta):
-	# this raycast needs to ignore NPCs
+	#This ai logic is trash
 	if self.global_position.distance_to(player.global_position) <= max_sight_distance and self.global_position.distance_to(player.global_position) >= stopping_distance:
 		var space_state = get_world_2d().direct_space_state
 		var result = space_state.intersect_ray(global_position, player.global_position, [self], 0b1010)
@@ -26,8 +25,6 @@ func _physics_process(delta):
 			chasing = false
 	elif self.global_position.distance_to(player.global_position) <= stopping_distance or self.global_position.distance_to(player.global_position) >= max_chase_distance:
 		chasing = false
-#	elif self.global_position.distance_to(player.global_position) >= max_chase_distance:
-#		chasing = false
 	if chasing == true:
 		velocity = direction_from_to(self.global_position, player.global_position)
 	else:

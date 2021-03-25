@@ -5,8 +5,8 @@ const MIN_POWER = 5
 const MAX_POWER = 15
 const MIN_RANGE = 1
 const MAX_RANGE = 3
-const MIN_PUSH_POWER = .25
-const MAX_PUSH_POWER = .75
+const MIN_PUSH_POWER = 1
+const MAX_PUSH_POWER = 2
 
 
 func _ready():

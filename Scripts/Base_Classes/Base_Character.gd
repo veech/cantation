@@ -69,12 +69,13 @@ func move_character(delta):
 	push = lerp(push, Vector2.ZERO, push_recovery)
 	
 func start_push(push_direction, push_power):
+	print("push called")
 	push = push_direction * push_power * push_sensitivity
 	
 func burn(burn_power, burn_duration):
 	self.burn_damage = burn_power
 	burn_time_remaining = burn_duration
-	burned = true	
+	burned = true
 	
 func freeze(freeze_power, freeze_duration):
 	print("frozen")
@@ -92,8 +93,8 @@ func take_damage(damage):
 func death():
 	print("Im ded")
 
-
-###Spell casting code
+#######################Spell casting code###########################
+####################################################################
 func instantiate_spell_caster(item, slot):
 	if !item:
 		return null
@@ -119,11 +120,8 @@ func build_spell(spell_type, item, slot):
 	var spell = spell_type.new()
 	spell.set_attributes(item.attributes)
 	spell.set_spell(pool_node_list[slot], self)
-	return spell	
+	return spell
 
-#this creates some pool containers on the gamemanager node
-		## maybe in the player controller, I can add the specific functionality for adding the individual 
-		## spell pool containers
 func create_pool_container(): 
 	var my_spell_container = Character_Spell_Container_Node.instance()
 	my_spell_container.set_name(self.get_name() + "_spell_pools")
@@ -155,4 +153,3 @@ func clear_container_node(slot):
 	print("Cleared container node")
 	for i in pool_node_list[slot].get_children():
 		i.queue_free()
-
