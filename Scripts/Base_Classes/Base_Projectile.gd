@@ -46,7 +46,7 @@ func on_body_entered(body):
 	
 
 func on_body_exited(body):
-	pass
+	print("NI")
 
 func knockback(body, push_strength):
 	print("NI")

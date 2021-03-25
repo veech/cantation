@@ -29,6 +29,19 @@ var Pool_Container = preload("res://Scenes/Utilities/Pool_Container.tscn")
 
 var spell_container: Node2D
 
+
+# Projectile Launchers
+const Fireball_Launcher = preload("res://Scripts/Spell_Casts/Fireball_Launcher.gd")
+const Wave_Launcher = preload("res://Scripts/Spell_Casts/Wave_Launcher.gd")
+const Iceblast_Launcher = preload("res://Scripts/Spell_Casts/Iceblast_Launcher.gd")
+
+#Non-projectile Spell Scripts
+const Summon_Sword = preload("res://Scripts/Spell_Casts/Summon_Sword.gd")
+const Wind_Spell = preload("res://Scripts/Spell_Casts/Wind_Spell.gd")
+const Lightning_Spell = preload("res://Scripts/Spell_Casts/Lightning_Spell.gd")
+	
+var equipped_spells = []
+
 func _ready():
 
 	speed = max_speed
@@ -80,164 +93,33 @@ func death():
 	print("Im ded")
 
 
-
-# pool setup should be a generic function that sets up one pool at a time.
-# that way, enemies can have a single spell equipped and have their own pool for that spell.
-
-# Getting the Spell Pool Ready
-const POOL_SIZE = 40
-const Pool = preload("res://Scripts/Pool.gd")
-const FIREBALL_POOL_NAME = "fireball"
-const WAVE_POOL_NAME = "wave"
-const ICEBLAST_POOL_NAME = "iceblast"
-
-const Fireball = preload("res://Scenes/Projectiles/Fire_Ball.tscn")
-const Wave = preload("res://Scenes/Projectiles/Wave.tscn")
-const Iceblast = preload("res://Scenes/Projectiles/Iceblast.tscn")
-
-# Projectile Launchers
-const Fireball_Launcher = preload("res://Scripts/Spell_Casts/Fireball_Launcher.gd")
-#var fireball_pool : Pool
-const Wave_Launcher = preload("res://Scripts/Spell_Casts/Wave_Launcher.gd")
-#var wave_pool : Pool
-const Iceblast_Launcher = preload("res://Scripts/Spell_Casts/Iceblast_Launcher.gd")
-#var iceblast_pool: Pool
-
-#Non-projectile Spell Scripts
-const Summon_Sword = preload("res://Scripts/Spell_Casts/Summon_Sword.gd")
-const Wind_Spell = preload("res://Scripts/Spell_Casts/Wind_Spell.gd")
-const Lightning_Spell = preload("res://Scripts/Spell_Casts/Lightning_Spell.gd")
-##### up to this point everything should be in base character
-	
-var equipped_spells = []
-#var spell_pool_parent_nodes = []
-# the ready function in the player controller will resize this list to the length of the possible equipped spells
-# node2d will be added to playercontroller with children being the pool objects. a reference to these node2ds
-#will be stored in the container.
-# if the objects are children of the player, theyre gonna move with the player. maybe this method can work 
-# with them attached to the gamemanager node still
-#maybe, I attach a node2d to the gamemanager that is called "self.get_name() + '_spell_pools'"
-#and I attach the pool node2Ds to that in the ready function. 
-
-
-### this should be in the basecharacter class and each branch of the switch statement should 
-### also instance the appropriate pool scenes
-
-### this is where the magic happens
-### this function needs to.....
-###	---	read the slot that called it and the spell added to the slot
-###	---	use the spell index to add the pool to the correct 
-
-#func instantiate_spell_caster(item, slot):
-#	if !item:
-#		return null
-#	match item.attributes["spell_type"]:
-#		Global.SPELLS.FIRE:
-#			var fireball_launcher = Fireball_Launcher.new()
-#
-#			#Base class has projectile, pool_name, pool_size
-#			#and the set_spell_pool function which only takes slot node (parent node) as an arg
-#			# 
-#
-#			fireball_launcher.set_spell_pool(instantiate_projectile_pool(Fireball, FIREBALL_POOL_NAME, slot, item.attributes))
-#			return fireball_launcher
-#		Global.SPELLS.WATER:
-#			var wave_launcher = Wave_Launcher.new()
-#			wave_launcher.set_spell_pool(instantiate_projectile_pool(Wave, WAVE_POOL_NAME, slot, item.attributes))
-#			return wave_launcher
-#		Global.SPELLS.ICE:
-#			var iceblast_launcher = Iceblast_Launcher.new()
-#			iceblast_launcher.set_spell_pool(instantiate_projectile_pool(Iceblast, ICEBLAST_POOL_NAME, slot, item.attributes))
-#			return iceblast_launcher
-#
-#		#The rest of these should return the correct spell script so the player can call cast.
-#		Global.SPELLS.SUMMONSWORD:
-#			var summon_sword = Summon_Sword.new()
-#			summon_sword.set_attributes(item.attributes)
-#			return summon_sword
-#		Global.SPELLS.LIGHTNING:
-#			var lightning_spell = Lightning_Spell.new()
-#			lightning_spell.set_attributes(item.attributes)
-#			return lightning_spell
-#		Global.SPELLS.WIND:
-#			var wind_spell = Wind_Spell.new()
-#			wind_spell.set_attributes(item.attributes)
-#			return wind_spell
-#		null:
-#			print("no spell_type assigned")
-#		_:
-#			print("This spell type is not in the switch statement")
-#
-
-
-
-
-
-
-
-
-
-
+###Spell casting code
 func instantiate_spell_caster(item, slot):
 	if !item:
 		return null
 	match item.attributes["spell_type"]:
 		Global.SPELLS.FIRE:
-			var fireball_launcher = Fireball_Launcher.new()
-			
-			#Base class has projectile, pool_name, pool_size
-			#and the set_spell_pool function which only takes slot node (parent node) as an arg
-			# 
-			
-			fireball_launcher.set_spell_pool(instantiate_projectile_pool(Fireball, FIREBALL_POOL_NAME, slot, item.attributes))
-			return fireball_launcher
+			return build_spell(Fireball_Launcher, item, slot)
 		Global.SPELLS.WATER:
-			var wave_launcher = Wave_Launcher.new()
-			wave_launcher.set_spell_pool(instantiate_projectile_pool(Wave, WAVE_POOL_NAME, slot, item.attributes))
-			return wave_launcher
+			return build_spell(Wave_Launcher, item, slot)
 		Global.SPELLS.ICE:
-			var iceblast_launcher = Iceblast_Launcher.new()
-			iceblast_launcher.set_spell_pool(instantiate_projectile_pool(Iceblast, ICEBLAST_POOL_NAME, slot, item.attributes))
-			return iceblast_launcher
-			
-		#The rest of these should return the correct spell script so the player can call cast.
+			return build_spell(Iceblast_Launcher, item, slot)
 		Global.SPELLS.SUMMONSWORD:
-			var summon_sword = Summon_Sword.new()
-			summon_sword.set_attributes(item.attributes)
-			return summon_sword
+			return build_spell(Summon_Sword, item, slot)
 		Global.SPELLS.LIGHTNING:
-			var lightning_spell = Lightning_Spell.new()
-			lightning_spell.set_attributes(item.attributes)
-			return lightning_spell
+			return build_spell(Lightning_Spell, item, slot)
 		Global.SPELLS.WIND:
-			var wind_spell = Wind_Spell.new()
-			wind_spell.set_attributes(item.attributes)
-			return wind_spell
+			return build_spell(Wind_Spell, item, slot)
 		null:
 			print("no spell_type assigned")
 		_:
 			print("This spell type is not in the switch statement")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-#####################This is my next step right here
-#maybe there will be a new pool for each spell even if 4 of one spell is equipped
-# that way, each pool can have the spells attributes assigned to each projectile at THIS point.
-# So it won't have to keep reassigning values at every cast. better for cpu usage, slightly harder on ram usage
-#I need to find a way to clear the pool once the spell is unequipped..... might be difficult and force more
-#restructuring. maybe the gamemanager node isnt the best place to attach the pool. though it is accessible
-#from anywhere
+func build_spell(spell_type, item, slot):
+	var spell = spell_type.new()
+	spell.set_attributes(item.attributes)
+	spell.set_spell(pool_node_list[slot], self)
+	return spell	
 
 #this creates some pool containers on the gamemanager node
 		## maybe in the player controller, I can add the specific functionality for adding the individual 
@@ -255,6 +137,7 @@ func set_up_pool_containers():
 		pool_container.set_name("pool_container_" + str(i))
 		get_spell_container().add_child(pool_container)
 		pool_node_list.push_back(pool_container)
+		print("this got called")
 
 func set_spell_container(node):
 	spell_container = node
@@ -268,24 +151,8 @@ func get_equipped_spells():
 func get_pool_node_list():
 	return pool_node_list
 
-func instantiate_projectile_pool(projectile, pool_name, slot, spell_attributes):
-	for i in pool_node_list[slot].get_children():
-		i.queue_free()
-	var new_pool = Pool.new(POOL_SIZE, pool_name, projectile, spell_attributes, self)
-	new_pool.attach_to_node(pool_node_list[slot])
-	return new_pool
-
 func clear_container_node(slot):
+	print("Cleared container node")
 	for i in pool_node_list[slot].get_children():
 		i.queue_free()
-### this should be defunct and turned into one generic function that will be able to instantiate each pool 
-### separately when necessary
-#func projectile_pool_setup():
-#	fireball_pool = Pool.new(POOL_SIZE, FIREBALL_POOL_NAME, Fireball)
-#	fireball_pool.attach_to_node(Game_Manager)
-#
-#	wave_pool = Pool.new(POOL_SIZE, WAVE_POOL_NAME, Wave)
-#	wave_pool.attach_to_node(Game_Manager)
-#
-#	iceblast_pool = Pool.new(POOL_SIZE, ICEBLAST_POOL_NAME, Iceblast)
-#	iceblast_pool.attach_to_node(Game_Manager)	
+

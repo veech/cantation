@@ -17,7 +17,7 @@ var active_objects = {}
 var inactive_objects = []
 
 
-func _init(size, obj_name, scene, spell_attributes, caster):
+func _init(size, obj_name, scene, spell_attributes):
 	if scene == null:
 		print("object not set for pool creation")
 		return
@@ -26,7 +26,6 @@ func _init(size, obj_name, scene, spell_attributes, caster):
 	self.obj_name = obj_name
 	self.scene = scene
 	self.spell_attributes = spell_attributes
-	self.spell_attributes["caster"] = caster.get_name()
 	construct()
 	
 func construct():
