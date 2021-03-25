@@ -1,10 +1,4 @@
-extends Area2D
-
-#maybe, what I need to do is have the Summon_Sword script be attached to the sword.
-#Equipping the sword spell will instance the sword scene. and add it to the player as a child.
-#swings will activate the node, swing it, and then deactivate it.
-
-var attributes = {}
+extends "res://Scripts/Base_Classes/Base_Spell.gd"
 
 #this will be an attribute
 var degrees_per_second = 180
@@ -30,21 +24,13 @@ func swing(mouse_position):
 	look_at(mouse_position)
 	turn_on()
 	start_rotation = get_rotation()
+	var push_angle = start_rotation
+	push_direction = Vector2(cos(push_angle), sin(push_angle))
 	rot_speed = speed
-	print(start_rotation)
 
-func turn_on():
-	self.collision_shape.set_deferred("disabled", false)
-	self.show()
-	
-func turn_off():
-	self.collision_shape.set_deferred("disabled", true)
-	self.hide()	
+func impact_body(body):
+	body.take_damage(attributes['power'])
+	knock_back(body, self.push_direction)
 
-var push_direction = start_rotation + PI/2
-
-func impact_body(body, attributes):
-	pass
-
-func push_body(body, push_direction, attributes):
+func knock_back(body, push_direction):
 	body.start_push(push_direction, attributes['push_power'])

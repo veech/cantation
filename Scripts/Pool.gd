@@ -47,7 +47,7 @@ func get_inactive_object():
 			return null
 		var n = obj.get_name()
 		active_objects[n] = obj
-		turn_on(obj)
+		obj.turn_on()
 		return obj
 	return null
 
@@ -58,7 +58,7 @@ func attach_to_node(target_node):
 		target_node.add_child(i)
 		
 func on_killed(target):
-	turn_off(target)
+	target.turn_off()
 	var name = target.get_name()
 	var temp = active_objects.erase(name)
 	inactive_objects.push_front(target)
@@ -69,13 +69,13 @@ func get_scene():
 func no_access():
 	return
 	
-func turn_on(target):
-	target.active = true
-	#collision_shape is a var named in baseprojectile
-	target.collision_shape.set_deferred("disabled", false)
-	target.show()
-
-func turn_off(target):
-	target.active = false
-	target.collision_shape.set_deferred("disabled", true)
-	target.hide()
+#func turn_on(target):
+#	target.active = true
+#	#collision_shape is a var named in baseprojectile
+#	target.collision_shape.set_deferred("disabled", false)
+#	target.show()
+#
+#func turn_off(target):
+#	target.active = false
+#	target.collision_shape.set_deferred("disabled", true)
+#	target.hide()

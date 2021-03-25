@@ -1,9 +1,9 @@
-extends "res://Scripts/Base_Classes/Base_Spell.gd"
+extends Area2D
 
 var projectile_pool
 const POOL_SIZE = 40
 const Pool = preload("res://Scripts/Pool.gd")
-
+var attributes = {}
 var pool_name
 var projectile
 
@@ -26,8 +26,7 @@ func direction_from_to(position_a, position_b):
 func set_spell_pool(pool):
 	self.projectile_pool = pool
 
-func unequip_spell():
-	.unequip_spell()
+func unequip(slot):
 	print("unequipping spell")
 	unset_spell_pool()
 	
@@ -37,19 +36,6 @@ func unset_spell_pool():
 func set_attributes(attributes):
 	self.attributes = attributes
 
-
-			#Base class has projectile, pool_name, pool_size
-			#and the set_spell_pool function which only takes slot node (parent node) as an arg
-			# 
-
-
-
-#	This might be the way. move the pool construction into each launcher
-#func instantiate_projectile_pool(projectile, pool_name, parent_node, spell_attributes, caster):
-#	var new_pool = Pool.new(POOL_SIZE, pool_name, projectile, spell_attributes, caster)
-#	new_pool.attach_to_node(parent_node)
-#	return new_pool
-#
 func set_spell(parent_node, caster):
 	self.attributes["caster"] = caster.get_name()
 	var new_pool = Pool.new(POOL_SIZE, pool_name, projectile, self.attributes)

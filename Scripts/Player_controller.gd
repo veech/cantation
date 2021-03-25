@@ -42,13 +42,13 @@ func _input(event):
 			get_current_spell().cast(self, get_global_mouse_position())
 		else:
 			print("No active spell to cast")
-	####TESTING
+
 	if event.is_action_pressed("advance_current_spell"):
 		set_current_spell(current_spell_slot + 1)
-		print("Active spell is spell: ", current_spell_slot + 1)	
+		print("Active spell is spell: ", current_spell_slot + 1)
 	if event.is_action_pressed("delete_active_pool"):
 		equipped_spells[current_spell_slot].projectile_pool.queue_free()
-	####TESTING
+
 
 func _set_facing_direction(input):
 	if input.x != 0 && input.y == 0: 
@@ -85,12 +85,14 @@ func _play_idle_animation():
 	elif facing_direction.x > 0:
 		$AnimatedSprite.play("right_idle")
 
-### next four functions can remain in the playercontroller for now
 func set_equipped_spell(spell, slot):
-	#this func should probably be a generic "unequip" so that diff spells can have diff functionality
-	#for instance, the summon sword spell needs to destroy the summoned sword.
-	clear_container_node(slot)
+	if equipped_spells[slot] != null:
+		unequip_spell(slot)
 	equipped_spells[slot] = instantiate_spell_caster(spell, slot)
+
+func unequip_spell(slot):
+	clear_container_node(slot)
+	equipped_spells[slot].unequip(slot)
 
 func set_current_spell(spell_slot):
 	current_spell_slot = spell_slot % 4
