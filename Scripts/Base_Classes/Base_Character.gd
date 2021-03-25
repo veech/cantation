@@ -9,7 +9,9 @@ export var armor_rating: int = 0
 export var fire_resistance: int = 0
 export var freeze_resistance: int = 0
 export var push_resistance: int = 0
-export var push_recovery: float = .1
+export var default_push_recovery: float = .1
+var push_recovery
+
 export var push_sensitivity: int = 100
 
 var current_health = max_health
@@ -26,25 +28,22 @@ var velocity: Vector2 = Vector2.ZERO
 var pool_node_list = Array()
 var Character_Spell_Container_Node = preload("res://Scenes/Utilities/Character_Spell_Container_Node.tscn")
 var Pool_Container = preload("res://Scenes/Utilities/Pool_Container.tscn")
-
 var spell_container: Node2D
 
-
-# Projectile Launchers
-const Fireball_Launcher = preload("res://Scripts/Spell_Casts/Fireball_Launcher.gd")
-const Wave_Launcher = preload("res://Scripts/Spell_Casts/Wave_Launcher.gd")
-const Iceblast_Launcher = preload("res://Scripts/Spell_Casts/Iceblast_Launcher.gd")
-
-#Non-projectile Spell Scripts
-const Summon_Sword = preload("res://Scripts/Spell_Casts/Summon_Sword.gd")
-const Wind_Spell = preload("res://Scripts/Spell_Casts/Wind_Spell.gd")
-const Lightning_Spell = preload("res://Scripts/Spell_Casts/Lightning_Spell.gd")
+# Spell_Casters
+const Fireball_Launcher = preload("res://Scripts/Spell_Casters/Fireball_Launcher.gd")
+const Wave_Launcher = preload("res://Scripts/Spell_Casters/Wave_Launcher.gd")
+const Iceblast_Launcher = preload("res://Scripts/Spell_Casters/Iceblast_Launcher.gd")
+const Sword_Summoner = preload("res://Scripts/Spell_Casters/Sword_Summoner.gd")
+const Wind_Caster = preload("res://Scripts/Spell_Casters/Wind_Caster.gd")
+const Lightning_Caster = preload("res://Scripts/Spell_Casters/Lightning_Caster.gd")
 	
 var equipped_spells = []
 
 func _ready():
 
-	speed = max_speed
+	reset_push_recovery()
+	reset_speed()
 	
 func _physics_process(delta):
 	move_character(delta)
@@ -52,7 +51,7 @@ func _physics_process(delta):
 		frozen_time_remaining -= delta
 		if frozen_time_remaining <= 0:
 			frozen = false
-			speed = max_speed
+			reset_speed()
 			print("No longer frozen")
 	if burned:
 		burn_time_remaining -= delta
@@ -90,6 +89,16 @@ func take_damage(damage):
 	if current_health <= 0:
 		death()
 
+func reset_push_recovery():
+	print("Push reset")
+	push_recovery = default_push_recovery
+
+func nullify_push_recovery():
+	push_recovery = 0
+
+func reset_speed():
+	speed = max_speed
+
 func death():
 	print("Im ded")
 
@@ -106,11 +115,11 @@ func instantiate_spell_caster(item, slot):
 		Global.SPELLS.ICE:
 			return build_spell(Iceblast_Launcher, item, slot)
 		Global.SPELLS.SUMMONSWORD:
-			return build_spell(Summon_Sword, item, slot)
+			return build_spell(Sword_Summoner, item, slot)
 		Global.SPELLS.LIGHTNING:
-			return build_spell(Lightning_Spell, item, slot)
+			return build_spell(Lightning_Caster, item, slot)
 		Global.SPELLS.WIND:
-			return build_spell(Wind_Spell, item, slot)
+			return build_spell(Wind_Caster, item, slot)
 		null:
 			print("no spell_type assigned")
 		_:

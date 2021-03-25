@@ -4,15 +4,16 @@
 [ext_resource path="res://Scripts/Spell_Casts/Wind_Spell.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 64.0256, 16.0127 )
+extents = Vector2( 64.0256, 11.9932 )
 
-[node name="Area2D" type="Area2D"]
+[node name="Wind_Collision_Box" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 1, 0.75 )
 texture = ExtResource( 1 )
-offset = Vector2( 64, 0 )
+offset = Vector2( 72, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 64, 0 )
+position = Vector2( 72, 0 )
 shape = SubResource( 1 )

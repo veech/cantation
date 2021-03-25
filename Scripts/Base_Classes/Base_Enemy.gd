@@ -11,7 +11,7 @@ var stopping_rate = .2
 
 func _ready():
 	max_speed = 75
-	speed = max_speed
+	reset_speed()
 	set_collision_layer_bit(2, true)
 
 func _physics_process(delta):

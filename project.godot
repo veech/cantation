@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "CanvasLayer",
+"class": "FpsLabel",
+"language": "GDScript",
+"path": "res://Scripts/fps_counter.gd"
+}, {
 "base": "Node",
 "class": "Global",
 "language": "GDScript",
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/Misc_Unused/Spell.gd"
 } ]
 _global_script_class_icons={
+"FpsLabel": "",
 "Global": "",
 "Spell": ""
 }

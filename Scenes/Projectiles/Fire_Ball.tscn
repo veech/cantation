@@ -1,7 +1,8 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Scripts/Projectiles/Fire_Ball.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Spell_Casts/Projectiles/Fire_Ball.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Spell_attacks/Fireball_Placeholder_anim.png" type="Texture" id=2]
+
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
