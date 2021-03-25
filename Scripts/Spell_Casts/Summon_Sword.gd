@@ -4,6 +4,11 @@ extends "res://Scripts/Base_Classes/Base_Spell.gd"
 const Sword = preload("res://Scenes/Non-Projectile_Spells/Sword.tscn")
 var sword
 
+func set_spell(parent_node):
+	sword = Sword.instance()
+	sword.position = Vector2(0,0)
+	return sword
+
 func cast(caster, mouse_position):
 	sword = Sword.instance()
 	sword.position = Vector2(0,0)

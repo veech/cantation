@@ -56,7 +56,7 @@ const Wind_Spell = preload("res://Scripts/Spell_Casts/Wind_Spell.gd")
 const Lightning_Spell = preload("res://Scripts/Spell_Casts/Lightning_Spell.gd")
 
 func _ready():
-	projectile_pool_setup()
+	#projectile_pool_setup()
 
 	
 	set_visible(false)
@@ -214,13 +214,13 @@ func instantiate_spell_caster(item):
 			print("no spell_type assigned")
 		_:
 			print("This spell type is not in the switch statement")
-
-func projectile_pool_setup():
-	fireball_pool = Pool.new(POOL_SIZE, FIREBALL_POOL_NAME, Fireball)
-	fireball_pool.attach_to_node(Game_Manager)
-
-	wave_pool = Pool.new(POOL_SIZE, WAVE_POOL_NAME, Wave)
-	wave_pool.attach_to_node(Game_Manager)
-	
-	iceblast_pool = Pool.new(POOL_SIZE, ICEBLAST_POOL_NAME, Iceblast)
-	iceblast_pool.attach_to_node(Game_Manager)
+#
+#func projectile_pool_setup():
+#	fireball_pool = Pool.new(POOL_SIZE, FIREBALL_POOL_NAME, Fireball)
+#	fireball_pool.attach_to_node(Game_Manager)
+#
+#	wave_pool = Pool.new(POOL_SIZE, WAVE_POOL_NAME, Wave)
+#	wave_pool.attach_to_node(Game_Manager)
+#
+#	iceblast_pool = Pool.new(POOL_SIZE, ICEBLAST_POOL_NAME, Iceblast)
+#	iceblast_pool.attach_to_node(Game_Manager)

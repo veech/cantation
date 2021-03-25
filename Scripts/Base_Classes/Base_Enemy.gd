@@ -35,3 +35,7 @@ func _physics_process(delta):
 func direction_from_to(position_a, position_b):
 	var direction = position_b - position_a
 	return direction.normalized()
+
+func death():
+	.death()
+	self.queue_free()

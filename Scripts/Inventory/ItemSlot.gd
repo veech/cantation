@@ -7,6 +7,7 @@ var item = null
 var style
 
 signal set_spell
+signal unequip_spell
 
 func _init():
 	
@@ -30,7 +31,8 @@ func pick_item():
 	remove_child(item)
 	Inventory_UI.add_child(item)
 	item = null
-	emit_signal("set_spell", item)
+	emit_signal("set_spell", item, slotIndex)
+	emit_signal("unequip_spell")
 	
 func put_item(new_item):
 	item = new_item

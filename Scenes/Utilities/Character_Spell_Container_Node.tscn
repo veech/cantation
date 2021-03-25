@@ -1,0 +1,3 @@
+[gd_scene format=2]
+
+[node name="spell_pools" type="Node2D"]
