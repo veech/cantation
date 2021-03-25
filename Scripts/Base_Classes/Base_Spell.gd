@@ -1,17 +1,16 @@
 extends Area2D
 
 var attributes = {}
-#in child classes with projectiles, one of the attributes need to be the pool or maybe it needs to be a 
-#variable passed into the _init() function
+
 var push_direction
 
 func _ready():
 	connect("body_entered", self, "on_body_entered")
 	connect("body_exited", self, "on_body_exited")
 
-#in some child classes, cast position will be player position, in others it will be an offset at the player's hand  
-func cast(caster, mouse_position):
-	print("Cast function not implemented in baseclass")
+#This function is gonna just be in the spell caster classes
+#func cast(caster, mouse_position):
+#	print("Cast function not implemented in baseclass")
 
 func impact_wall():
 	pass
@@ -26,7 +25,18 @@ func on_body_entered(body):
 		
 		
 func on_body_exited(body):
-	print("BaseSpell on body exited")
+	if body.get_name() == self.attributes["caster"]:
+		return
+	if body.is_in_group("Wall"):
+		exit_wall()
+	else:
+		exit_body(body)
+
+func exit_body(body):
+	pass
+	
+func exit_wall():
+	pass
 
 func impact_body(body):
 	print("NI")

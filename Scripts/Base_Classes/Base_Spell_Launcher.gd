@@ -1,9 +1,9 @@
-extends Area2D
+extends "res://Scripts/Base_Classes/Base_Spell_Caster.gd"
 
 var projectile_pool
 const POOL_SIZE = 40
 const Pool = preload("res://Scripts/Pool.gd")
-var attributes = {}
+
 var pool_name
 var projectile
 
