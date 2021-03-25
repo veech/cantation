@@ -1,19 +1,20 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Assets/Spell_attacks/Shorty_Sword.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Spell_attacks/Longer_Sword.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Spell_Casts/Sword.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 2.14255, 7.70475 )
+extents = Vector2( 4.54251, 16.3553 )
 
 [node name="Sword" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-rotation = -0.785398
+rotation = 0.785398
 texture = ExtResource( 1 )
-offset = Vector2( 14, -14 )
+offset = Vector2( -14, -14 )
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -24 )
+position = Vector2( 0, -26.083 )
 shape = SubResource( 1 )

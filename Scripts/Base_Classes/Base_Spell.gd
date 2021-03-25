@@ -1,7 +1,7 @@
 extends Area2D
 
 var attributes = {}
-
+var active = true
 var push_direction
 
 func _ready():

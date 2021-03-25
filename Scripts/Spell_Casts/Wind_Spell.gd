@@ -7,16 +7,15 @@ onready var collision_shape = $CollisionShape2D
 var spell_time = 2
 
 func _ready():
-	pass
+	$Spell_Timer.connect("timeout", self, "deactivate_spell")
 
 func activate_wind(mouse_position):
+	$Spell_Timer.stop()
 	look_at(mouse_position)
 	var push_angle = rotation
 	push_direction = Vector2(cos(push_angle), sin(push_angle))
 	turn_on()
-	yield(get_tree().create_timer(spell_time), "timeout")
-	print("Spell activated")
-	deactivate_spell()
+	$Spell_Timer.start(spell_time)
 
 func deactivate_spell():
 	turn_off()

@@ -1,16 +1,22 @@
 extends "res://Scripts/Base_Classes/Base_Spell_Caster.gd"
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+const Lightning = preload("res://Scenes/Non-Projectile_Spells/Lightning_Spell.tscn")
+
+func _init():
+	print("setting some parameters")
+	pool_name = "lightning"
+	spell = Lightning
+
+func set_spell(parent_node, caster):
+	self.attributes["caster"] = caster.get_name()
+	var new_pool = Pool.new(POOL_SIZE, pool_name, spell, self.attributes)
+	new_pool.attach_to_node(parent_node)
+	self.spell_pool = new_pool
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func cast(caster, mouse_position):
+	pass
+	
+func unequip(slot):
+	pass

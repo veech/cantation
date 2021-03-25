@@ -7,7 +7,7 @@ const Wave = preload("res://Scenes/Projectiles/Wave.tscn")
 #placement correct
 func _init():
 	pool_name = "wave"
-	projectile = Wave
+	spell = Wave
 	
 func cast(caster, mouse_position):
 	.cast(caster, mouse_position)
