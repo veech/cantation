@@ -4,6 +4,10 @@ var projectile_pool
 const POOL_SIZE = 40
 const Pool = preload("res://Scripts/Pool.gd")
 
+var pool_name
+var projectile
+
+
 func cast(caster, mouse_position):
 	var spawned_spell = self.projectile_pool.get_inactive_object()
 	if !spawned_spell:
@@ -33,11 +37,22 @@ func unset_spell_pool():
 func set_attributes(attributes):
 	self.attributes = attributes
 
+
+			#Base class has projectile, pool_name, pool_size
+			#and the set_spell_pool function which only takes slot node (parent node) as an arg
+			# 
+
+
+
 #	This might be the way. move the pool construction into each launcher
 #func instantiate_projectile_pool(projectile, pool_name, parent_node, spell_attributes, caster):
 #	var new_pool = Pool.new(POOL_SIZE, pool_name, projectile, spell_attributes, caster)
 #	new_pool.attach_to_node(parent_node)
 #	return new_pool
 #
-#func set_spell():
-#	pass
+func set_spell(parent_node, caster):
+	self.attributes["caster"] = caster.get_name()
+	var new_pool = Pool.new(POOL_SIZE, pool_name, projectile, self.attributes)
+	new_pool.attach_to_node(parent_node)
+	self.projectile_pool = new_pool
+	return new_pool

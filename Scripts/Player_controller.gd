@@ -87,6 +87,8 @@ func _play_idle_animation():
 
 ### next four functions can remain in the playercontroller for now
 func set_equipped_spell(spell, slot):
+	#this func should probably be a generic "unequip" so that diff spells can have diff functionality
+	#for instance, the summon sword spell needs to destroy the summoned sword.
 	clear_container_node(slot)
 	equipped_spells[slot] = instantiate_spell_caster(spell, slot)
 

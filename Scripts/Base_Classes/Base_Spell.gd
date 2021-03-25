@@ -22,3 +22,6 @@ func get_attributes():
 #I think the spell/spell_launcher is not getting destroyed
 func unequip_spell():
 	print("Spell_unequipped!")
+
+func set_spell(parent_node, caster):
+	print("NI in Base_Spell.gd")
