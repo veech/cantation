@@ -33,7 +33,7 @@ func _physics_process(delta):
 
 func on_body_entered(body):
 	#this is to make sure the caster isnt damaged by his/her own spell
-	if body.get_name() == self.attributes["name"]:
+	if body.get_name() == self.attributes["caster"]:
 		return
 	
 	#these might be redundant. the wall one might be necessary since the wall wont have a "damage" function

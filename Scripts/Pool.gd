@@ -5,7 +5,7 @@ extends Node
 var size
 var scene
 var obj_name
-
+var spell_attributes = {}
 #this is hacky. I need this to be set somehow by the level size maybe?
 #or I just need to find a way to turn off all of the 
 var pool_position = Vector2(-1000, -1000)
@@ -17,7 +17,7 @@ var active_objects = {}
 var inactive_objects = []
 
 
-func _init(size, obj_name, scene):
+func _init(size, obj_name, scene, spell_attributes, caster):
 	if scene == null:
 		print("object not set for pool creation")
 		return
@@ -25,12 +25,15 @@ func _init(size, obj_name, scene):
 	self.size = size
 	self.obj_name = obj_name
 	self.scene = scene
+	self.spell_attributes = spell_attributes
+	self.spell_attributes["caster"] = caster.get_name()
 	construct()
 	
 func construct():
 	for i in range(self.size):
 		var s = self.scene.instance()
 		s.set_name(obj_name + "_" + str(i))
+		s.attributes = self.spell_attributes
 		s.connect("killed", self, "on_killed")
 		s.active = false
 #		s.global_position = pool_position
