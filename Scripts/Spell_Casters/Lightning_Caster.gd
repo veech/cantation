@@ -1,22 +1,20 @@
 extends "res://Scripts/Base_Classes/Base_Spell_Caster.gd"
 
-
-const Lightning = preload("res://Scenes/Non-Projectile_Spells/Lightning_Spell.tscn")
+const Lightning_Radius = preload("res://Scenes/Non-Projectile_Spells/Lightning_Collision_Radius.tscn")
 
 func _init():
 	print("setting some parameters")
-	pool_name = "lightning"
-	spell = Lightning
 
 func set_spell(parent_node, caster):
-	self.attributes["caster"] = caster.get_name()
-	var new_pool = Pool.new(POOL_SIZE, pool_name, spell, self.attributes)
-	new_pool.attach_to_node(parent_node)
-	self.spell_pool = new_pool
-
+	casted_spell = Lightning_Radius.instance()
+	casted_spell.position = Vector2(0,0)
+	casted_spell.set_attributes(attributes)
+	casted_spell.attributes['caster'] = caster.get_name()
+	caster.add_child(casted_spell)
+	casted_spell.turn_off()
 
 func cast(caster, mouse_position):
-	pass
+	casted_spell.check_radius(caster, mouse_position)
 	
 func unequip(slot):
-	pass
+	casted_spell.queue_free()
