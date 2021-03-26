@@ -22,6 +22,7 @@ var frozen_time_remaining = 0
 var burn_time_remaining = 0
 var burn_damage = 0
 var timer = 0
+var shocked = false
 
 var velocity: Vector2 = Vector2.ZERO
 
@@ -38,12 +39,26 @@ const Sword_Summoner = preload("res://Scripts/Spell_Casters/Sword_Summoner.gd")
 const Wind_Caster = preload("res://Scripts/Spell_Casters/Wind_Caster.gd")
 const Lightning_Caster = preload("res://Scripts/Spell_Casters/Lightning_Caster.gd")
 	
+const Shock_Anim = preload("res://Scenes/Non-Projectile_Spells/Shock_Anim.tscn")
+var shock_anim
 var equipped_spells = []
+
+var Shock_Timer = preload("res://Scenes/Utilities/Shock_Timer.tscn")
+var shock_timer: Timer
 
 func _ready():
 
 	reset_push_recovery()
 	reset_speed()
+	create_shock_node()
+	shock_timer = Shock_Timer.instance()
+	self.add_child(shock_timer)
+	shock_timer.connect('timeout', self, 'end_shock')
+	
+func create_shock_node():
+	shock_anim = Shock_Anim.instance()
+	self.add_child(shock_anim)
+	#shock_anim.connect("animation_finished", self, "end_shock")
 	
 func _physics_process(delta):
 	move_character(delta)
@@ -82,6 +97,20 @@ func freeze(freeze_power, freeze_duration):
 	frozen_time_remaining = freeze_duration
 	frozen = true
 	
+func shock(shock_time):
+	shock_timer.stop()
+	shock_anim.set_visible(true)
+	shock_timer.start(shock_time)
+		#attributes should choose which anim is played somehow.
+		#a timer could work too. I just would need to call stop on the timer and then start it up again.
+	shock_anim.play("shock_medium")
+	nullify_speed()
+	
+func end_shock():
+	#shocked = false
+	shock_anim.set_visible(false)
+	reset_speed()
+	
 func take_damage(damage):
 	var health_loss = damage - armor_rating
 	current_health -= health_loss
@@ -98,6 +127,9 @@ func nullify_push_recovery():
 
 func reset_speed():
 	speed = max_speed
+
+func nullify_speed():
+	speed = 0
 
 func death():
 	print("Im ded")

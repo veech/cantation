@@ -31,13 +31,16 @@ animations = [ {
 extents = Vector2( 9.5906, 9.03312 )
 
 [node name="Lightning_Spell" type="Area2D"]
+z_index = 3
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
 animation = "Shocking"
-frame = 1
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 6 )
+
+[node name="Timer" type="Timer" parent="."]
