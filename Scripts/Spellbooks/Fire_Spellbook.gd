@@ -10,7 +10,6 @@ const MIN_BURN_DURATION = 2
 const MAX_BURN_DURATION = 6
 
 func _ready():
-	print("From Spellbook: ", attributes)
 	attributes["spell_type"] = Global.SPELLS.FIRE
 	attributes["power"] = rng.randi_range(MIN_POWER, MAX_POWER)
 	attributes["push_power"] = rng.randf_range(MIN_PUSH_POWER, MAX_PUSH_POWER)

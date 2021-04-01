@@ -50,22 +50,17 @@ func spawn_enemies():
 		if new_spawn.extents.y*2 > tallest_enemy_height:
 			tallest_enemy_height = new_spawn.extents.y*2
 		enemies.push_back(new_spawn)
-	print("length of enemies in container ", len(enemies))
 	place_enemies()
 
 func place_enemies():
 	var placement_angle_interval = (2*PI)/len(enemies)
 	var placement_angle = placement_angle_interval
 	for enemy in enemies:
-		print("Placement angle is ", placement_angle)
 		enemy.position = Vector2((spawn_radius * cos(placement_angle)), (spawn_radius * sin(placement_angle)))
 		placement_angle += placement_angle_interval
-		
-		print("I was placed at ", enemy.global_position)
 
 func calculate_circle():
 	min_spawn_angle = asin(tallest_enemy_height/spawn_radius)
-	print("min angle is ", min_spawn_angle)
 
 func calculate_max_enemies():
 	var max_enemies: int
@@ -78,14 +73,14 @@ func calculate_max_enemies():
 		var full_circle = PI * 2
 		var num_of_angles = full_circle/min_spawn_angle
 		max_enemies = int(num_of_angles)	
-	print("Max enemies: ", max_enemies)
 	return max_enemies
 
 func update_goal():
-	print("updating goals")
-	for i in len(enemies):
-		if enemies[i] != null:
-			enemies[i].calculate_goal()
+	if player_detected:
+		print("updating goals")
+		for i in len(enemies):
+			if enemies[i] != null:
+				enemies[i].calculate_goal()
 
 func calculate_spawn_position(index):
 	var starting_position = spawn_radius

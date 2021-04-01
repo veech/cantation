@@ -11,7 +11,6 @@ const MIN_SHOCK_TIME = 1
 const MAX_SHOCK_TIME = 3
 
 func _ready():
-	print("From Spellbook: ", attributes)
 	attributes["spell_type"] = Global.SPELLS.LIGHTNING
 	attributes["power"] = rng.randi_range(MIN_POWER, MAX_POWER)
 	attributes["radius"] = rng.randf_range(MIN_RADIUS, MAX_RADIUS)
