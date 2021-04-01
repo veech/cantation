@@ -1,38 +1,35 @@
 extends "res://Scripts/Base_Classes/Base_Character.gd"
 
-onready var player = get_node("../../Player")
-onready var nav2d = get_node("../../Navigation2D")
+onready var player = get_node("../../../Player")
+onready var nav2d = get_node("../../../Navigation2D")
 #onready var line2d = get_node("../../Line2D")
-onready var enemy_manager = get_parent()
+onready var enemy_manager = get_parent().get_parent()
+onready var extents = $CollisionShape2D.get_shape().get_extents()
 
 export var max_sight_distance: int = 150
 export var max_chase_distance: int = 300
 export var stopping_distance: int = 50
-export var min_flock_dist = 4
+export var min_flock_dist = 40
 
 var path : = PoolVector2Array()
 var chasing = false
 var stopping_rate = .2
 
+var separation_weight = 10
+var chase_weight = 1
 
 func _ready(): 
 	max_speed = 75
 	reset_speed()
 	set_collision_layer_bit(2, true)
-	print("My manager is: ", enemy_manager)
 
-func _physics_process(delta):
-	pass
-		
-
-	
 func _unhandled_input(event):
 	if event.is_action_pressed("Cast"):
 		print(velocity)		
 
 func calculate_goal():
-	var separation = calc_separate() * .5
-	var player_path = better_chase()
+	var separation = calc_separate() * separation_weight
+	var player_path = better_chase() * chase_weight
 	velocity =  Vector2(separation + player_path).normalized()
 	
 func better_chase():
@@ -52,8 +49,11 @@ func better_chase():
 func calc_separate():
 	var separate = Vector2()
 	for enemy in enemy_manager.enemies:
-		if global_position.distance_to(enemy.global_position) <= 40:
-			separate = separate + (global_position - enemy.global_position)
+		if enemy != null:
+			var distance = global_position.distance_to(enemy.global_position)
+			if distance > 0 and distance <= 40:
+				var difference = (global_position - enemy.global_position)
+				separate += difference.normalized()/distance
 	return separate
 		
 func dist_to_player():
