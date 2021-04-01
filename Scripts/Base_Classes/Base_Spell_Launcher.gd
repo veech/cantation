@@ -1,9 +1,5 @@
 extends "res://Scripts/Base_Classes/Base_Spell_Caster.gd"
 
-
-	
-	
-	
 func cast(caster, mouse_position):
 	var spawned_spell = self.spell_pool.get_inactive_object()
 	if !spawned_spell:
