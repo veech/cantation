@@ -9,7 +9,6 @@ const MIN_WIDTH = 1
 const MAX_WIDTH = 6
 
 func _ready():
-	print("From Spellbook: ", attributes)
 	attributes["spell_type"] = Global.SPELLS.WIND
 #	attributes["power"] = rng.randi_range(MIN_POWER, MAX_POWER)
 	attributes["push_power"] = rng.randf_range(MIN_PUSH_POWER, MAX_PUSH_POWER)

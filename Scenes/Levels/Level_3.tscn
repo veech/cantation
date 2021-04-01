@@ -53,5 +53,9 @@ z_index = 2
 
 [node name="Enemy_Manager" parent="." instance=ExtResource( 11 )]
 position = Vector2( -424.283, 438.094 )
-spawn_radius = 50
 enemies_spawned = 5
+
+[node name="Enemy_Manager2" parent="." instance=ExtResource( 11 )]
+position = Vector2( 285.511, 271.973 )
+spawn_radius = 100
+enemies_spawned = 26

@@ -175,7 +175,6 @@ func set_up_pool_containers():
 		pool_container.set_name("pool_container_" + str(i))
 		get_spell_container().add_child(pool_container)
 		pool_node_list.push_back(pool_container)
-		print("this got called")
 
 func direction_from_to(position_a, position_b):
 	var direction = position_b - position_a

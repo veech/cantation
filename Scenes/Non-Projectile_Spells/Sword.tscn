@@ -4,17 +4,18 @@
 [ext_resource path="res://Scripts/Spell_Casts/Sword.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4.54251, 16.3553 )
+extents = Vector2( 4.82986, 18.5023 )
 
 [node name="Sword" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -16 )
 rotation = 0.785398
 texture = ExtResource( 1 )
 offset = Vector2( -14, -14 )
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -26.083 )
+position = Vector2( 0, -38.465 )
 shape = SubResource( 1 )
