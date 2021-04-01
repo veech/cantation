@@ -23,6 +23,7 @@ func _ready():
 		var spell_slot = spell_set.slots[i]
 		if spell_slot:
 			spell_slot.connect("set_spell", self, "set_equipped_spell")
+	print(self.get_path())
 
 
 func _physics_process(delta):
