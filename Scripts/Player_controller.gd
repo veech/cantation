@@ -36,7 +36,7 @@ func get_input_axis():
 	
 	_set_facing_direction(input)
 
-func _input(event):
+func _unhandled_input(event):
 	if event.is_action_pressed("Cast"):
 		if get_current_spell() != null:
 			get_current_spell().cast(self, get_global_mouse_position())

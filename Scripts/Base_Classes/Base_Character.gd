@@ -119,7 +119,6 @@ func take_damage(damage):
 		death()
 
 func reset_push_recovery():
-	print("Push reset")
 	push_recovery = default_push_recovery
 
 func nullify_push_recovery():
@@ -177,6 +176,10 @@ func set_up_pool_containers():
 		get_spell_container().add_child(pool_container)
 		pool_node_list.push_back(pool_container)
 		print("this got called")
+
+func direction_from_to(position_a, position_b):
+	var direction = position_b - position_a
+	return direction.normalized()
 
 func set_spell_container(node):
 	spell_container = node
