@@ -52,4 +52,6 @@ tile_data = PoolIntArray( -262153, 2, 0, -262152, 3, 65536, -262151, 3, 65536, -
 z_index = 2
 
 [node name="Enemy_Manager" parent="." instance=ExtResource( 11 )]
-position = Vector2( 294.95, 298.401 )
+position = Vector2( -424.283, 438.094 )
+spawn_radius = 50
+enemies_spawned = 5
