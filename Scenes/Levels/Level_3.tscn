@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Tilemaps/Brick_Wall_Version2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Spellbooks/Ice_Spellbook.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Spellbooks/Water_Spellbook.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Spellbooks/Fire_Spellbook.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Enemies/Wheel_Enemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Utilities/FPS_Counter.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Spellbooks/Wind_Spellbook.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Spellbooks/Lightning_Spellbook.tscn" type="PackedScene" id=9]
@@ -54,8 +55,10 @@ z_index = 2
 [node name="Enemy_Manager" parent="." instance=ExtResource( 11 )]
 position = Vector2( -424.283, 438.094 )
 enemies_spawned = 5
+Enemy = ExtResource( 6 )
 
 [node name="Enemy_Manager2" parent="." instance=ExtResource( 11 )]
 position = Vector2( 285.511, 271.973 )
 spawn_radius = 100
 enemies_spawned = 26
+Enemy = ExtResource( 6 )

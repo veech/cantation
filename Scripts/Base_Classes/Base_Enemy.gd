@@ -5,6 +5,7 @@ onready var nav2d = get_node("../../../Navigation2D")
 #onready var line2d = get_node("../../Line2D")
 onready var enemy_manager = get_parent().get_parent()
 onready var extents = $CollisionShape2D.get_shape().get_extents()
+onready var animated_sprite = $Animated_Sprite
 
 export var max_sight_distance: int = 100
 export var min_flock_dist = 40
@@ -16,10 +17,13 @@ var stopping_rate = .2
 var separation_weight = 1
 var chase_weight = 1
 
+
+
 func _ready(): 
 	max_speed = 75
 	reset_speed()
 	set_collision_layer_bit(2, true)
+	animated_sprite.play("Idle_Down")
 	
 func _physics_process(_delta):
 	if enemy_manager.player_detected == false:
@@ -28,6 +32,25 @@ func _physics_process(_delta):
 			var result = space_state.intersect_ray(global_position, player.global_position, [self], 0b1010)
 			if result.collider.is_in_group("Player"):
 				enemy_manager.player_detected = true	
+	animator(velocity)
+
+func animator(direction: Vector2):
+	if direction != Vector2.ZERO:
+		animated_sprite.play("Walk_" + get_animation_direction(direction))
+	else:
+		animated_sprite.play("Idle_" + get_animation_direction(direction))
+
+func get_animation_direction(direction: Vector2):
+	var norm_direction = direction.normalized()
+	if norm_direction.y >= 0.707:
+		return "Down"
+	elif norm_direction.y <= -0.707:
+		return "Up"
+	elif norm_direction.x <= -0.707:
+		return "Left"
+	elif norm_direction.x >= 0.707:
+		return "Right"
+	return "Down"	
 
 func calculate_goal():
 	var separation = calc_separate() * separation_weight

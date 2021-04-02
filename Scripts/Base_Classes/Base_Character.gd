@@ -47,7 +47,6 @@ var Shock_Timer = preload("res://Scenes/Utilities/Shock_Timer.tscn")
 var shock_timer: Timer
 
 func _ready():
-
 	reset_push_recovery()
 	reset_speed()
 	create_shock_node()
@@ -77,6 +76,8 @@ func _physics_process(delta):
 			print("Burn damage!: current health: ", current_health)
 		if burn_time_remaining <= 0:
 			burned = false
+	
+	
 	
 func move_character(delta):
 	move_and_slide((velocity * speed) + push)

@@ -19,7 +19,7 @@ var enemy_height: float = 32
 var enemy_width: float = 16
 
 onready var enemy_container = $Enemy_Container
-export(PackedScene) onready var Enemy = preload("res://Scenes/Enemies/Enemy.tscn")
+export(PackedScene) onready var Enemy #= preload("res://Scenes/Enemies/Enemy.tscn")
 
 func _ready():
 	spawn_enemies()
