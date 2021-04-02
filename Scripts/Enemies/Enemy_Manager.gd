@@ -15,8 +15,8 @@ export(int, 9, 100) var spawn_radius = 40
 export var enemies_spawned = 12
 
 var min_spawn_angle: float
-var enemy_height: float = 32
-var enemy_width: float = 16
+export var enemy_height: float = 32
+export var enemy_width: float = 16
 
 onready var enemy_container = $Enemy_Container
 export(PackedScene) onready var Enemy #= preload("res://Scenes/Enemies/Enemy.tscn")

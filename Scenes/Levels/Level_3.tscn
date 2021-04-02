@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Tilemaps/Brick_Wall_Version2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Scenes/Spellbooks/Lightning_Spellbook.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Spellbooks/Summon_Sword_Spellbook.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Enemies/Enemy_Manager.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Enemies/Floating_Enemy.tscn" type="PackedScene" id=12]
 
 [node name="Level" type="Node2D"]
 
@@ -18,28 +19,28 @@
 position = Vector2( -244.106, -121.162 )
 
 [node name="Fire_Spellbook" parent="." instance=ExtResource( 5 )]
-position = Vector2( -149.671, 219.161 )
+position = Vector2( -132.209, -177.738 )
 
 [node name="Ice_Spellbook" parent="." instance=ExtResource( 3 )]
-position = Vector2( 23.9532, 151.435 )
+position = Vector2( -189.834, -177.977 )
 
 [node name="Water_Spellbook" parent="." instance=ExtResource( 4 )]
-position = Vector2( -212.821, -118.81 )
+position = Vector2( -319.007, -178.274 )
 
 [node name="Wind_Spellbook" parent="." instance=ExtResource( 8 )]
-position = Vector2( -248.634, -71.2389 )
+position = Vector2( -357.652, -178.369 )
 
 [node name="Lightning_Spellbook" parent="." instance=ExtResource( 9 )]
-position = Vector2( -147.727, -77.1252 )
+position = Vector2( -254.857, -177.648 )
 
 [node name="Summon_Sword_Spellbook" parent="." instance=ExtResource( 10 )]
-position = Vector2( -200.703, -27.5124 )
+position = Vector2( -219.58, -177.116 )
 
 [node name="Fire_Spellbook2" parent="." instance=ExtResource( 5 )]
-position = Vector2( -185.25, -123 )
+position = Vector2( -287.188, -178.217 )
 
 [node name="Fire_Spellbook3" parent="." instance=ExtResource( 5 )]
-position = Vector2( -157.75, -125.5 )
+position = Vector2( -160.582, -177.885 )
 
 [node name="FPS_Counter" parent="." instance=ExtResource( 7 )]
 
@@ -57,8 +58,15 @@ position = Vector2( -424.283, 438.094 )
 enemies_spawned = 5
 Enemy = ExtResource( 6 )
 
+[node name="Enemy_Manager3" parent="." instance=ExtResource( 11 )]
+position = Vector2( -88.6621, 355.687 )
+spawn_radius = 25
+enemies_spawned = 7
+enemy_height = 52.0
+Enemy = ExtResource( 12 )
+
 [node name="Enemy_Manager2" parent="." instance=ExtResource( 11 )]
-position = Vector2( 285.511, 271.973 )
+position = Vector2( 291.504, 448.773 )
 spawn_radius = 100
 enemies_spawned = 26
 Enemy = ExtResource( 6 )

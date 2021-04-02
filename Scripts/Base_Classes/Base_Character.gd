@@ -3,6 +3,8 @@ extends KinematicBody2D
 export var max_speed = 150
 var speed
 var push = Vector2.ZERO
+onready var animated_sprite = $AnimatedSprite
+var facing_direction: Vector2 = Vector2(0,1)
 
 export var max_health: int = 100
 export var armor_rating: int = 0
@@ -76,8 +78,26 @@ func _physics_process(delta):
 			print("Burn damage!: current health: ", current_health)
 		if burn_time_remaining <= 0:
 			burned = false
-	
-	
+	animator(velocity)
+
+func animator(direction: Vector2):
+	if direction != Vector2.ZERO:
+		animated_sprite.play("Walk_" + get_animation_direction(direction))
+		facing_direction = direction
+	else:
+		animated_sprite.play("Idle_" + get_animation_direction(facing_direction))
+
+func get_animation_direction(direction: Vector2):
+	var norm_direction = direction.normalized()
+	if norm_direction.x <= -0.707:
+		return "Left"
+	elif norm_direction.x >= 0.707:
+		return "Right"
+	elif norm_direction.y >= 0.707:
+		return "Down"
+	elif norm_direction.y <= -0.707:
+		return "Up"
+	return "Down"
 	
 func move_character(delta):
 	move_and_slide((velocity * speed) + push)
