@@ -10,7 +10,7 @@ extents = Vector2( 8, 16 )
 ]]
 script = ExtResource( 2 )
 
-[node name="Animated_Sprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

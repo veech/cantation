@@ -5,12 +5,11 @@ onready var inventory = get_node("/root/Inventory_UI").get_child(0)
 onready var spell_set = get_node("/root/Inventory_UI/Inventory/Spells_Set")
 
 var input: Vector2
-var facing_direction = Vector2(0,1)
+#var facing_direction = Vector2(0,1)
 
 #this gets resized in the func ""update_number_of_spell_slots()"" called in _ready()
 #var equipped_spells = []
 var current_spell_slot = 0
-
 
 func _ready():
 	set_collision_layer_bit(1, true)
@@ -27,7 +26,7 @@ func _ready():
 
 func _physics_process(delta):
 	get_input_axis()
-	_animate()
+	#_animate()
 
 func get_input_axis():
 	input.x = Input.get_action_strength("right") - Input.get_action_strength("left")
