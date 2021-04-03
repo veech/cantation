@@ -4,7 +4,7 @@ export var max_speed = 150
 var speed
 var push = Vector2.ZERO
 onready var animated_sprite = $AnimatedSprite
-var facing_direction: Vector2 = Vector2(0,1)
+var facing_direction: Vector2 = Vector2.DOWN
 
 export var max_health: int = 100
 export var armor_rating: int = 0
@@ -23,7 +23,7 @@ var burned = false
 var frozen_time_remaining = 0
 var burn_time_remaining = 0
 var burn_damage = 0
-var timer = 0
+var burn_timer = 0
 var shocked = false
 
 var velocity: Vector2 = Vector2.ZERO
@@ -59,7 +59,6 @@ func _ready():
 func create_shock_node():
 	shock_anim = Shock_Anim.instance()
 	self.add_child(shock_anim)
-	#shock_anim.connect("animation_finished", self, "end_shock")
 	
 func _physics_process(delta):
 	move_character(delta)
@@ -71,10 +70,10 @@ func _physics_process(delta):
 			print("No longer frozen")
 	if burned:
 		burn_time_remaining -= delta
-		timer += delta
-		if timer >= 1:
+		burn_timer += delta
+		if burn_timer >= 1:
 			current_health -= burn_damage
-			timer = 0
+			burn_timer = 0
 			print("Burn damage!: current health: ", current_health)
 		if burn_time_remaining <= 0:
 			burned = false
@@ -84,7 +83,7 @@ func animator(direction: Vector2):
 	if direction != Vector2.ZERO:
 		animated_sprite.play("Walk_" + get_animation_direction(direction))
 		facing_direction = direction
-	else:
+	else:		
 		animated_sprite.play("Idle_" + get_animation_direction(facing_direction))
 
 func get_animation_direction(direction: Vector2):
