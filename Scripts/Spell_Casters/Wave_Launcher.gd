@@ -6,9 +6,7 @@ const Wave = preload("res://Scenes/Projectiles/Wave.tscn")
 # this wave spawner will have to handle how many waves get spawned with a "width" attribute and maybe use a radius to get 
 #placement correct
 func _init():
-	pool_name = "wave"
-	spell = Wave
+	this_spell = Wave
 	
 func cast(caster, mouse_position):
 	.cast(caster, mouse_position)
-

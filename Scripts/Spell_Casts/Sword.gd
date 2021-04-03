@@ -15,7 +15,7 @@ onready var collision_shape = $CollisionShape2D
 func _physics_process(delta):
 	self.rotate(deg2rad(degrees_per_second) * delta * rot_speed)
 	if get_rotation() >= start_rotation + arc:
-		turn_off()
+		queue_free()
 
 func set_attributes(attributes):
 	self.attributes = attributes

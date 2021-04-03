@@ -13,7 +13,7 @@ export var freeze_resistance: int = 0
 export var push_resistance: int = 0
 export var default_push_recovery: float = .1
 var push_recovery
-
+var layer
 export var push_sensitivity: int = 100
 
 var current_health = max_health
@@ -25,13 +25,9 @@ var burn_time_remaining = 0
 var burn_damage = 0
 var burn_timer = 0
 var shocked = false
+var can_shoot = true
 
 var velocity: Vector2 = Vector2.ZERO
-
-var pool_node_list = Array()
-var Character_Spell_Container_Node = preload("res://Scenes/Utilities/Character_Spell_Container_Node.tscn")
-var Pool_Container = preload("res://Scenes/Utilities/Pool_Container.tscn")
-var spell_container: Node2D
 
 # Spell_Casters
 const Fireball_Launcher = preload("res://Scripts/Spell_Casters/Fireball_Launcher.gd")
@@ -55,7 +51,7 @@ func _ready():
 	shock_timer = Shock_Timer.instance()
 	self.add_child(shock_timer)
 	shock_timer.connect('timeout', self, 'end_shock')
-	
+
 func create_shock_node():
 	shock_anim = Shock_Anim.instance()
 	self.add_child(shock_anim)
@@ -119,6 +115,7 @@ func freeze(freeze_power, freeze_duration):
 	
 func shock(shock_time):
 	shock_timer.stop()
+	shocked = true
 	shock_anim.set_visible(true)
 	shock_timer.start(shock_time)
 		#attributes should choose which anim is played somehow.
@@ -127,8 +124,8 @@ func shock(shock_time):
 	nullify_speed()
 	
 func end_shock():
-	#shocked = false
 	shock_anim.set_visible(false)
+	shocked = false
 	reset_speed()
 	
 func take_damage(damage):
@@ -179,40 +176,17 @@ func instantiate_spell_caster(item, slot):
 func build_spell(spell_type, item, slot):
 	var spell = spell_type.new()
 	spell.set_attributes(item.attributes)
-	spell.set_spell(pool_node_list[slot], self)
+	spell.attributes['caster'] = self.get_name()
+	spell.attributes['layer'] = self.layer
 	return spell
-
-func create_pool_container(): 
-	var my_spell_container = Character_Spell_Container_Node.instance()
-	my_spell_container.set_name(self.get_name() + "_spell_pools")
-	Game_Manager.add_child(my_spell_container)
-	return my_spell_container
-
-func set_up_pool_containers():
-	set_spell_container(create_pool_container())
-	for i in len(get_equipped_spells()):
-		var pool_container = Pool_Container.instance()
-		pool_container.set_name("pool_container_" + str(i))
-		get_spell_container().add_child(pool_container)
-		pool_node_list.push_back(pool_container)
 
 func direction_from_to(position_a, position_b):
 	var direction = position_b - position_a
 	return direction.normalized()
 
-func set_spell_container(node):
-	spell_container = node
-	
-func get_spell_container():
-	return spell_container
-
 func get_equipped_spells():
 	return equipped_spells
 
-func get_pool_node_list():
-	return pool_node_list
-
 func clear_container_node(slot):
 	print("Cleared container node")
-	for i in pool_node_list[slot].get_children():
-		i.queue_free()
+

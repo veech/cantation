@@ -14,7 +14,8 @@ func set_spell_pool(pool):
 	self.spell_pool = pool
 	
 func unset_spell_pool():
-	spell_pool.queue_free()
+	pass
+	#spell_pool.queue_free()
 
 func set_spell(parent_node, caster):
 	print("Set spell not implemented")

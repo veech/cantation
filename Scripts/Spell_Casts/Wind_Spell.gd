@@ -8,6 +8,7 @@ var spell_time = 2
 
 func _ready():
 	$Spell_Timer.connect("timeout", self, "deactivate_spell")
+	print("Wind ready function called")
 
 func activate_wind(mouse_position):
 	$Spell_Timer.stop()
@@ -18,8 +19,7 @@ func activate_wind(mouse_position):
 	$Spell_Timer.start(spell_time)
 
 func deactivate_spell():
-	turn_off()
-	print("Spell deactivated")
+	queue_free()
 
 func impact_body(body):
 	body.nullify_push_recovery()

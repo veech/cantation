@@ -3,10 +3,11 @@
 [ext_resource path="res://Assets/Projectiles/Projectile_Placeholders.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Spell_Casts/Projectiles/Iceblast.gd" type="Script" id=2]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 
-[node name="Iceblast" type="Area2D"]
+[node name="Iceblast" type="Area2D" groups=[
+"Spells",
+]]
 z_index = 1
 script = ExtResource( 2 )
 

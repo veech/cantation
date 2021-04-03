@@ -1,17 +1,16 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Tilemaps/Brick_Wall_Version2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Spellbooks/Ice_Spellbook.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Spellbooks/Water_Spellbook.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Spellbooks/Fire_Spellbook.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Enemies/Wheel_Enemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Enemies/Floatie_Manager.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Utilities/FPS_Counter.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Spellbooks/Wind_Spellbook.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Spellbooks/Lightning_Spellbook.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Spellbooks/Summon_Sword_Spellbook.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Enemies/Enemy_Manager.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/Enemies/Floating_Enemy.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Enemies/Wheelie_Manager.tscn" type="PackedScene" id=11]
 
 [node name="Level" type="Node2D"]
 
@@ -53,20 +52,14 @@ tile_data = PoolIntArray( -262153, 2, 0, -262152, 3, 65536, -262151, 3, 65536, -
 [node name="Line2D" type="Line2D" parent="."]
 z_index = 2
 
-[node name="Enemy_Manager" parent="." instance=ExtResource( 11 )]
-position = Vector2( -424.283, 438.094 )
-enemies_spawned = 5
-Enemy = ExtResource( 6 )
+[node name="Wheelie_Manager" parent="." instance=ExtResource( 11 )]
+position = Vector2( -132.041, 399.986 )
 
-[node name="Enemy_Manager3" parent="." instance=ExtResource( 11 )]
-position = Vector2( -88.6621, 355.687 )
-spawn_radius = 25
-enemies_spawned = 7
-enemy_height = 52.0
-Enemy = ExtResource( 12 )
+[node name="Floatie_Manager" parent="." instance=ExtResource( 6 )]
+position = Vector2( 314.455, 197.715 )
 
-[node name="Enemy_Manager2" parent="." instance=ExtResource( 11 )]
-position = Vector2( 291.504, 448.773 )
-spawn_radius = 100
-enemies_spawned = 26
-Enemy = ExtResource( 6 )
+[node name="Wheelie_Manager2" parent="." instance=ExtResource( 11 )]
+position = Vector2( -97.5795, 638.217 )
+
+[node name="Floatie_Manager2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 713.005, 443.437 )
