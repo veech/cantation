@@ -3,7 +3,6 @@
 [ext_resource path="res://Assets/Spell_attacks/Water_Spell_Animation.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Spell_Casts/Projectiles/Wave.gd" type="Script" id=2]
 
-
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 16, 16 )
@@ -31,17 +30,20 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 3.33497, 7.46173 )
 
-[node name="Wave" type="Area2D"]
+[node name="Wave" type="Area2D" groups=[
+"Spells",
+]]
 scale = Vector2( 2, 3 )
 z_index = 1
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
-frame = 1
 playing = true
 offset = Vector2( 8, 0 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=[
+"Spells",
+]]
 position = Vector2( 12.0994, 0.070076 )
 shape = SubResource( 6 )

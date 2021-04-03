@@ -4,13 +4,9 @@ var attributes = {}
 var active = true
 var push_direction
 
-func _ready():
+func _init():
 	connect("body_entered", self, "on_body_entered")
 	connect("body_exited", self, "on_body_exited")
-
-#This function is gonna just be in the spell caster classes
-#func cast(caster, mouse_position):
-#	print("Cast function not implemented in baseclass")
 
 func impact_wall():
 	pass
@@ -18,11 +14,13 @@ func impact_wall():
 func on_body_entered(body):
 	if body.get_name() == self.attributes["caster"]:
 		return
-	if body.is_in_group("Wall"):
+	elif body.is_in_group("Wall"):
 		impact_wall()
+	#Not sure why this isnt working could be a collision layer/mask thing
+	elif body.is_in_group("Spells"):
+		queue_free()
 	else:
 		impact_body(body)
-		
 		
 func on_body_exited(body):
 	if body.get_name() == self.attributes["caster"]:

@@ -3,7 +3,6 @@
 [ext_resource path="res://Scripts/Spell_Casts/Projectiles/Fire_Ball.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Spell_attacks/Fireball_Placeholder_anim.png" type="Texture" id=2]
 
-
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 16, 16 )
@@ -31,15 +30,18 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 8.58493, 7.87974 )
 
-[node name="Fire_Ball" type="Area2D"]
+[node name="Fire_Ball" type="Area2D" groups=[
+"Spells",
+]]
 z_index = 1
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
 animation = "Fly"
-frame = 2
 playing = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=[
+"Spells",
+]]
 shape = SubResource( 6 )

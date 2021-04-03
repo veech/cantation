@@ -1,6 +1,5 @@
 extends "res://Scripts/Base_Classes/Base_Spellbook.gd"
 
-
 const MIN_POWER = 5
 const MAX_POWER = 15
 const MIN_RADIUS = 1
