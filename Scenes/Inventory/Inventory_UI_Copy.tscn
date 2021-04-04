@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Inventory/Spells_Set.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Inventory/Tool_Tip.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scripts/Inventory/Inventory.gd" type="Script" id=4]
 [ext_resource path="res://UI_Styles/TopBar_StyleI.tres" type="StyleBox" id=5]
 [ext_resource path="res://UI_Styles/Box_Style.tres" type="StyleBox" id=6]
+[ext_resource path="res://UI_Styles/Inventory_UI_Style.tres" type="StyleBox" id=7]
 [ext_resource path="res://UI_Styles/Temp_Spell_Set_box.tres" type="StyleBox" id=8]
 [ext_resource path="res://Assets/misc_unused/Text_Box_Alt.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/Inventory/Tip.tscn" type="PackedScene" id=10]
@@ -16,14 +17,20 @@
 pause_mode = 2
 layer = 0
 
-[node name="Inventory" type="Control" parent="."]
-self_modulate = Color( 1, 1, 1, 0 )
+[node name="Inventory" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = 49.5
+margin_right = -50.0
+margin_bottom = -50.5
+custom_styles/panel = ExtResource( 7 )
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Inventory_TopBar" type="Panel" parent="Inventory"]
-visible = false
 anchor_right = 1.0
 margin_bottom = 40.0
 custom_styles/panel = ExtResource( 5 )
@@ -32,7 +39,6 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Inventory/Inventory_TopBar"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -42,10 +48,10 @@ valign = 1
 uppercase = true
 
 [node name="Pack" type="Panel" parent="Inventory"]
-margin_left = 33.8775
-margin_top = 161.532
-margin_right = 398.878
-margin_bottom = 576.532
+margin_left = 35.0
+margin_top = 65.0
+margin_right = 400.0
+margin_bottom = 480.0
 custom_styles/panel = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -70,33 +76,39 @@ __meta__ = {
 [node name="Label" type="Label" parent="Inventory/Pack/TopBar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-text = "Inventory"
+text = "Spells"
 align = 1
 valign = 1
 
 [node name="Spells_Set" type="Panel" parent="Inventory"]
-anchor_left = 0.1
-anchor_top = 0.05
-anchor_right = 0.9
-anchor_bottom = 0.15
-margin_left = -0.400002
-margin_right = -0.599976
-margin_bottom = -10.0
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -400.0
+margin_top = 65.0
+margin_right = -35.0
+margin_bottom = 480.0
 custom_styles/panel = ExtResource( 6 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Spell_Slots" type="HBoxContainer" parent="Inventory/Spells_Set"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Spell_Slots" type="NinePatchRect" parent="Inventory/Spells_Set"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -74.0
+margin_top = -74.0
+margin_right = 74.0
+margin_bottom = 74.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Spell_A" type="Panel" parent="Inventory/Spells_Set/Spell_Slots"]
-margin_bottom = 50.0
+margin_right = 40.0
+margin_bottom = 40.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -115,9 +127,10 @@ __meta__ = {
 }
 
 [node name="Spell_B" type="Panel" parent="Inventory/Spells_Set/Spell_Slots"]
-margin_left = 4.0
-margin_right = 4.0
-margin_bottom = 50.0
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -40.0
+margin_bottom = 40.0
 script = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="Inventory/Spells_Set/Spell_Slots/Spell_B"]
@@ -130,9 +143,10 @@ text = "2"
 align = 1
 
 [node name="Spell_C" type="Panel" parent="Inventory/Spells_Set/Spell_Slots"]
-margin_left = 8.0
-margin_right = 8.0
-margin_bottom = 50.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+margin_right = 40.0
 script = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="Inventory/Spells_Set/Spell_Slots/Spell_C"]
@@ -145,9 +159,12 @@ text = "3"
 align = 1
 
 [node name="Spell_D" type="Panel" parent="Inventory/Spells_Set/Spell_Slots"]
-margin_left = 12.0
-margin_right = 12.0
-margin_bottom = 50.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -40.0
 script = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="Inventory/Spells_Set/Spell_Slots/Spell_D"]
@@ -162,99 +179,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Spell_E" type="Panel" parent="Inventory/Spells_Set/Spell_Slots"]
-margin_left = 16.0
-margin_right = 16.0
-margin_bottom = 50.0
-script = ExtResource( 3 )
-
-[node name="Label" type="Label" parent="Inventory/Spells_Set/Spell_Slots/Spell_E"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -14.0
-custom_styles/normal = ExtResource( 8 )
-text = "5"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Spell_F" type="Panel" parent="Inventory/Spells_Set/Spell_Slots"]
-margin_left = 20.0
-margin_right = 20.0
-margin_bottom = 50.0
-script = ExtResource( 3 )
-
-[node name="Label" type="Label" parent="Inventory/Spells_Set/Spell_Slots/Spell_F"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -14.0
-custom_styles/normal = ExtResource( 8 )
-text = "6"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Spell_G" type="Panel" parent="Inventory/Spells_Set/Spell_Slots"]
-margin_left = 24.0
-margin_right = 24.0
-margin_bottom = 50.0
-script = ExtResource( 3 )
-
-[node name="Label" type="Label" parent="Inventory/Spells_Set/Spell_Slots/Spell_G"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -14.0
-custom_styles/normal = ExtResource( 8 )
-text = "7"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Spell_H" type="Panel" parent="Inventory/Spells_Set/Spell_Slots"]
-margin_left = 28.0
-margin_right = 28.0
-margin_bottom = 50.0
-script = ExtResource( 3 )
-
-[node name="Label" type="Label" parent="Inventory/Spells_Set/Spell_Slots/Spell_H"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -14.0
-custom_styles/normal = ExtResource( 8 )
-text = "8"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Spell_I" type="Panel" parent="Inventory/Spells_Set/Spell_Slots"]
-margin_left = 32.0
-margin_right = 32.0
-margin_bottom = 50.0
-script = ExtResource( 3 )
-
-[node name="Label" type="Label" parent="Inventory/Spells_Set/Spell_Slots/Spell_I"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -14.0
-custom_styles/normal = ExtResource( 8 )
-text = "9"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Panel" type="Panel" parent="Inventory/Spells_Set"]
-visible = false
 anchor_right = 1.0
+margin_bottom = 25.0
 custom_styles/panel = ExtResource( 5 )
 
 [node name="Label" type="Label" parent="Inventory/Spells_Set/Panel"]

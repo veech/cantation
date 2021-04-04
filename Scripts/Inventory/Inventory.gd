@@ -1,4 +1,4 @@
-extends Panel
+extends Control
 
 const ItemSlotClass = preload("res://Scripts/Inventory/ItemSlot.gd")
 const ItemClass = preload("res://Scripts/Inventory/Item.gd")
@@ -28,8 +28,8 @@ onready var spell_set = get_node("Spells_Set")
 func _ready():
 	#projectile_pool_setup()
 
-	
-	set_visible(false)
+	set_visible(true)
+	set_mouse_filter(MOUSE_FILTER_IGNORE)
 	var slots = get_node("Pack/Slots")
 	for _i in range(MAX_SLOTS):
 		var slot = ItemSlotClass.new()
@@ -96,7 +96,11 @@ func _input(event: InputEvent):
 		holding_item.rect_global_position = event.global_position - item_offset
 		
 func toggle_inventory():
-	set_visible(!is_visible())
+#	if get_mouse_filter() == MOUSE_FILTER_PASS:
+#		self.set_mouse_filter(MOUSE_FILTER_IGNORE)
+#	else:
+#		set_mouse_filter(MOUSE_FILTER_PASS)
+	$Pack.set_visible(!$Pack.is_visible())
 	
 func get_free_slot():
 	for slot in slotList:

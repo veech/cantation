@@ -16,11 +16,14 @@
 pause_mode = 2
 layer = 0
 
-[node name="Inventory" type="Control" parent="."]
+[node name="Inventory" type="Panel" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Inventory_TopBar" type="Panel" parent="Inventory"]
 visible = false
