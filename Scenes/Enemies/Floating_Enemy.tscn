@@ -1,7 +1,8 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Assets/Enemies/Floating_Enemy.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Enemies/Floating_Enemy.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/UI_Elements/Health_Bar.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9.36289, 25.9266 )
@@ -56,27 +57,27 @@ region = Rect2( 240, 192, 48, 64 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 128, 48, 64 )
+region = Rect2( 0, 0, 48, 64 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 1 )
-region = Rect2( 48, 128, 48, 64 )
+region = Rect2( 48, 0, 48, 64 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 1 )
-region = Rect2( 96, 128, 48, 64 )
+region = Rect2( 96, 0, 48, 64 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 1 )
-region = Rect2( 144, 128, 48, 64 )
+region = Rect2( 144, 0, 48, 64 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 1 )
-region = Rect2( 192, 128, 48, 64 )
+region = Rect2( 192, 0, 48, 64 )
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 1 )
-region = Rect2( 240, 128, 48, 64 )
+region = Rect2( 240, 0, 48, 64 )
 
 [sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 1 )
@@ -176,27 +177,27 @@ region = Rect2( 240, 0, 48, 64 )
 
 [sub_resource type="AtlasTexture" id=44]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 48, 64 )
+region = Rect2( 0, 128, 48, 64 )
 
 [sub_resource type="AtlasTexture" id=45]
 atlas = ExtResource( 1 )
-region = Rect2( 48, 0, 48, 64 )
+region = Rect2( 48, 128, 48, 64 )
 
 [sub_resource type="AtlasTexture" id=46]
 atlas = ExtResource( 1 )
-region = Rect2( 96, 0, 48, 64 )
+region = Rect2( 96, 128, 48, 64 )
 
 [sub_resource type="AtlasTexture" id=47]
 atlas = ExtResource( 1 )
-region = Rect2( 144, 0, 48, 64 )
+region = Rect2( 144, 128, 48, 64 )
 
 [sub_resource type="AtlasTexture" id=48]
 atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 48, 64 )
+region = Rect2( 192, 128, 48, 64 )
 
 [sub_resource type="AtlasTexture" id=49]
 atlas = ExtResource( 1 )
-region = Rect2( 240, 0, 48, 64 )
+region = Rect2( 240, 128, 48, 64 )
 
 [sub_resource type="SpriteFrames" id=50]
 animations = [ {
@@ -212,12 +213,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
 "loop": true,
-"name": "Walk_Left",
+"name": "Walk_Down",
 "speed": 10.0
 }, {
 "frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ) ],
 "loop": true,
-"name": "Idle_Left",
+"name": "Walk_Left",
 "speed": 10.0
 }, {
 "frames": [ SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ) ],
@@ -232,12 +233,12 @@ animations = [ {
 }, {
 "frames": [ SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ) ],
 "loop": true,
-"name": "Walk_Down",
+"name": "Idle_Down",
 "speed": 10.0
 }, {
 "frames": [ SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ) ],
 "loop": true,
-"name": "Idle_Down",
+"name": "Idle_Left",
 "speed": 10.0
 } ]
 
@@ -251,9 +252,14 @@ shape = SubResource( 1 )
 position = Vector2( 0, 5.83315 )
 frames = SubResource( 50 )
 animation = "Idle_Down"
-frame = 4
+frame = 3
 playing = true
 offset = Vector2( 0, 6 )
 
 [node name="Spawn_Point" type="Position2D" parent="."]
 position = Vector2( -14, -2 )
+
+[node name="Health_Bar_Container" parent="." instance=ExtResource( 3 )]
+margin_top = -17.0
+margin_right = 27.0
+margin_bottom = 22.0

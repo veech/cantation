@@ -16,6 +16,7 @@ var push_recovery
 var layer
 export var push_sensitivity: int = 100
 
+onready var health_bar = get_node("Health_Bar_Container/Health_Bar")
 var current_health = max_health
 var frozen = false
 var burned = false
@@ -45,6 +46,9 @@ var Shock_Timer = preload("res://Scenes/Utilities/Shock_Timer.tscn")
 var shock_timer: Timer
 
 func _ready():
+	health_bar.max_value = max_health
+	health_bar.value = current_health
+	
 	reset_push_recovery()
 	reset_speed()
 	create_shock_node()
@@ -132,6 +136,7 @@ func take_damage(damage):
 	var health_loss = damage - armor_rating
 	current_health -= health_loss
 	print("Damage taken!\n\nCurrent Health: ", current_health)
+	update_health_bar()
 	if current_health <= 0:
 		death()
 
@@ -190,3 +195,5 @@ func get_equipped_spells():
 func clear_container_node(slot):
 	print("Cleared container node")
 
+func update_health_bar():
+	health_bar.value = current_health

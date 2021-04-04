@@ -52,14 +52,8 @@ tile_data = PoolIntArray( -262153, 2, 0, -262152, 3, 65536, -262151, 3, 65536, -
 [node name="Line2D" type="Line2D" parent="."]
 z_index = 2
 
-[node name="Wheelie_Manager" parent="." instance=ExtResource( 11 )]
-position = Vector2( -132.041, 399.986 )
-
 [node name="Floatie_Manager" parent="." instance=ExtResource( 6 )]
-position = Vector2( 314.455, 197.715 )
+position = Vector2( -404.433, 407.185 )
 
-[node name="Wheelie_Manager2" parent="." instance=ExtResource( 11 )]
-position = Vector2( -97.5795, 638.217 )
-
-[node name="Floatie_Manager2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 713.005, 443.437 )
+[node name="Wheelie_Manager" parent="." instance=ExtResource( 11 )]
+position = Vector2( 329.775, 367.985 )
