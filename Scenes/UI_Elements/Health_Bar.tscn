@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/UI_Sprites/Bar_Background.png" type="Texture" id=1]
+[ext_resource path="res://Assets/UI_Sprites/Bar_Fill.png" type="Texture" id=2]
+[ext_resource path="res://Assets/UI_Sprites/Bar.png" type="Texture" id=3]
+
+[node name="Health_Bar_Container" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -10.0
+margin_top = -14.0
+margin_right = 18.0
+margin_bottom = 10.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health_Bar" type="TextureProgress" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -6.0
+mouse_filter = 2
+texture_under = ExtResource( 1 )
+texture_over = ExtResource( 3 )
+texture_progress = ExtResource( 2 )
+fill_mode = 3
+nine_patch_stretch = true
+stretch_margin_left = 1
+stretch_margin_top = 1
+stretch_margin_right = 1
+stretch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

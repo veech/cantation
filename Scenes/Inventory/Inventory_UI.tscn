@@ -21,6 +21,9 @@ self_modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Inventory_TopBar" type="Panel" parent="Inventory"]
 visible = false
@@ -43,10 +46,10 @@ uppercase = true
 
 [node name="Pack" type="Panel" parent="Inventory"]
 visible = false
-margin_left = 33.8775
-margin_top = 161.532
-margin_right = 398.878
-margin_bottom = 576.532
+margin_left = 34.0
+margin_top = 162.0
+margin_right = 368.0
+margin_bottom = 530.0
 custom_styles/panel = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false

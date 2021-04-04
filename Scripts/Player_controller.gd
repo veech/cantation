@@ -40,9 +40,9 @@ func _unhandled_input(event):
 	if event.is_action_pressed("advance_current_spell"):
 		set_current_spell(current_spell_slot + 1)
 		print("Active spell is spell: ", current_spell_slot + 1)
-	if event.is_action_pressed("delete_active_pool"):
+	elif event.is_action_pressed("delete_active_pool"):
 		equipped_spells[current_spell_slot].projectile_pool.queue_free()
-	if event.is_action_pressed("Select_Spell"):
+	elif event.is_action_pressed("Select_Spell"):
 		set_current_spell(int(event.unicode) - 49) #Translates unicode into an integer
 
 func set_equipped_spell(spell, slot):
