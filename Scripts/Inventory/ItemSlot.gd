@@ -13,7 +13,7 @@ func _init():
 	
 	rect_min_size = Vector2(72, 72)
 	style = StyleBoxFlat.new()
-	refreshColors()
+	refresh_colors()
 	style.set_border_width_all(3)
 	style.set_corner_radius_all(5)
 	
@@ -43,7 +43,10 @@ func put_item(new_item):
 #This is ignored except when the slot emitting it is a spell_slot
 	emit_signal("set_spell", item, slotIndex)
 
-func refreshColors():
-	style.bg_color = Color("#9badb7")
+func refresh_colors():
+	style.bg_color = Color("#3f3f74")
 	style.border_color = Color("#252222")
 	
+func set_active_spell_color():
+	style.bg_color = Color("#9badb7")
+	style.border_color = Color("#252222")

@@ -4,12 +4,17 @@ const ItemSlotClass = preload("res://Scripts/Inventory/ItemSlot.gd")
 const ItemClass = preload("res://Scripts/Inventory/Item.gd")
 const ToolTipClass = preload("res://Scripts/Inventory/Tool_Tip.gd")
 
-var equipped_spell_1 = null
-var equipped_spell_2 = null
-var equipped_spell_3 = null
-var equipped_spell_4 = null
-
-var equipped_spells = [null, null, null, null, null]
+#var equipped_spell_1 = null
+#var equipped_spell_2 = null
+#var equipped_spell_3 = null
+#var equipped_spell_4 = null
+#var equipped_spell_5 = null
+#var equipped_spell_6 = null
+#var equipped_spell_7 = null
+#var equipped_spell_8 = null
+#var equipped_spell_9 = null
+#
+#var equipped_spells = [null, null, null, null, null, null]
 
 var current_spell_slot = 0
 
@@ -46,7 +51,7 @@ func _ready():
 			spell_slot.connect("mouse_entered", self, "mouse_enter_slot", [spell_slot])
 			spell_slot.connect("mouse_exited", self, "mouse_exit_slot", [spell_slot])
 			spell_slot.connect("gui_input", self, "slot_gui_input", [spell_slot])
-
+	spell_set.slots[0].set_active_spell_color()
 
 func slot_gui_input(event: InputEvent, slot: ItemSlotClass):
 	if event is InputEventMouseButton:
