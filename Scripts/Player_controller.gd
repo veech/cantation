@@ -12,7 +12,7 @@ func _ready():
 	layer = 1
 	set_collision_layer_bit(layer, true)
 	update_number_of_spell_slots()
-	
+	print(len(spell_set.slots))
 	#this function is found in Base_Character. Adds node containers to GameManager and populates
 	#the array of references to those nodes where we will place the pools.
 	#sddup_pool_containers()
@@ -42,6 +42,8 @@ func _unhandled_input(event):
 		print("Active spell is spell: ", current_spell_slot + 1)
 	if event.is_action_pressed("delete_active_pool"):
 		equipped_spells[current_spell_slot].projectile_pool.queue_free()
+	if event.is_action_pressed("Select_Spell"):
+		set_current_spell(int(event.unicode) - 49) #Translates unicode into an integer
 
 func set_equipped_spell(spell, slot):
 	equipped_spells[slot] = instantiate_spell_caster(spell, slot)
@@ -50,7 +52,10 @@ func unequip_spell(slot):
 	clear_container_node(slot)
 
 func set_current_spell(spell_slot):
-	current_spell_slot = spell_slot % 4
+	current_spell_slot = spell_slot % 9
+	for slot in spell_set.slots:
+		slot.refresh_colors()
+	spell_set.slots[spell_slot % 9].set_active_spell_color()
 
 func get_current_spell():
 	return equipped_spells[current_spell_slot]
