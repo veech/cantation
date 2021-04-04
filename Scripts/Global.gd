@@ -16,6 +16,8 @@ enum SPELLS {
 	LIGHTNING
 }
 
+const spell_strings = ["Fire", "Wind", "Ice", "Water", "Summon Sword", "Lightning"]
+
 const item_images = [
 		preload("res://Assets/Spellbooks/Fire.png"),
 		preload("res://Assets/Spellbooks/Wind.png"),
