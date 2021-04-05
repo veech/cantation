@@ -2,7 +2,7 @@ extends "res://Scripts/Base_Classes/Base_Enemy.gd"
 
 func _ready():
 	casting_range_min = 70
-	casting_range_max = 120
+	casting_range_max = 160
 	equip_spell(Fireball_Launcher)
 	
 #func _physics_process(delta):
