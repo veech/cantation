@@ -136,7 +136,7 @@ func burn(burn_power, burn_duration):
 	
 func freeze(freeze_power, freeze_duration):
 	print("frozen")
-	speed = max_speed - (max_speed * 1/freeze_power)
+	speed = (max_speed * 1/freeze_power)
 	frozen_time_remaining = freeze_duration
 	frozen = true
 	

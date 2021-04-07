@@ -33,4 +33,4 @@ func impact_body(body):
 	knock_back(body, self.push_direction)
 
 func knock_back(body, push_direction):
-	body.start_push(push_direction, attributes['push_power'])
+	body.knockback(push_direction, attributes['push_power'])

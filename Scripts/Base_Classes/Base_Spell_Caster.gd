@@ -4,8 +4,8 @@ var attributes = {}
 var casted_spell
 
 var spell_pool
-const POOL_SIZE = 40
-const Pool = preload("res://Scripts/Pool.gd")
+#const POOL_SIZE = 40
+#const Pool = preload("res://Scripts/Pool.gd")
 
 var pool_name
 var spell

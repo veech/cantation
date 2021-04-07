@@ -7,6 +7,7 @@ onready var spell_set = get_node("/root/Inventory_UI/Inventory/Spells_Set")
 var input: Vector2
 
 var current_spell_slot = 0
+var secondary_spell_slot = 1
 
 func _ready():
 	layer = 1
@@ -20,7 +21,8 @@ func _ready():
 		var spell_slot = spell_set.slots[i]
 		if spell_slot:
 			spell_slot.connect("set_spell", self, "set_equipped_spell")
-
+	set_current_spell(current_spell_slot)
+	set_secondary_spell(secondary_spell_slot)
 
 func _physics_process(delta):
 	get_input_axis()
@@ -36,14 +38,25 @@ func _unhandled_input(event):
 			get_current_spell().cast(self, get_global_mouse_position())
 		else:
 			print("No active spell to cast")
+	elif event.is_action_pressed("Secondary_Cast"):
+		if get_secondary_spell() != null:
+			get_secondary_spell().cast(self, get_global_mouse_position())
+		else:
+			print("No active spell to cast")
 
 	if event.is_action_pressed("advance_current_spell"):
 		set_current_spell(current_spell_slot + 1)
 		print("Active spell is spell: ", current_spell_slot + 1)
 	elif event.is_action_pressed("delete_active_pool"):
 		equipped_spells[current_spell_slot].projectile_pool.queue_free()
-	elif event.is_action_pressed("Select_Spell"):
-		set_current_spell(int(event.unicode) - 49) #Translates unicode into an integer
+	if event is InputEventKey and event.pressed:
+		if event.is_action_pressed("Select_Spell"):
+			if event.shift:
+				print("select secondary")
+				set_secondary_spell(int(event.scancode) - 49) #Translates scancode into integer 1-9
+			else:
+				print("select")
+				set_current_spell(int(event.scancode) - 49)
 
 func set_equipped_spell(spell, slot):
 	equipped_spells[slot] = instantiate_spell_caster(spell, slot)
@@ -52,13 +65,33 @@ func unequip_spell(slot):
 	clear_container_node(slot)
 
 func set_current_spell(spell_slot):
+	if spell_slot == secondary_spell_slot:
+		active_spell_swap()
 	current_spell_slot = spell_slot % 9
+	set_slot_colors()
+
+func set_secondary_spell(spell_slot):
+	if spell_slot == current_spell_slot:
+		active_spell_swap()
+	secondary_spell_slot = spell_slot % 9
+	set_slot_colors()
+
+func active_spell_swap():
+	var temp = secondary_spell_slot
+	secondary_spell_slot = current_spell_slot
+	current_spell_slot = temp
+
+func set_slot_colors():
 	for slot in spell_set.slots:
 		slot.refresh_colors()
-	spell_set.slots[spell_slot % 9].set_active_spell_color()
+	spell_set.slots[current_spell_slot].set_active_spell_color()
+	spell_set.slots[secondary_spell_slot].set_secondary_spell_color()	
 
 func get_current_spell():
 	return equipped_spells[current_spell_slot]
 
+func get_secondary_spell():
+	return equipped_spells[secondary_spell_slot]
+	
 func update_number_of_spell_slots():
 	equipped_spells.resize(len(spell_set.slots))

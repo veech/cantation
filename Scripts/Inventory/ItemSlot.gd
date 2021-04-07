@@ -50,3 +50,7 @@ func refresh_colors():
 func set_active_spell_color():
 	style.bg_color = Color("#9badb7")
 	style.border_color = Color("#252222")
+	
+func set_secondary_spell_color():
+	style.bg_color = Color("#d95763")
+	style.border_color = Color("#252222")

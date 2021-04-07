@@ -64,7 +64,9 @@ func bisect(point_a, point_b):
 func _input(event):
 	if event.is_action_released("Cast") and drawing == true:
 		emit_signal("line_finished")
-
+	elif event.is_action_released("Secondary_Cast") and drawing == true:
+		emit_signal("line_finished")
+	
 func stop_drawing():
 	point_timer.stop()
 	drawing = false
@@ -79,7 +81,7 @@ func activate_wind():
 		add_child(wind_unit)
 		wind_unit.look_at(line2d.points[i+1])
 		wind_unit.set_attributes(attributes)
-		wind_unit.look_direction = line2d.points[i+1].direction_to(line2d.points[i])
+		wind_unit.look_direction = line2d.points[i].direction_to(line2d.points[i+1])
 	line2d.visible = false
 	deactivate_timer.start(duration)
 	
