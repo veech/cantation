@@ -30,14 +30,13 @@ func get_tips():
 	var temp_dict = attributes.duplicate()
 	for key in temp_dict.keys():
 		if typeof(temp_dict[key]) == TYPE_REAL:
-			print("Float found")
 			if key == 'radius':
 				temp_dict[key] = str(int(temp_dict[key] * 100))
 				temp_dict[key] = temp_dict[key].substr(0, 3)
-				print(temp_dict[key])
+				#print(temp_dict[key])
 			else:
 				temp_dict[key] = str(int(temp_dict[key] * 100)) + '%'
-				print(temp_dict[key])
+				#print(temp_dict[key])
 		#This was a stupid attempt to replace the key with a diff name
 		if key == 'projectile_speed':
 			var temp_key = key

@@ -3,6 +3,9 @@ extends KinematicBody2D
 export var max_speed = 150
 var speed
 var push = Vector2.ZERO
+var knockback = Vector2.ZERO
+var knockback_recovery
+
 onready var animated_sprite = $AnimatedSprite
 var facing_direction: Vector2 = Vector2.DOWN
 
@@ -11,10 +14,11 @@ export var armor_rating: int = 0
 export var fire_resistance: int = 0
 export var freeze_resistance: int = 0
 export var push_resistance: int = 0
-export var default_push_recovery: float = .1
-var push_recovery
+export var default_knockback_recovery: float = .1
+
 var layer
-export var push_sensitivity: int = 100
+export var push_sensitivity: int = 50
+export var knockback_sensitivity: int = 150
 
 onready var health_bar = get_node("Health_Bar_Container/Health_Bar")
 var current_health = max_health
@@ -49,7 +53,7 @@ func _ready():
 	health_bar.max_value = max_health
 	health_bar.value = current_health
 	
-	reset_push_recovery()
+	reset_knockback_recovery()
 	reset_speed()
 	create_shock_node()
 	shock_timer = Shock_Timer.instance()
@@ -99,12 +103,31 @@ func get_animation_direction(direction: Vector2):
 	return "Down"
 	
 func move_character(delta):
-	move_and_slide((velocity * speed) + push)
-	push = lerp(push, Vector2.ZERO, push_recovery)
+	move_and_slide((velocity * speed) + push + knockback)
+	#this is causing an issue with the way wind is handled
+	#but it's necessary for knockback recovery
+	knockback = lerp(knockback, Vector2.ZERO, knockback_recovery)
+	
+func knockback(push_direction, push_power):
+	print("knockback called")
+	knockback = push_direction * push_power * knockback_sensitivity
+	
+func reset_knockback_recovery():
+	knockback_recovery = default_knockback_recovery
+
+func nullify_knockback_recovery():
+	knockback_recovery = 0
 	
 func start_push(push_direction, push_power):
 	print("push called")
-	push = push_direction * push_power * push_sensitivity
+	push += push_direction * push_power * push_sensitivity
+	
+func end_push(push_direction, push_power):
+	push -= push_direction * push_power * push_sensitivity
+	#reset_push()
+	
+func reset_push():
+	push = Vector2.ZERO
 	
 func burn(burn_power, burn_duration):
 	self.burn_damage = burn_power
@@ -140,11 +163,7 @@ func take_damage(damage):
 	if current_health <= 0:
 		death()
 
-func reset_push_recovery():
-	push_recovery = default_push_recovery
 
-func nullify_push_recovery():
-	push_recovery = 0
 
 func reset_speed():
 	speed = max_speed

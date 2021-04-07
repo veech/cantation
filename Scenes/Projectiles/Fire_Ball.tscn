@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/Spell_Casts/Projectiles/Fire_Ball.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Spell_attacks/Fireball_Placeholder_anim.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Spell_attacks/Rock.png" type="Texture" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -30,6 +31,43 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 8.58493, 7.87974 )
 
+[sub_resource type="Curve" id=8]
+_data = [ Vector2( 0, 1 ), 0.0, -0.288334, 0, 0, Vector2( 1, 0 ), -0.964231, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 1
+emission_sphere_radius = 6.0
+flag_disable_z = true
+gravity = Vector3( -98, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 9 )
+color = Color( 0.796078, 0.345098, 0.203922, 1 )
+
+[sub_resource type="Curve" id=10]
+_data = [ Vector2( 0, 1 ), 0.0, -0.671686, 0, 0, Vector2( 1, 0.384091 ), -0.898701, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=11]
+curve = SubResource( 10 )
+
+[sub_resource type="ParticlesMaterial" id=12]
+emission_shape = 1
+emission_sphere_radius = 4.0
+flag_disable_z = true
+gravity = Vector3( -98, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 260.4
+angle_random = 1.0
+scale = 0.5
+scale_curve = SubResource( 11 )
+color = Color( 0.576471, 0.415686, 0.415686, 1 )
+hue_variation = 0.06
+hue_variation_random = 0.87
+
 [node name="Fire_Ball" type="Area2D" groups=[
 "Spells",
 ]]
@@ -37,11 +75,24 @@ z_index = 1
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+z_index = 1
 frames = SubResource( 5 )
 animation = "Fly"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=[
 "Spells",
 ]]
 shape = SubResource( 6 )
+
+[node name="Sparks" type="Particles2D" parent="."]
+amount = 30
+process_material = SubResource( 7 )
+
+[node name="Smoke" type="Particles2D" parent="."]
+position = Vector2( -2.10224, 3.8147e-06 )
+amount = 16
+speed_scale = 2.0
+process_material = SubResource( 12 )
+texture = ExtResource( 3 )

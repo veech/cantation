@@ -29,6 +29,7 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 margin_bottom = 40.0
+mouse_filter = 2
 custom_styles/panel = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -87,6 +88,7 @@ anchor_bottom = 0.11
 margin_left = -0.400002
 margin_right = -0.599976
 margin_bottom = -4.0
+mouse_filter = 2
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -95,6 +97,7 @@ __meta__ = {
 [node name="Spell_Slots" type="HBoxContainer" parent="Inventory/Spells_Set"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

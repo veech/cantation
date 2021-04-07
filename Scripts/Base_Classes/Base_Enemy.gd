@@ -122,6 +122,11 @@ func cease_casting():
 func dist_to_player():
 	return self.global_position.distance_to(player.global_position)		
 
+func take_damage(damage):
+	.take_damage(damage)
+	if !enemy_manager.player_detected:
+		enemy_manager.player_detected = true
+
 func death():
 	.death()
 	self.queue_free()

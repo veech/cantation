@@ -1,21 +1,80 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Spell_attacks/Wind_Hitbox_placeholder.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Spell_Casts/Wind_Spell.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Spell_attacks/Wind/Wind_Sprite_B.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Particles/Wind_Particles.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Spell_attacks/Wind/Wind_A.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 64.0256, 11.9932 )
+extents = Vector2( 11.2311, 10.5323 )
+
+[sub_resource type="CanvasItemMaterial" id=2]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 3
+particles_anim_loop = false
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 2
+emission_box_extents = Vector3( 50, 6, 1 )
+flag_disable_z = true
+gravity = Vector3( -98, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.5
+color = Color( 0.141176, 0.227451, 0.286275, 0.462745 )
+anim_speed = 1.0
+
+[sub_resource type="CanvasItemMaterial" id=4]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 2
+particles_anim_loop = true
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 2
+emission_box_extents = Vector3( 70, 5, 1 )
+flag_disable_z = true
+gravity = Vector3( -98, 0, 0 )
+initial_velocity = 5.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 1.5
+color = Color( 0.87451, 0.937255, 1, 0.756863 )
+anim_speed = 1.0
 
 [node name="Wind_Collision_Box" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 1, 0.75 )
+visible = false
+position = Vector2( -11.5165, -0.629959 )
+scale = Vector2( 0.155952, 0.75 )
 texture = ExtResource( 1 )
 offset = Vector2( 72, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 72, 0 )
+position = Vector2( 0.184509, -1.52588e-05 )
 shape = SubResource( 1 )
 
 [node name="Spell_Timer" type="Timer" parent="."]
+
+[node name="Particles2D_A" type="Particles2D" parent="."]
+visible = false
+material = SubResource( 2 )
+position = Vector2( 86.9102, -0.396851 )
+process_material = SubResource( 3 )
+texture = ExtResource( 3 )
+
+[node name="Particles2D_B" type="Particles2D" parent="."]
+visible = false
+material = SubResource( 4 )
+position = Vector2( 77.3788, 0.374577 )
+z_index = 1
+amount = 2
+speed_scale = 1.5
+process_material = SubResource( 5 )
+texture = ExtResource( 5 )
+
+[node name="Particles2D_C" parent="." instance=ExtResource( 4 )]

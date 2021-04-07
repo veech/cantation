@@ -29,8 +29,16 @@ func on_body_exited(body):
 	print("NI body exited")
 
 func knock_back(body, push_direction):
-	print("called knock_back in base_projectile")
-	body.start_push(velocity, attributes['push_power'])
+	body.knockback(push_direction, attributes['push_power'])
+
+func end_knock_back(body, push_direction):
+	body.reset_push()
+
+func start_push(body, push_direction):
+	body.start_push(push_direction, attributes['push_power'])
+	
+func end_push(body, push_direction):
+	body.end_push(push_direction, attributes['push_power'])
 
 #result must be a DIRECTION i.e. must be normalized before being entered into this function
 func set_movement_direction(direction):

@@ -40,7 +40,16 @@ func impact_body(body):
 	print("NI")
 
 func knock_back(body, push_direction):
+	body.knockback(push_direction, attributes['push_power'])
+
+func end_knock_back(body, push_direction):
+	body.reset_push()
+
+func start_push(body, push_direction):
 	body.start_push(push_direction, attributes['push_power'])
+	
+func end_push(body, push_direction):
+	body.end_push(push_direction, attributes['push_power'])
 
 func set_attributes(new_attributes):
 	self.attributes = new_attributes
