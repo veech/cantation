@@ -43,6 +43,9 @@ const Wind_Caster = preload("res://Scripts/Spell_Casters/Wind_Caster.gd")
 const Lightning_Caster = preload("res://Scripts/Spell_Casters/Lightning_Caster.gd")
 	
 const Shock_Anim = preload("res://Scenes/Non-Projectile_Spells/Shock_Anim.tscn")
+const Burn_Anim = preload("res://Scenes/Non-Projectile_Spells/Burn_Anim.tscn")
+
+var burn_anim
 var shock_anim
 var equipped_spells = []
 
@@ -56,13 +59,20 @@ func _ready():
 	reset_knockback_recovery()
 	reset_speed()
 	create_shock_node()
+	create_burn_node()
 	shock_timer = Shock_Timer.instance()
 	self.add_child(shock_timer)
 	shock_timer.connect('timeout', self, 'end_shock')
 
+func create_burn_node():
+	burn_anim = Burn_Anim.instance()
+	self.add_child(burn_anim)
+	burn_anim.set_visible(false)
+	
 func create_shock_node():
 	shock_anim = Shock_Anim.instance()
 	self.add_child(shock_anim)
+	shock_anim.set_visible(false)
 	
 func _physics_process(delta):
 	move_character(delta)
@@ -81,6 +91,7 @@ func _physics_process(delta):
 			print("Burn damage!: current health: ", current_health)
 		if burn_time_remaining <= 0:
 			burned = false
+			burn_anim.set_visible(false)
 	animator(velocity)
 
 func animator(direction: Vector2):
@@ -133,6 +144,7 @@ func burn(burn_power, burn_duration):
 	self.burn_damage = burn_power
 	burn_time_remaining = burn_duration
 	burned = true
+	burn_anim.set_visible(true)
 	
 func freeze(freeze_power, freeze_duration):
 	print("frozen")
@@ -162,8 +174,6 @@ func take_damage(damage):
 	update_health_bar()
 	if current_health <= 0:
 		death()
-
-
 
 func reset_speed():
 	speed = max_speed
