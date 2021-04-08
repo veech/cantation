@@ -76,7 +76,7 @@ func _physics_process(delta):
 		burn_time_remaining -= delta
 		burn_timer += delta
 		if burn_timer >= 1:
-			current_health -= burn_damage
+			take_damage(burn_damage)
 			burn_timer = 0
 			print("Burn damage!: current health: ", current_health)
 		if burn_time_remaining <= 0:

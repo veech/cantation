@@ -19,6 +19,7 @@ func _init():
 
 func cast(caster, mouse_position):
 	.cast(caster, mouse_position)
+	
 
 func randomize_attributes():
 	attributes["spell_type"] = Global.SPELLS.FIRE
