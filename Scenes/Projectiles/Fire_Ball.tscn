@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scripts/Spell_Casts/Projectiles/Fire_Ball.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Spell_attacks/Fireball_Placeholder_anim.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Spell_attacks/Rock.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Spell_attacks/Fireball_explosion.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Particles/Particle_Curves/Smoke_scale_curve.tres" type="Texture" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 4 )
@@ -77,12 +78,6 @@ orbit_velocity_random = 0.0
 scale_curve = SubResource( 14 )
 color = Color( 0.796078, 0.345098, 0.203922, 1 )
 
-[sub_resource type="Curve" id=16]
-_data = [ Vector2( 0, 1 ), 0.0, -0.671686, 0, 0, Vector2( 1, 0.384091 ), -0.898701, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=17]
-curve = SubResource( 16 )
-
 [sub_resource type="ParticlesMaterial" id=18]
 emission_shape = 1
 emission_sphere_radius = 4.0
@@ -93,7 +88,33 @@ orbit_velocity_random = 0.0
 angle = 260.4
 angle_random = 1.0
 scale = 0.5
-scale_curve = SubResource( 17 )
+scale_curve = ExtResource( 5 )
+color = Color( 0.576471, 0.415686, 0.415686, 1 )
+hue_variation = 0.06
+hue_variation_random = 0.87
+
+[sub_resource type="Curve" id=19]
+max_value = 100.0
+_data = [ Vector2( 0, 100 ), 0.0, 0.0, 0, 0, Vector2( 0.208861, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=20]
+curve = SubResource( 19 )
+
+[sub_resource type="ParticlesMaterial" id=21]
+lifetime_randomness = 0.56
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.4
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 400.0
+damping_curve = SubResource( 20 )
+angle = 360.0
+angle_random = 0.94
+scale = 0.5
+scale_curve = ExtResource( 5 )
 color = Color( 0.576471, 0.415686, 0.415686, 1 )
 hue_variation = 0.06
 hue_variation_random = 0.87
@@ -127,4 +148,14 @@ amount = 16
 speed_scale = 2.0
 local_coords = false
 process_material = SubResource( 18 )
+texture = ExtResource( 3 )
+
+[node name="Steam" type="Particles2D" parent="."]
+emitting = false
+amount = 50
+lifetime = 0.75
+one_shot = true
+explosiveness = 1.0
+local_coords = false
+process_material = SubResource( 21 )
 texture = ExtResource( 3 )

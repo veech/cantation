@@ -161,11 +161,13 @@ func shock(shock_time):
 		#a timer could work too. I just would need to call stop on the timer and then start it up again.
 	shock_anim.play("shock_medium")
 	nullify_speed()
+	animated_sprite.set_speed_scale(7)
 	
 func end_shock():
 	shock_anim.set_visible(false)
 	shocked = false
 	reset_speed()
+	animated_sprite.set_speed_scale(1)
 	
 func take_damage(damage):
 	var health_loss = damage - armor_rating

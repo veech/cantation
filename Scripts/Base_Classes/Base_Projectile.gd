@@ -51,7 +51,7 @@ func set_attributes(new_attributes):
 	self.attributes = new_attributes
 
 func stop_projectile():
-	self.movement_direction = Vector2.ZERO
+	set_movement_direction(Vector2.ZERO)
 
 func turn_on():
 	.turn_on()

@@ -2,7 +2,7 @@ extends "res://Scripts/Base_Classes/Base_Spell.gd"
 
 #this will be an attribute
 var degrees_per_second = 180
-#this var should be set in the spellbook attributes
+##this var should be set in the spellbook attributes
 var arc = PI*1.25
 
 var speed = 3
@@ -13,8 +13,8 @@ var start_rotation = 0
 onready var collision_shape = $CollisionShape2D
 	
 func _physics_process(delta):
-	self.rotate(deg2rad(degrees_per_second) * delta * rot_speed)
-	if get_rotation() >= start_rotation + arc:
+	self.rotate(deg2rad(degrees_per_second) * delta * attributes['speed'])
+	if get_rotation() >= start_rotation + attributes["arc"]:
 		queue_free()
 
 func set_attributes(attributes):
@@ -34,3 +34,7 @@ func impact_body(body):
 
 func knock_back(body, push_direction):
 	body.knockback(push_direction, attributes['push_power'])
+
+func impact_spell(area):
+	if area.is_in_group('Fireballs'):
+		area.explode()

@@ -33,7 +33,7 @@ func on_body_exited(body):
 		exit_body(body)
 
 func on_area_entered(area):
-	impact_projectile(area)
+	impact_spell(area)
 	
 func on_area_exited(area):
 	pass
@@ -44,7 +44,7 @@ func exit_body(body):
 func exit_wall():
 	pass
 
-func impact_projectile(area):
+func impact_spell(area):
 	pass
 
 func impact_body(body):
