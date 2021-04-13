@@ -12,6 +12,9 @@ const MIN_RADIUS = 1
 const MAX_RADIUS = 6
 
 func _ready():
+	randomize_values()
+
+func randomize_values():
 	attributes["spell_type"] = Global.SPELLS.ICE
 	attributes["power"] = rng.randi_range(MIN_POWER, MAX_POWER)
 	attributes["freeze_power"] = rng.randi_range(MIN_FREEZE_POWER, MAX_FREEZE_POWER)

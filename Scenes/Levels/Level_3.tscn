@@ -52,9 +52,6 @@ tile_data = PoolIntArray( -262153, 2, 0, -262152, 3, 65536, -262151, 3, 65536, -
 [node name="Floatie_Manager" parent="." instance=ExtResource( 6 )]
 position = Vector2( -404.433, 407.185 )
 
-[node name="Wheelie_Manager" parent="." instance=ExtResource( 11 )]
-position = Vector2( 329.775, 367.985 )
-
 [node name="Summon_Sword_Spellbook2" parent="." instance=ExtResource( 10 )]
 position = Vector2( -346.586, -140.85 )
 
@@ -66,3 +63,6 @@ position = Vector2( -345.584, -116.155 )
 
 [node name="Summon_Sword_Spellbook5" parent="." instance=ExtResource( 10 )]
 position = Vector2( -316.885, -117.824 )
+
+[node name="Wheelie_Manager" parent="." instance=ExtResource( 11 )]
+position = Vector2( 253.477, 404.401 )

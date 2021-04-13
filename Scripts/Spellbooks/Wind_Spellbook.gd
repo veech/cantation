@@ -9,6 +9,9 @@ const MIN_WIDTH = 1
 const MAX_WIDTH = 6
 
 func _ready():
+	randomize_values()
+
+func randomize_values():
 	attributes["spell_type"] = Global.SPELLS.WIND
 	attributes["push_power"] = rng.randf_range(MIN_PUSH_POWER, MAX_PUSH_POWER)
 	attributes["width"] = rng.randi_range(MIN_WIDTH, MAX_WIDTH) # maybe this can just scale the box width

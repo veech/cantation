@@ -5,6 +5,13 @@ onready var nav2d = get_node("../../../Navigation2D")
 onready var enemy_manager = get_parent().get_parent()
 onready var extents = $CollisionShape2D.get_shape().get_extents()
 
+onready var Fire_Spellbook = preload("res://Scripts/Spellbooks/Fire_Spellbook.gd")
+onready var Ice_Spellbook = preload("res://Scripts/Spellbooks/Ice_Spellbook.gd")
+onready var Lightning_Spellbook = preload("res://Scripts/Spellbooks/Lightning_Spellbook.gd")
+onready var Sword_Spellbook = preload("res://Scripts/Spellbooks/Summon_Sword_Spellbook.gd")
+onready var Water_Spellbook = preload("res://Scripts/Spellbooks/Water_Spellbook.gd")
+onready var Wind_Spellbook = preload("res://Scripts/Spellbooks/Wind_Spellbook.gd")
+
 export var max_sight_distance: int = 100
 export var min_flock_dist = 40
 
@@ -80,11 +87,13 @@ func _physics_process(delta):
 func get_name():
 	return enemy_manager.get_name()
 
-func equip_spell(spell):
-	var new_spell = spell.new()
-	add_child(new_spell)
-	equipped_spells.push_back(new_spell)
-	equipped_spells[0].randomize_attributes()
+func equip_spell(spell, spellbook):
+	var new_spellbook = spellbook.new()
+	new_spellbook.randomize_values()
+	var new_launcher = spell.new()
+	add_child(new_launcher)
+	new_launcher.set_attributes(new_spellbook.attributes)
+	equipped_spells.push_back(new_launcher)
 	equipped_spells[0].attributes["caster"] = enemy_manager.get_name()
 
 func calculate_goal():

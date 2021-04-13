@@ -3,7 +3,17 @@ extends "res://Scripts/Base_Classes/Base_Enemy.gd"
 func _ready():
 	casting_range_min = 70
 	casting_range_max = 160
-	equip_spell(Fireball_Launcher)
+	
+	equip_spell(Fireball_Launcher, Fire_Spellbook)
+	
+#	var fire_spellbook = Fire_Spellbook.new()
+#	fire_spellbook.randomize_values()
+#	var fireball_launcher = Fireball_Launcher.new()
+#	add_child(fireball_launcher)
+#	fireball_launcher.set_attributes(fire_spellbook.attributes)
+#	equip_spell(fireball_launcher)
+	
+
 	
 #func _physics_process(delta):
 #	var distance = dist_to_player()

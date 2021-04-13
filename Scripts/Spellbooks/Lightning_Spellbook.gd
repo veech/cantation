@@ -10,8 +10,11 @@ const MIN_SHOCK_TIME = 1
 const MAX_SHOCK_TIME = 3
 
 func _ready():
+	randomize_values()
+
+func randomize_values():
 	attributes["spell_type"] = Global.SPELLS.LIGHTNING
 	attributes["power"] = rng.randi_range(MIN_POWER, MAX_POWER)
 	attributes["radius"] = rng.randf_range(MIN_RADIUS, MAX_RADIUS)
 	attributes["range"] = rng.randi_range(MIN_RANGE, MAX_RANGE)
-	attributes["shock_time"] = rng.randi_range(MIN_SHOCK_TIME, MAX_SHOCK_TIME)
+	attributes["shock_time"] = rng.randi_range(MIN_SHOCK_TIME, MAX_SHOCK_TIME)	

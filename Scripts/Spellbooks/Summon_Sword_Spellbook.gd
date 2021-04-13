@@ -15,10 +15,12 @@ const MAX_ARC = 1.5
 
 
 func _ready():
+	randomize_values()
+
+func randomize_values():
 	attributes["spell_type"] = Global.SPELLS.SUMMONSWORD
 	attributes["power"] = rng.randi_range(MIN_POWER, MAX_POWER)
 	attributes["push_power"] = rng.randf_range(MIN_PUSH_POWER, MAX_PUSH_POWER)
 	attributes["range"] = rng.randf_range(MIN_RANGE, MAX_RANGE)
 	attributes["speed"] = rng.randf_range(MIN_SPEED, MAX_SPEED)
 	attributes["arc"] = rng.randf_range(MIN_ARC, MAX_ARC) * PI
-
