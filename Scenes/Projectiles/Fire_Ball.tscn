@@ -71,7 +71,7 @@ curve = SubResource( 13 )
 emission_shape = 1
 emission_sphere_radius = 6.0
 flag_disable_z = true
-gravity = Vector3( -98, 0, 0 )
+gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale_curve = SubResource( 14 )
@@ -87,7 +87,7 @@ curve = SubResource( 16 )
 emission_shape = 1
 emission_sphere_radius = 4.0
 flag_disable_z = true
-gravity = Vector3( -98, 0, 0 )
+gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 260.4
@@ -118,11 +118,13 @@ shape = SubResource( 12 )
 
 [node name="Sparks" type="Particles2D" parent="."]
 amount = 30
+local_coords = false
 process_material = SubResource( 15 )
 
 [node name="Smoke" type="Particles2D" parent="."]
 position = Vector2( -2.10224, 3.8147e-06 )
 amount = 16
 speed_scale = 2.0
+local_coords = false
 process_material = SubResource( 18 )
 texture = ExtResource( 3 )

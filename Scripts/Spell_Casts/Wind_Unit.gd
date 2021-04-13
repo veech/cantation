@@ -26,3 +26,8 @@ func on_body_exited(body):
 		exit_wall()
 	else:
 		exit_body(body)
+
+func on_area_entered(area):
+	if area.is_in_group('Projectiles'):
+		area.target_direction = look_direction
+		area.attributes['caster'] = 'rogue'

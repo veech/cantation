@@ -1,6 +1,7 @@
 extends "res://Scripts/Base_Classes/Base_Spell.gd"
 
 var movement_direction = Vector2.ZERO
+var target_direction = Vector2.ZERO
 
 var base_speed = 240
 var velocity = Vector2.ZERO
@@ -16,12 +17,13 @@ func impact_wall():
 	queue_free()
 	
 func _ready():
-
+	add_to_group('Projectiles')
 	collision_shape.disabled = true
 	set_collision_layer_bit(4, true)
 	
 func _physics_process(delta):
-	
+	look_at(global_position + movement_direction)
+	movement_direction = lerp(movement_direction, target_direction, .1)
 	velocity = movement_direction * base_speed * attributes['projectile_speed'] * delta
 	global_position += velocity
 
@@ -43,6 +45,7 @@ func end_push(body, push_direction):
 #result must be a DIRECTION i.e. must be normalized before being entered into this function
 func set_movement_direction(direction):
 	self.movement_direction = direction
+	self.target_direction = direction
 
 func set_attributes(new_attributes):
 	self.attributes = new_attributes

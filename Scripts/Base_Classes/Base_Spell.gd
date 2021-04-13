@@ -7,6 +7,8 @@ var push_direction
 func _init():
 	connect("body_entered", self, "on_body_entered")
 	connect("body_exited", self, "on_body_exited")
+	connect("area_entered", self, "on_area_entered")
+	connect("area_exited", self, "on_area_exited")
 
 func impact_wall():
 	pass
@@ -30,10 +32,19 @@ func on_body_exited(body):
 	else:
 		exit_body(body)
 
+func on_area_entered(area):
+	impact_projectile(area)
+	
+func on_area_exited(area):
+	pass
+
 func exit_body(body):
 	pass
 	
 func exit_wall():
+	pass
+
+func impact_projectile(area):
 	pass
 
 func impact_body(body):

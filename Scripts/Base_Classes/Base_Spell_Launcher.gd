@@ -4,7 +4,7 @@ var this_spell
 
 func cast(caster, mouse_position):
 	var spawned_spell = this_spell.instance()
-	spawned_spell.set_attributes(self.attributes)
+	spawned_spell.set_attributes(self.attributes.duplicate())
 	var cast_position = caster.global_position
 	var movement_direction = direction_from_to(cast_position, mouse_position)
 	spawned_spell.set_movement_direction(movement_direction)
