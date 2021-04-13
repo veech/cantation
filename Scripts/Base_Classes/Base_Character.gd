@@ -81,14 +81,12 @@ func _physics_process(delta):
 		if frozen_time_remaining <= 0:
 			frozen = false
 			reset_speed()
-			print("No longer frozen")
 	if burned:
 		burn_time_remaining -= delta
 		burn_timer += delta
 		if burn_timer >= 1:
 			take_damage(burn_damage)
 			burn_timer = 0
-			print("Burn damage!: current health: ", current_health)
 		if burn_time_remaining <= 0:
 			burned = false
 			burn_anim.set_visible(false)
@@ -120,7 +118,6 @@ func move_character(delta):
 	knockback = lerp(knockback, Vector2.ZERO, knockback_recovery)
 	
 func knockback(push_direction, push_power):
-	print("knockback called")
 	knockback = push_direction * push_power * knockback_sensitivity
 	
 func reset_knockback_recovery():
@@ -130,7 +127,6 @@ func nullify_knockback_recovery():
 	knockback_recovery = 0
 	
 func start_push(push_direction, push_power):
-	print("push called")
 	push += push_direction * push_power * push_sensitivity
 	
 func end_push(push_direction, push_power):
@@ -147,7 +143,6 @@ func burn(burn_power, burn_duration):
 	burn_anim.set_visible(true)
 	
 func freeze(freeze_power, freeze_duration):
-	print("frozen")
 	speed = (max_speed * 1/freeze_power)
 	frozen_time_remaining = freeze_duration
 	frozen = true
@@ -172,7 +167,6 @@ func end_shock():
 func take_damage(damage):
 	var health_loss = damage - armor_rating
 	current_health -= health_loss
-	print("Damage taken!\n\nCurrent Health: ", current_health)
 	update_health_bar()
 	if current_health <= 0:
 		death()

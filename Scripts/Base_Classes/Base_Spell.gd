@@ -48,7 +48,8 @@ func impact_spell(area):
 	pass
 
 func impact_body(body):
-	print("NI")
+	pass
+	#print("NI")
 
 func knock_back(body, push_direction):
 	body.knockback(push_direction, attributes['push_power'])
@@ -69,7 +70,8 @@ func get_attributes():
 	return self.attributes
 
 func set_spell(parent_node, caster):
-	print("NI in Base_Spell.gd")
+	pass
+	#print("NI in Base_Spell.gd")
 
 func turn_on():
 	self.collision_shape.set_deferred("disabled", false)

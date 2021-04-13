@@ -119,12 +119,14 @@ func calc_targeting():
 		return Vector2.ZERO
 
 func cast_spell():
+	print("In range signal emitted")
 	if can_shoot and shocked == false:
 		equipped_spells[0].cast(self, player.position)
-		cast_timer.start()
+	cast_timer.start()
 	
 #This should stop the timer
 func cease_casting():
+	print("out of range signal emitted")
 	cast_timer.stop()
 
 func dist_to_player():

@@ -11,7 +11,7 @@ onready var collision_shape = $CollisionShape2D
 
 func impact_body(body):
 	queue_free()
-	print("NI: Base_Projectile impact_body")
+	#print("NI: Base_Projectile impact_body")
 
 func impact_wall():
 	queue_free()
@@ -28,7 +28,8 @@ func _physics_process(delta):
 	global_position += velocity
 
 func on_body_exited(body):
-	print("NI body exited")
+	pass
+	#print("NI body exited")
 
 func knock_back(body, push_direction):
 	body.knockback(push_direction, attributes['push_power'])
