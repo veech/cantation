@@ -6,6 +6,8 @@ var push = Vector2.ZERO
 var knockback = Vector2.ZERO
 var knockback_recovery
 
+onready var Shader_Material = preload("res://Materials/Character_Material.tres")
+#onready var shader_material = $AnimatedSprite.Shader_Material
 onready var animated_sprite = $AnimatedSprite
 var facing_direction: Vector2 = Vector2.DOWN
 
@@ -53,6 +55,14 @@ var Shock_Timer = preload("res://Scenes/Utilities/Shock_Timer.tscn")
 var shock_timer: Timer
 
 func _ready():
+	#Shader_Material.shader.set_local_to_scene(true)
+#	animated_sprite.set_material(Shader_Material)
+#	animated_sprite.material.set_local_to_scene(true)
+#	animated_sprite.material.shader.set_local_to_scene(true)
+#	print(animated_sprite.material.is_local_to_scene())
+#	animated_sprite.material.set_shader_param("multiply_color", Color(1, 1, 1, 1))
+#	print(animated_sprite.material)
+	reset_shader()
 	health_bar.max_value = max_health
 	health_bar.value = current_health
 	
@@ -64,6 +74,28 @@ func _ready():
 	self.add_child(shock_timer)
 	shock_timer.connect('timeout', self, 'end_shock')
 
+func _physics_process(delta):
+	move_character(delta)
+	if frozen:
+		frozen_time_remaining -= delta
+		if frozen_time_remaining <= 0:
+			end_freeze()
+	if burned:
+		burn_time_remaining -= delta
+		burn_timer += delta
+		if burn_timer >= 1:
+			take_damage(burn_damage)
+			burn_timer = 0
+		if burn_time_remaining <= 0:
+			end_burn()
+	animator(velocity)
+
+func reset_shader():
+	animated_sprite.material.set_shader_param("multiply_color", Color(1, 1, 1, 1))
+
+func multiply_shader(color):
+	animated_sprite.material.set_shader_param("multiply_color", color)
+
 func create_burn_node():
 	burn_anim = Burn_Anim.instance()
 	self.add_child(burn_anim)
@@ -73,24 +105,6 @@ func create_shock_node():
 	shock_anim = Shock_Anim.instance()
 	self.add_child(shock_anim)
 	shock_anim.set_visible(false)
-	
-func _physics_process(delta):
-	move_character(delta)
-	if frozen:
-		frozen_time_remaining -= delta
-		if frozen_time_remaining <= 0:
-			frozen = false
-			reset_speed()
-	if burned:
-		burn_time_remaining -= delta
-		burn_timer += delta
-		if burn_timer >= 1:
-			take_damage(burn_damage)
-			burn_timer = 0
-		if burn_time_remaining <= 0:
-			burned = false
-			burn_anim.set_visible(false)
-	animator(velocity)
 
 func animator(direction: Vector2):
 	if direction != Vector2.ZERO:
@@ -141,11 +155,23 @@ func burn(burn_power, burn_duration):
 	burn_time_remaining = burn_duration
 	burned = true
 	burn_anim.set_visible(true)
+	if frozen:
+		end_freeze()
+	
+func end_burn():
+	burned = false
+	burn_anim.set_visible(false)
 	
 func freeze(freeze_power, freeze_duration):
 	speed = (max_speed * 1/freeze_power)
 	frozen_time_remaining = freeze_duration
 	frozen = true
+	multiply_shader(Color(0, 1, 1, 1))
+	
+func end_freeze():
+	reset_shader()
+	reset_speed()
+	frozen = false
 	
 func shock(shock_time):
 	shock_timer.stop()

@@ -1,10 +1,11 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://Scripts/Player_controller.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Mage_Animations/Cast_Anims.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Mage_Animations/Mage_Movement_Anims_Centered.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/UI_Elements/Health_Bar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Mage_Animations/Lightning_Cast_Mage_Anim.png" type="Texture" id=5]
+[ext_resource path="res://Materials/Character_Material.tres" type="Material" id=6]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -264,11 +265,11 @@ extents = Vector2( 7.13808, 11.7045 )
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = ExtResource( 6 )
 position = Vector2( 0, -0.176577 )
 frames = SubResource( 45 )
 animation = "Uber_Cast_Up"
-frame = 2
-playing = true
+frame = 3
 offset = Vector2( 0, -4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
