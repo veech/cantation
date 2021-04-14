@@ -24,7 +24,8 @@ var separation_weight = 0.4
 var chase_weight = 1
 
 var in_casting_range = false
-var cast_speed = 1.5
+var default_cast_interval = 1.5
+var cast_interval
 var cast_timer
 
 signal casting_range
@@ -33,28 +34,17 @@ signal out_of_range
 func _ready(): 
 	max_speed = 75
 	reset_speed()
+	reset_cast_interval()
 	layer = 2
 	set_collision_layer_bit(layer, true)
 	
 	cast_timer = Timer.new()
 	add_child(cast_timer)
 	cast_timer.set_one_shot(true)
-	cast_timer.set_wait_time(cast_speed)	
+	cast_timer.set_wait_time(cast_interval)	
 	cast_timer.connect("timeout", self, "cast_spell")
 	connect("casting_range", self, "cast_spell")
 	connect("out_of_range", self, "cease_casting")
-	
-#func _physics_process(_delta):
-#	if enemy_manager.player_detected == false and dist_to_player() <= max_sight_distance:
-#		var space_state = get_world_2d().direct_space_state
-#		var result = space_state.intersect_ray(global_position, player.global_position, [self], 0b1010)
-#		if result.collider.is_in_group("Player"):
-#			enemy_manager.player_detected = true	
-#	else:
-#		var space_state = get_world_2d().direct_space_state
-#		var result = space_state.intersect_ray(global_position, player.global_position, [self], 0b1010)
-#		if !result.collider.is_in_group("Player"):
-#			in_casting_range = false
 
 func _physics_process(delta):
 	var distance = dist_to_player()
@@ -122,13 +112,15 @@ func cast_spell():
 	print("In range signal emitted")
 	if can_shoot and shocked == false:
 		equipped_spells[0].cast(self, player.position)
-	cast_timer.start()
+	cast_timer.start(cast_interval)
 	
-#This should stop the timer
 func cease_casting():
 	print("out of range signal emitted")
 	cast_timer.stop()
 
+func reset_cast_interval():
+	cast_interval = default_cast_interval
+	
 func dist_to_player():
 	return self.global_position.distance_to(player.global_position)		
 
@@ -136,6 +128,15 @@ func take_damage(damage):
 	.take_damage(damage)
 	if !enemy_manager.player_detected:
 		enemy_manager.player_detected = true
+
+func freeze(freeze_power, freeze_duration):
+	.freeze(freeze_power, freeze_duration)
+	cast_interval *= 2 
+
+func end_freeze():
+	.end_freeze()
+	reset_cast_interval()
+	cast_timer.start(cast_interval)
 
 func death():
 	.death()

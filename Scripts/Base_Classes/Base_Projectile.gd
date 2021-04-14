@@ -43,7 +43,7 @@ func start_push(body, push_direction):
 func end_push(body, push_direction):
 	body.end_push(push_direction, attributes['push_power'])
 
-#result must be a DIRECTION i.e. must be normalized before being entered into this function
+#input must be a DIRECTION i.e. must be normalized before being entered into this function
 func set_movement_direction(direction):
 	self.movement_direction = direction
 	self.target_direction = direction
