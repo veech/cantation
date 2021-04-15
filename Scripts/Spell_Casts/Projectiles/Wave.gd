@@ -52,12 +52,26 @@ func spawn_splash(body):
 		if cast.get_collider() == body:
 			impact_normal = cast.get_collision_normal()
 			impact_point = cast.get_collision_point()
-			break
-	var splash_direction = (movement_direction - 2 * (movement_direction * impact_normal) * impact_normal)
-	var splash = Splash.instance()
-	splash.global_position = impact_point
-	splash.process_material.set_direction(Vector3(splash_direction.x, splash_direction.y, 0))
-	Game_Manager.add_child(splash)
+
+			var splash_direction = (movement_direction - 2 * (movement_direction * impact_normal) * impact_normal)
+			var splash = Splash.instance()
+			splash.global_position = impact_point
+			splash.process_material.set_direction(Vector3(splash_direction.x, splash_direction.y, 0))
+			Game_Manager.add_child(splash)
+
+#func spawn_splash(body):
+#	var impact_normal: Vector2
+#	var impact_point: Vector2
+#	for cast in raycast_array:
+#		if cast.get_collider() == body:
+#			impact_normal = cast.get_collision_normal()
+#			impact_point = cast.get_collision_point()
+#			break
+#	var splash_direction = (movement_direction - 2 * (movement_direction * impact_normal) * impact_normal)
+#	var splash = Splash.instance()
+#	splash.global_position = impact_point
+#	splash.process_material.set_direction(Vector3(splash_direction.x, splash_direction.y, 0))
+#	Game_Manager.add_child(splash)
 
 func on_body_entered(body):
 	.on_body_entered(body)

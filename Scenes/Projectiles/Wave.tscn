@@ -69,7 +69,7 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 visible = false
 frames = SubResource( 5 )
-frame = 2
+frame = 3
 playing = true
 offset = Vector2( 8, 0 )
 
@@ -110,26 +110,26 @@ position = Vector2( 5, 0 )
 [node name="Raycast_C" type="RayCast2D" parent="Raycast_Container"]
 enabled = true
 cast_to = Vector2( 15, 0 )
-collision_mask = 31775
+collision_mask = 14
 collide_with_areas = true
 
 [node name="Raycast_B" type="RayCast2D" parent="Raycast_Container"]
 enabled = true
 cast_to = Vector2( 15, -15 )
-collision_mask = 31775
+collision_mask = 14
 collide_with_areas = true
 
 [node name="Raycast_D" type="RayCast2D" parent="Raycast_Container"]
 enabled = true
 cast_to = Vector2( 15, 15 )
-collision_mask = 9
+collision_mask = 14
 
 [node name="Raycast_A" type="RayCast2D" parent="Raycast_Container"]
 enabled = true
-cast_to = Vector2( 0, -20 )
-collision_mask = 9
+cast_to = Vector2( 0, -10 )
+collision_mask = 14
 
 [node name="Raycast_E" type="RayCast2D" parent="Raycast_Container"]
 enabled = true
-cast_to = Vector2( 0, 20 )
-collision_mask = 9
+cast_to = Vector2( 0, 10 )
+collision_mask = 14
