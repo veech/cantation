@@ -10,14 +10,14 @@ func _init():
 	connect("area_entered", self, "on_area_entered")
 	connect("area_exited", self, "on_area_exited")
 
-func impact_wall():
+func impact_wall(body):
 	pass
 
 func on_body_entered(body):
 	if body.get_name() == self.attributes["caster"]:
 		return
 	elif body.is_in_group("Wall"):
-		impact_wall()
+		impact_wall(body)
 	#Not sure why this isnt working could be a collision layer/mask thing
 	elif body.is_in_group("Spells"):
 		queue_free()
@@ -28,7 +28,7 @@ func on_body_exited(body):
 	if body.get_name() == self.attributes["caster"]:
 		return
 	if body.is_in_group("Wall"):
-		exit_wall()
+		exit_wall(body)
 	else:
 		exit_body(body)
 
@@ -41,7 +41,7 @@ func on_area_exited(area):
 func exit_body(body):
 	pass
 	
-func exit_wall():
+func exit_wall(body):
 	pass
 
 func impact_spell(area):

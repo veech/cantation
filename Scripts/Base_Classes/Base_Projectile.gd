@@ -13,7 +13,7 @@ func impact_body(body):
 	queue_free()
 	#print("NI: Base_Projectile impact_body")
 
-func impact_wall():
+func impact_wall(body):
 	queue_free()
 	
 func _ready():

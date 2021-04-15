@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Particles/Wave/Wave_Splash.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Particles/Evaporate.gd" type="Script" id=2]
+[ext_resource path="res://Particles/Evaporate.tres" type="Material" id=3]
+
+[node name="Evaporate" type="Particles2D"]
+position = Vector2( 18, 0 )
+z_index = 2
+emitting = false
+amount = 60
+one_shot = true
+explosiveness = 0.7
+local_coords = false
+process_material = ExtResource( 3 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )

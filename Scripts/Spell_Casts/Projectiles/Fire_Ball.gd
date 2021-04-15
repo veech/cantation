@@ -26,7 +26,7 @@ func impact_body(body):
 	knock_back(body, movement_direction)
 	explode()
 
-func impact_wall():
+func impact_wall(body):
 	explode()
 	
 func explode():
@@ -39,9 +39,10 @@ func explode():
 func put_out():
 	stop_projectile()
 	self.collision_shape.set_deferred("disabled", true)
-	steam.set_emitting(true)
-	alive = false
-	animated_sprite.visible = false
+	queue_free()
+#	steam.set_emitting(true)
+#	alive = false
+#	animated_sprite.visible = false
 	
 func end_explosion():
 	if animated_sprite.get_animation() == "Explode":

@@ -14,7 +14,7 @@ func exit_body(body):
 
 func on_body_entered(body):
 	if body.is_in_group("Wall"):
-		impact_wall()
+		impact_wall(body)
 	#Not sure why this isnt working could be a collision layer/mask thing
 	elif body.is_in_group("Spells"):
 		queue_free()
@@ -23,7 +23,7 @@ func on_body_entered(body):
 
 func on_body_exited(body):
 	if body.is_in_group("Wall"):
-		exit_wall()
+		exit_wall(body)
 	else:
 		exit_body(body)
 
