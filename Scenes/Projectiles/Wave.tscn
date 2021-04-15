@@ -1,8 +1,13 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Assets/Spell_attacks/Water_Spell_Animation.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Spell_Casts/Projectiles/Wave.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Particles/Wave_Splash.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Particles/Wave/Wave_Splash.png" type="Texture" id=3]
+[ext_resource path="res://Particles/Splash.tres" type="Material" id=4]
+[ext_resource path="res://Assets/Particles/Wave/Wave_Base.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Particles/Wave/Wave_Mid.png" type="Texture" id=6]
+[ext_resource path="res://Particles/Base_Wave.tres" type="Material" id=7]
+[ext_resource path="res://Particles/Wave_Mid.tres" type="Material" id=8]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -28,31 +33,31 @@ animations = [ {
 "speed": 12.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=17]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 6.91666, 8.16667 )
 
-[sub_resource type="Curve" id=10]
+[sub_resource type="Curve" id=7]
 min_value = -360.0
 max_value = 360.0
 _data = [ Vector2( 0, 320.727 ), 0.0, -835.309, 0, 0, Vector2( 1, -360 ), -670.325, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=11]
-curve = SubResource( 10 )
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
 
-[sub_resource type="Curve" id=12]
+[sub_resource type="Curve" id=9]
 max_value = 100.0
 _data = [ Vector2( 0, 1 ), 0.0, 220.685, 0, 0, Vector2( 1, 76.3636 ), 265.714, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=13]
-curve = SubResource( 12 )
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 9 )
 
-[sub_resource type="Curve" id=14]
+[sub_resource type="Curve" id=11]
 _data = [ Vector2( 0.00537634, 0.623864 ), 0.0, 6.25636, 0, 0, Vector2( 0.209677, 0.714773 ), -0.507273, -0.507273, 0, 0, Vector2( 1, 0.496591 ), -0.179038, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=15]
-curve = SubResource( 14 )
+[sub_resource type="CurveTexture" id=12]
+curve = SubResource( 11 )
 
-[sub_resource type="ParticlesMaterial" id=16]
+[sub_resource type="ParticlesMaterial" id=13]
 emission_shape = 1
 emission_sphere_radius = 7.0
 flag_disable_z = true
@@ -61,38 +66,13 @@ gravity = Vector3( 0, 0, 0 )
 initial_velocity = 5.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-damping_curve = SubResource( 13 )
+damping_curve = SubResource( 10 )
 angle = 199.6
 angle_random = 0.52
-angle_curve = SubResource( 11 )
+angle_curve = SubResource( 8 )
 scale_random = 0.5
-scale_curve = SubResource( 15 )
+scale_curve = SubResource( 12 )
 color = Color( 0.556863, 0.556863, 0.556863, 1 )
-
-[sub_resource type="Curve" id=7]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0612648, 0, 0, Vector2( 1, 0.395455 ), -1.57348, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=8]
-curve = SubResource( 7 )
-
-[sub_resource type="ParticlesMaterial" id=9]
-resource_local_to_scene = true
-emission_shape = 2
-emission_box_extents = Vector3( 1, 8, 1 )
-flag_disable_z = true
-spread = 90.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 15.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-radial_accel = 17.82
-angle = 30.0
-angle_random = 1.0
-scale = 0.3
-scale_random = 0.3
-scale_curve = SubResource( 8 )
-hue_variation = -0.01
-hue_variation_random = 0.5
 
 [node name="Wave" type="Area2D" groups=[
 "Spells",
@@ -102,6 +82,7 @@ z_index = 1
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
 frames = SubResource( 5 )
 frame = 2
 playing = true
@@ -110,21 +91,41 @@ offset = Vector2( 8, 0 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=[
 "Spells",
 ]]
+visible = false
 position = Vector2( 9.91667, 0.166667 )
-shape = SubResource( 17 )
+shape = SubResource( 6 )
 
 [node name="Evaporate" type="Particles2D" parent="."]
-position = Vector2( 8.66667, -0.0833333 )
+position = Vector2( 18, 0 )
+z_index = 2
 emitting = false
 amount = 60
 explosiveness = 1.0
 local_coords = false
-process_material = SubResource( 16 )
+process_material = SubResource( 13 )
 texture = ExtResource( 3 )
 
-[node name="Splash" type="Particles2D" parent="."]
+[node name="Foam" type="Particles2D" parent="."]
 position = Vector2( 15, 0 )
-amount = 20
-lifetime = 0.1
-process_material = SubResource( 9 )
+z_index = 2
+emitting = false
+amount = 60
+lifetime = 0.75
+process_material = ExtResource( 4 )
 texture = ExtResource( 3 )
+
+[node name="Wave_Base" type="Particles2D" parent="."]
+z_index = 1
+amount = 50
+lifetime = 0.5
+process_material = ExtResource( 7 )
+texture = ExtResource( 5 )
+
+[node name="Wave_Mid" type="Particles2D" parent="."]
+visible = false
+position = Vector2( 6, 0 )
+emitting = false
+amount = 20
+lifetime = 0.25
+process_material = ExtResource( 8 )
+texture = ExtResource( 6 )

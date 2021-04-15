@@ -7,56 +7,56 @@
 [ext_resource path="res://Scenes/Particles/Particle_Curves/Smoke_scale_curve.tres" type="Texture" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 4 )
-region = Rect2( 48, 0, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 4 )
-region = Rect2( 96, 0, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 48, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 4 )
-region = Rect2( 48, 48, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 4 )
-region = Rect2( 96, 48, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
 region = Rect2( 48, 0, 16, 16 )
 
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 4 )
+region = Rect2( 48, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 4 )
+region = Rect2( 96, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 4 )
+region = Rect2( 48, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 4 )
+region = Rect2( 96, 48, 48, 48 )
+
 [sub_resource type="SpriteFrames" id=11]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
-"loop": false,
-"name": "Explode",
-"speed": 25.0
-}, {
-"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
 "name": "Fly",
 "speed": 10.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": false,
+"name": "Explode",
+"speed": 25.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=12]
@@ -78,7 +78,7 @@ orbit_velocity_random = 0.0
 scale_curve = SubResource( 14 )
 color = Color( 0.796078, 0.345098, 0.203922, 1 )
 
-[sub_resource type="ParticlesMaterial" id=18]
+[sub_resource type="ParticlesMaterial" id=16]
 emission_shape = 1
 emission_sphere_radius = 4.0
 flag_disable_z = true
@@ -93,14 +93,14 @@ color = Color( 0.576471, 0.415686, 0.415686, 1 )
 hue_variation = 0.06
 hue_variation_random = 0.87
 
-[sub_resource type="Curve" id=19]
+[sub_resource type="Curve" id=17]
 max_value = 100.0
 _data = [ Vector2( 0, 100 ), 0.0, 0.0, 0, 0, Vector2( 0.208861, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=20]
-curve = SubResource( 19 )
+[sub_resource type="CurveTexture" id=18]
+curve = SubResource( 17 )
 
-[sub_resource type="ParticlesMaterial" id=21]
+[sub_resource type="ParticlesMaterial" id=19]
 lifetime_randomness = 0.56
 flag_disable_z = true
 spread = 180.0
@@ -110,7 +110,7 @@ initial_velocity_random = 0.4
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 400.0
-damping_curve = SubResource( 20 )
+damping_curve = SubResource( 18 )
 angle = 360.0
 angle_random = 0.94
 scale = 0.5
@@ -147,15 +147,16 @@ position = Vector2( -2.10224, 3.8147e-06 )
 amount = 16
 speed_scale = 2.0
 local_coords = false
-process_material = SubResource( 18 )
+process_material = SubResource( 16 )
 texture = ExtResource( 3 )
 
 [node name="Steam" type="Particles2D" parent="."]
+z_index = 3
 emitting = false
 amount = 50
 lifetime = 0.75
 one_shot = true
 explosiveness = 1.0
 local_coords = false
-process_material = SubResource( 21 )
+process_material = SubResource( 19 )
 texture = ExtResource( 3 )

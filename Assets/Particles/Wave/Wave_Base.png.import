@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Wave_Splash.png-1b81e2f9f18b415513e2efebc27a9130.stex"
+path="res://.import/Wave_Base.png-3651445a3ca61653897e5c9b8ddb5f7c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Particles/Wave_Splash.png"
-dest_files=[ "res://.import/Wave_Splash.png-1b81e2f9f18b415513e2efebc27a9130.stex" ]
+source_file="res://Assets/Particles/Wave/Wave_Base.png"
+dest_files=[ "res://.import/Wave_Base.png-3651445a3ca61653897e5c9b8ddb5f7c.stex" ]
 
 [params]
 
