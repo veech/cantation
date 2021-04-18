@@ -57,6 +57,7 @@ func _unhandled_input(event):
 func cast_primary_spell():
 	if get_current_spell() != null:
 		get_current_spell().cast(self, get_global_mouse_position())
+		facing_direction = global_position.direction_to(get_global_mouse_position())
 		cast_animation(get_current_spell())
 	else:
 		print("No active spell to cast")
@@ -71,18 +72,9 @@ func cast_secondary_spell():
 func cast_animation(spell):
 	if spell.attributes['spell_type'] != Global.SPELLS.WIND:
 		in_cast = true
-		cast_anim_timer.start(.5)
-		
+		cast_anim_timer.start(2)
 	else:
 		starting_wind_cast = true
-		print("Wind spell cast")
-		#Maybe I can set up a signal connection between the start of the first 
-		#Animation and a function that starts the looping animation and sets
-		# a bool casting wind to true.
-		# then in the unhandled input function if the bool is true, it will
-		# listen for release mouse button input and trigger the outro animation
-		# also if the bool is true, it will stop all movement and stop 
-		# the other animations from happening
 
 func set_equipped_spell(spell, slot):
 	equipped_spells[slot] = instantiate_spell_caster(spell, slot)

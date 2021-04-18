@@ -135,7 +135,7 @@ func animator(direction: Vector2):
 			facing_direction = direction
 	else:		
 		if in_cast:
-			print("Stationary casts not yet set up")
+			animated_sprite.play("Cast_" + get_animation_direction(facing_direction))
 		elif starting_wind_cast:
 			animated_sprite.play("Uber_In_" + get_binary_animation_direction(facing_direction))
 		elif in_wind_cast:
@@ -170,6 +170,7 @@ func get_binary_animation_direction(direction: Vector2):
 func on_animation_finished():
 	if in_cast:
 		in_cast = false
+		#animated_sprite.stop()
 	elif starting_wind_cast:
 		starting_wind_cast = false
 		in_wind_cast = true
