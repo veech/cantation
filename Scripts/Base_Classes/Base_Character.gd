@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 export var max_speed = 150
-var speed
+var speed 
 var push = Vector2.ZERO
 var knockback = Vector2.ZERO
 var knockback_recovery
@@ -54,6 +54,13 @@ var equipped_spells = []
 var Shock_Timer = preload("res://Scenes/Utilities/Shock_Timer.tscn")
 var shock_timer: Timer
 
+var cast_anim_timer: Timer
+
+var in_cast = false
+var starting_wind_cast = false
+var in_wind_cast = false
+var ending_wind_cast = false
+
 func _ready():
 	#Shader_Material.shader.set_local_to_scene(true)
 #	animated_sprite.set_material(Shader_Material)
@@ -73,6 +80,13 @@ func _ready():
 	shock_timer = Shock_Timer.instance()
 	self.add_child(shock_timer)
 	shock_timer.connect('timeout', self, 'end_shock')
+
+	animated_sprite.connect('animation_finished', self, "on_animation_finished")
+
+	cast_anim_timer = Timer.new()
+	add_child(cast_anim_timer)
+	cast_anim_timer.set_one_shot(true)
+	cast_anim_timer.connect("timeout", self, "on_animation_finished")
 
 func _physics_process(delta):
 	move_character(delta)
@@ -108,10 +122,28 @@ func create_shock_node():
 
 func animator(direction: Vector2):
 	if direction != Vector2.ZERO:
-		animated_sprite.play("Walk_" + get_animation_direction(direction))
-		facing_direction = direction
+		if in_cast:
+			animated_sprite.play("Cast_W_" + get_animation_direction(direction))
+		elif starting_wind_cast:
+			animated_sprite.play("Uber_In_" + get_binary_animation_direction(direction))
+		elif in_wind_cast:
+			animated_sprite.play("Uber_" + get_binary_animation_direction(direction))
+		elif ending_wind_cast:
+			animated_sprite.play("Uber_Out_" + get_binary_animation_direction(direction))
+		else:
+			animated_sprite.play("Walk_" + get_animation_direction(direction))
+			facing_direction = direction
 	else:		
-		animated_sprite.play("Idle_" + get_animation_direction(facing_direction))
+		if in_cast:
+			print("Stationary casts not yet set up")
+		elif starting_wind_cast:
+			animated_sprite.play("Uber_In_" + get_binary_animation_direction(facing_direction))
+		elif in_wind_cast:
+			animated_sprite.play("Uber_" + get_binary_animation_direction(facing_direction))
+		elif ending_wind_cast:
+			animated_sprite.play("Uber_Out_" + get_binary_animation_direction(facing_direction))
+		else:
+			animated_sprite.play("Idle_" + get_animation_direction(facing_direction))
 
 func get_animation_direction(direction: Vector2):
 	var norm_direction = direction.normalized()
@@ -124,7 +156,31 @@ func get_animation_direction(direction: Vector2):
 	elif norm_direction.y <= -0.707:
 		return "Up"
 	return "Down"
-	
+
+func get_binary_animation_direction(direction: Vector2):
+	var norm_direction = direction.normalized()
+	if norm_direction.y > 0:
+		return "Down"
+	else:
+		return "Up"
+
+#I just realized I could have done this more elegantly
+#I should have just checked for the current animation name instead of making all of these bools
+#I might fix it later. might just plan to do better on the next project
+func on_animation_finished():
+	if in_cast:
+		in_cast = false
+	elif starting_wind_cast:
+		starting_wind_cast = false
+		in_wind_cast = true
+	elif ending_wind_cast:
+		ending_wind_cast = false
+	else:
+		return
+
+func cast_animation(spell):
+	pass
+
 func move_character(delta):
 	move_and_slide((velocity * speed) + push + knockback)
 	#this is causing an issue with the way wind is handled
@@ -198,7 +254,9 @@ func take_damage(damage):
 		death()
 
 func reset_speed():
+	print("max speed is ", max_speed)
 	speed = max_speed
+	print("my speed is", speed)
 
 func nullify_speed():
 	speed = 0

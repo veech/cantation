@@ -9,12 +9,13 @@ var input: Vector2
 var current_spell_slot = 0
 var secondary_spell_slot = 1
 
+
 func _ready():
 	layer = 1
 	set_collision_layer_bit(layer, true)
 	update_number_of_spell_slots()
 	print(len(spell_set.slots))
-	#this function is found in Base_Character. Adds node containers to GameManager and populates
+			#this function is found in Base_Character. Adds node containers to GameManager and populates
 	#the array of references to those nodes where we will place the pools.
 	#sddup_pool_containers()
 	for i in range(len(spell_set.slots)):
@@ -23,6 +24,7 @@ func _ready():
 			spell_slot.connect("set_spell", self, "set_equipped_spell")
 	set_current_spell(current_spell_slot)
 	set_secondary_spell(secondary_spell_slot)
+
 
 func _physics_process(delta):
 	get_input_axis()
@@ -34,22 +36,10 @@ func get_input_axis():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("Cast"):
-		if get_current_spell() != null:
-			get_current_spell().cast(self, get_global_mouse_position())
-		else:
-			print("No active spell to cast")
+		cast_primary_spell()
 	elif event.is_action_pressed("Secondary_Cast"):
-		if get_secondary_spell() != null:
-			get_secondary_spell().cast(self, get_global_mouse_position())
-		else:
-			print("No active spell to cast")
-
-	if event.is_action_pressed("advance_current_spell"):
-		set_current_spell(current_spell_slot + 1)
-		print("Active spell is spell: ", current_spell_slot + 1)
-	elif event.is_action_pressed("delete_active_pool"):
-		equipped_spells[current_spell_slot].projectile_pool.queue_free()
-	if event is InputEventKey and event.pressed:
+		cast_secondary_spell()
+	elif event is InputEventKey and event.pressed:
 		if event.is_action_pressed("Select_Spell"):
 			if event.shift:
 				print("select secondary")
@@ -57,6 +47,42 @@ func _unhandled_input(event):
 			else:
 				print("select")
 				set_current_spell(int(event.scancode) - 49)
+	elif in_wind_cast or starting_wind_cast:
+		if event.is_action_released("Cast") or event.is_action_released("Secondary_Cast"):
+			starting_wind_cast = false
+			in_wind_cast = false
+			ending_wind_cast = true
+
+
+func cast_primary_spell():
+	if get_current_spell() != null:
+		get_current_spell().cast(self, get_global_mouse_position())
+		cast_animation(get_current_spell())
+	else:
+		print("No active spell to cast")
+
+func cast_secondary_spell():
+	if get_secondary_spell() != null:
+		get_secondary_spell().cast(self, get_global_mouse_position())
+		cast_animation(get_secondary_spell())
+	else:
+		print("No active spell to cast")
+
+func cast_animation(spell):
+	if spell.attributes['spell_type'] != Global.SPELLS.WIND:
+		in_cast = true
+		cast_anim_timer.start(.5)
+		
+	else:
+		starting_wind_cast = true
+		print("Wind spell cast")
+		#Maybe I can set up a signal connection between the start of the first 
+		#Animation and a function that starts the looping animation and sets
+		# a bool casting wind to true.
+		# then in the unhandled input function if the bool is true, it will
+		# listen for release mouse button input and trigger the outro animation
+		# also if the bool is true, it will stop all movement and stop 
+		# the other animations from happening
 
 func set_equipped_spell(spell, slot):
 	equipped_spells[slot] = instantiate_spell_caster(spell, slot)
